@@ -65,7 +65,6 @@
                                 {{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
                         <input type="text" class="form-control" id="contact_number" name="contact_number"
@@ -76,7 +75,6 @@
                                 {{ $message }}</div>
                         @enderror
                     </div>
-
                     <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
 
                 </form>
