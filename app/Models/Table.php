@@ -18,4 +18,8 @@ class Table extends Model
     {
         return $this->hasMany(Reservation::class, 'table_id');
     }
+    public function order()
+    {
+        return $this->hasMany(Order::class, 'table_id');
+    }
 }

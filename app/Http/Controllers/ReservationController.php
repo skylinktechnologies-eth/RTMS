@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     //
+    
     public function index(){
         $reservations=Reservation::all();
         $tables=Table::all();
