@@ -5,7 +5,11 @@ use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SupplyItemController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\WaitstaffAssignmentController;
+use App\Http\Controllers\WaitstaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,4 +82,44 @@ Route::controller(OrderItemController::class)->group(function () {
     Route::post('orderItem-store', 'store')->name('orderItem.store');
     Route::put('orderItem-update/{id}', 'update')->name('orderItem.update');
     Route::delete('orderItem-delete/{id}', 'destroy')->name('orderItem.destroy');
+});
+
+//waitstaff
+Route::controller(WaitstaffController::class)->group(function () {
+    Route::get('waitstaff', 'index')->name('waitstaff.index');
+    Route::get('waitstaff-create', 'create')->name('waitstaff.create');
+    Route::get('waitstaff-edit/{id}', 'edit')->name('waitstaff.edit');
+    Route::post('waitstaff-store', 'store')->name('waitstaff.store');
+    Route::put('waitstaff-update/{id}', 'update')->name('waitstaff.update');
+    Route::delete('waitstaff-delete/{id}', 'destroy')->name('waitstaff.destroy');
+});
+
+//waitstaff Assignment
+Route::controller(WaitstaffAssignmentController::class)->group(function () {
+    Route::get('waitstaffAssignment', 'index')->name('waitstaffAssignment.index');
+    Route::get('waitstaffAssignment-create', 'create')->name('waitstaffAssignment.create');
+    Route::get('waitstaffAssignment-edit/{id}', 'edit')->name('waitstaffAssignment.edit');
+    Route::post('waitstaffAssignment-store', 'store')->name('waitstaffAssignment.store');
+    Route::put('waitstaffAssignment-update/{id}', 'update')->name('waitstaffAssignment.update');
+    Route::delete('waitstaffAssignment-delete/{id}', 'destroy')->name('waitstaffAssignment.destroy');
+});
+
+//Supplier
+Route::controller(SupplierController::class)->group(function () {
+    Route::get('supplier', 'index')->name('supplier.index');
+    Route::get('supplier-create', 'create')->name('supplier.create');
+    Route::get('supplier-edit/{id}', 'edit')->name('supplier.edit');
+    Route::post('supplier-store', 'store')->name('supplier.store');
+    Route::put('supplier-update/{id}', 'update')->name('supplier.update');
+    Route::delete('supplier-delete/{id}', 'destroy')->name('supplier.destroy');
+});
+
+//SupplyItem
+Route::controller(SupplyItemController::class)->group(function () {
+    Route::get('supplyItem', 'index')->name('supplyItem.index');
+    Route::get('supplyItem-create', 'create')->name('supplyItem.create');
+    Route::get('supplyItem-edit/{id}', 'edit')->name('supplyItem.edit');
+    Route::post('supplyItem-store', 'store')->name('supplyItem.store');
+    Route::put('supplyItem-update/{id}', 'update')->name('supplyItem.update');
+    Route::delete('supplyItem-delete/{id}', 'destroy')->name('supplyItem.destroy');
 });

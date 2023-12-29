@@ -22,4 +22,8 @@ class Table extends Model
     {
         return $this->hasMany(Order::class, 'table_id');
     }
+    public function waitstaffAssignment()
+    {
+        return $this->hasMany(WaitstaffAssignment::class, 'table_id');
+    }
 }

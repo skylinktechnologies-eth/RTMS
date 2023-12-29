@@ -15,6 +15,7 @@ class ReservationController extends Controller
         $tables=Table::all();
         return view('Pages.Reservation.index',compact('reservations','tables'));
     }
+    
     public function create(){
         $reservations=Reservation::all();
         $tables=Table::all();
