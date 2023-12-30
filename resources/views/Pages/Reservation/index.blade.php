@@ -1,117 +1,69 @@
 @extends('Frames.app')
 @section('content')
-    <style>
-        /* Optional: Add custom styling for the card */
-        .card {
-            margin: 20px;
-        }
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active">Reservation</li>
+        </ol>
 
-        /* Style for the DataTable */
-        .data_table {
-            overflow-x: auto;
-            /* Enable horizontal scrolling on small screens */
-        }
+        <ul class="app-actions">
+            <li>
+                <a href="#" id="reportrange">
+                    <span class="range-text"></span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
+                    <i class="icon-print"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                    data-original-title="Download CSV">
+                    <i class="icon-cloud_download"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-        /* Style for the DataTable header */
-        #example thead {
-            background-color: #f4f4f4;
-        }
+    <div class="main-container">
 
-        /* Style for DataTable rows */
-        #example tbody tr {
-            border-bottom: 1px solid #ddd;
-            /* Add border between rows */
-        }
+        @if (session('success'))
+            <div class="row">
 
-        /* Style for DataTable cells */
-        #example td {
-            padding: 8px;
-        }
+                <div class="col-md-4">
 
-        /* Responsive table on small screens */
-        @media screen and (max-width: 767px) {
-            #example {
-                overflow-x: auto;
-                display: block;
-            }
+                </div>
+                <div class="col-md-4">
 
-            #example thead,
-            #example tbody,
-            #example th,
-            #example td,
-            #example tr {
-                display: block;
-            }
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success px-3" id="success-alert">
 
-            #example th {
-                text-align: left;
-            }
-
-            #example tbody tr {
-                margin-bottom: 10px;
-            }
-
-            #example td {
-                border-bottom: none;
-            }
-
-            /* Specify a custom font for the DataTable text */
-            .data_table table {
-                font-family: 'YourCustomFont', sans-serif;
-
-            }
-
-            /* Optional: You can also apply the custom font to the header if needed */
-            .data_table table thead th {
-                font-family: 'YourCustomFont', sans-serif;
-                font-weight: bold;
-            }
-
-            /* Optional: You can adjust the font size and  as needed */
-            .data_table table td,
-            .data_table table th {
-                font-size: 19px;
-
-                /* Add other text properties as needed */
-            }
-        }
-    </style>
-
-
-    <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
-            <a type="link" href="{{ route('reservation.create') }}" style="color: #f4f4f4"><i class=" mdi mdi-plus"></i></a>
-        </span> Create Reservation
-    </h3>
-
-    @if (session('success'))
-        <div class="row">
-
-            <div class="col-md-4">
-
+                        {{ session('success') }}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="alert alert-success px-3" id="success-alert">
-
-                    {{ session('success') }}
+        @endif
+        <div class="row gutters">
+            <div class="col-sm-12">
+                <div class="text-right mb-3">
+                    <!-- Button trigger modal -->
+                    <a href="{{ route('reservation.create') }}" type="button" class="btn btn-primary">Add New
+                        Reservation</a>
                 </div>
             </div>
         </div>
-    @endif
-    <div class="col-md-12">
-        <div class="card rounded-3 px-3">
-            <div class="card-header   rounded-3 " style="margin-top: -10px;color:#9e7b7b">
+        <!-- Row start -->
+        <div class="row gutters">
+            <div class="col-sm-12">
 
-            </div>
+                <div class="table-container">
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="data_table">
-                        <table id="example" class="table  table-bordered" style="width:100%">
-                            <thead style="">
+                    <div class="table-responsive">
+                        <table id="basicExample" class="table custom-table">
+                            <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Table Name</th>
@@ -151,7 +103,7 @@
                                             <div class="d-flex">
 
                                                 <a type="link" href="{{ route('reservation.edit', $reservation->id) }}">
-                                                    <i class=" mdi mdi-lead-pencil " style="margin-right: 5px;"></i>
+                                                    <i class="icon-edit" style="color: blue"></i>
                                                 </a>
 
 
@@ -160,7 +112,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-link p-0">
-                                                        <i class=" mdi mdi-delete" style="color:red"></i>
+                                                        <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
 
@@ -178,69 +130,12 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade " id="addReservations" tabindex="-1" aria-labelledby="addReservationsLabel" aria-hidden="true">
-        <div class="modal-dialog " style=" max-width: 700px;">
-            <div class="modal-content px-3 rounded-4" style="background-color: #ffffff">
-                <div class="modal-header p-3" style="background-color: #b66dff">
-                    <h4 class="modal-title " id="addReservationsLabel" style="color: #ffffff">Create Table</h4>
-                    <a type="button" data-bs-dismiss="modal" aria-label="Close"><i class=" mdi mdi-close  "
-                            style="color: #ffffff"></i></a>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('reservation.store') }}">
-                        @csrf
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-
-                                <div class="form-group">
-                                    <label for="exampleInputCity1">Table Name</label>
-                                    <select id="mySelect" style="width: 300px;">
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Add more options as needed -->
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputCity1">Capacity</label>
-                                    <input type="intiger" class="form-control" id="capacity" name="capacity"
-                                        placeholder="Location">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputCity1">Table Name</label>
-                                    <input type="text" class="form-control" id="table_name" name="table_name"
-                                        placeholder="Table Name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputCity1">Capacity</label>
-                                    <input type="intiger" class="form-control" id="capacity" name="capacity"
-                                        placeholder="Location">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
 
             </div>
         </div>
     </div>
-    <!-- Modal -->
+    <!-- Row end -->
+   
+
 @endsection

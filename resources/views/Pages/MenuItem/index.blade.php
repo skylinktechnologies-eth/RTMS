@@ -1,123 +1,77 @@
+
 @extends('Frames.app')
 @section('content')
-    <style>
-        /* Optional: Add custom styling for the card */
-        .card {
-            margin: 20px;
-        }
-
-        /* Style for the DataTable */
-        .data_table {
-            overflow-x: auto;
-            /* Enable horizontal scrolling on small screens */
-        }
-
-        /* Style for the DataTable header */
-        #example thead {
-            background-color: #f4f4f4;
-        }
-
-        /* Style for DataTable rows */
-        #example tbody tr {
-            border-bottom: 1px solid #ddd;
-            /* Add border between rows */
-        }
-
-        /* Style for DataTable cells */
-        #example td {
-            padding: 8px;
-        }
-
-        /* Responsive table on small screens */
-        @media screen and (max-width: 767px) {
-            #example {
-                overflow-x: auto;
-                display: block;
-            }
-
-            #example thead,
-            #example tbody,
-            #example th,
-            #example td,
-            #example tr {
-                display: block;
-            }
-
-            #example th {
-                text-align: left;
-            }
-
-            #example tbody tr {
-                margin-bottom: 10px;
-            }
-
-            #example td {
-                border-bottom: none;
-            }
-
-            /* Specify a custom font for the DataTable text */
-            .data_table table {
-                font-family: 'YourCustomFont', sans-serif;
-
-            }
-
-            /* Optional: You can also apply the custom font to the header if needed */
-            .data_table table thead th {
-                font-family: 'YourCustomFont', sans-serif;
-                font-weight: bold;
-            }
-
-            /* Optional: You can adjust the font size and  as needed */
-            .data_table table td,
-            .data_table table th {
-                font-size: 19px;
-
-                /* Add other text properties as needed */
-            }
-        }
-
-        .table td img {
+<style>
+     .table td img {
             width: 70px;
             height: 50px;
             border-radius: 0%;
         }
-    </style>
+</style>
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active">Menu Item</li>
+        </ol>
 
+        <ul class="app-actions">
+            <li>
+                <a href="#" id="reportrange">
+                    <span class="range-text"></span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
+                    <i class="icon-print"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                    data-original-title="Download CSV">
+                    <i class="icon-cloud_download"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
-            <a type="link" href="{{ route('menuItem.create') }}" style="color: #f4f4f4"><i class=" mdi mdi-plus"></i></a>
-        </span> Create Menu Items
-    </h3>
+    <div class="main-container">
 
-    @if (session('success'))
-        <div class="row">
+        @if (session('success'))
+            <div class="row">
 
-            <div class="col-md-4">
+                <div class="col-md-4">
 
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success px-3" id="success-alert">
+
+                        {{ session('success') }}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="alert alert-success px-3" id="success-alert">
-
-                    {{ session('success') }}
+        @endif
+        <div class="row gutters">
+            <div class="col-sm-12">
+                <div class="text-right mb-3">
+                    <!-- Button trigger modal -->
+                    <a href="{{ route('menuItem.create') }}" type="button" class="btn btn-primary">Add New
+                        Menu</a>
                 </div>
             </div>
         </div>
-    @endif
-    <div class="col-md-12">
-        <div class="card rounded-3 px-3">
-            <div class="card-header   rounded-3 " style="margin-top: -10px;color:#9e7b7b">
+        <!-- Row start -->
+        <div class="row gutters">
+            <div class="col-sm-12">
 
-            </div>
+                <div class="table-container">
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="data_table">
-                        <table id="example" class="table  table-bordered" style="width:100%">
-                            <thead style="">
+                    <div class="table-responsive">
+                        <table id="basicExample" class="table custom-table">
+                            <thead >
                                 <tr>
                                     <th>No</th>
                                     <th>Image</th>
@@ -149,13 +103,13 @@
                                         <td>
                                             <div class="d-flex">
                                                 <a type="link" href="{{ route('menuItem.edit', $item->id) }}">
-                                                    <i class=" mdi mdi-lead-pencil " style="margin-right: 5px;"></i>
+                                                    <i class=" icon-edit " style="margin-right: 5px; color:blue"></i>
                                                 </a>
                                                 <form action="{{ route('menuItem.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-link p-0">
-                                                        <i class=" mdi mdi-delete" style="color:red"></i>
+                                                        <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
 
@@ -173,7 +127,11 @@
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
+    <!-- Row end -->
 @endsection
+

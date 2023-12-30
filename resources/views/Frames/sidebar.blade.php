@@ -632,7 +632,7 @@
 
 
 
-{{-- 
+
 
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -738,7 +738,7 @@
                 <span class="menu-title">Menu Item</span>
                 <i class="mdi mdi-silverware-variant  menu-icon"></i>
             </a>
-        </li> --}}
+        </li>
 
 
 {{--               
