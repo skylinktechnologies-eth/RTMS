@@ -55,7 +55,7 @@ class PurchaseController extends Controller
             $orderItem->total = $item['total'];
             $orderItem->save();
         }
-        return back()->with('success','Issuing Created successfully');
+        return back()->with('success','Orders Created successfully');
     }
     public function update(Request $request ,$id)
     {
