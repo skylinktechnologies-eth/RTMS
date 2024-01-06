@@ -135,9 +135,9 @@
 										<li>
 											<a href="{{ route('waitstaff.index') }}">Staff</a>
 										</li>
-										<li>
+										{{-- <li>
 											<a href="{{ route('waitstaffAssignment.index') }}"> Assignment</a>
-										</li>
+										</li> --}}
 										
 									</ul>
 								</div>
