@@ -29,21 +29,20 @@ class WaitstaffAssignmentController extends Controller
         return view('Pages.WaitstaffAssignment.edit',compact('waitstaffs','assignment','tables'));
     }
    
-    public function store(Request $request){
+    public function store(Request $request,$id){
         
         $request->validate([
             'waitstaff_id' => 'required',
-            'table_id' => 'required',
-            'assignment_date' => 'required' 
-        ]);   
+            'table_id' => 'required', 
+        ]);
+
        
        $waitstaff= new WaitstaffAssignment();
-       $waitstaff->waitstaff_id=$request->waitstaff_id;
+       $waitstaff->waitstaff_id=$id;
        $waitstaff->table_id=$request->table_id;
-       $waitstaff->assignment_date=$request->assignment_date;
        $waitstaff->save(); 
        
-        return back()->with('success','Waitstaff created successfully!');
+        return back()->with('success','Waitstaff Assign successfully!');
     }
 
     public function update(Request $request, $id){

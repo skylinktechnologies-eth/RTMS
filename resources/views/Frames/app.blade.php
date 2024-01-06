@@ -143,6 +143,27 @@
 								</div>
 							</li>
 							
+							<li class="header-menu">Inventory</li>
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="icon-edit1"></i>
+									<span class="menu-text">Maintain</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											<a href="{{ route('location.index') }}"> Item Location</a>
+										</li>
+										<li>
+											<a href="{{ route('itemCategory.index') }}"> Item Category</a>
+										</li>
+										<li>
+											<a href="{{ route('supplyItem.index') }}"> Supply Item</a>
+										</li>
+									
+									</ul>
+								</div>
+							</li>
 							<li class="sidebar-dropdown">
 								<a href="#">
 									<i class="icon-edit1"></i>
@@ -154,11 +175,18 @@
 											<a href="{{ route('supplier.index') }}">Supplier</a>
 										</li>
 										<li>
-											<a href="{{ route('supplyItem.index') }}"> Supply item</a>
+											<a href="{{ route('purchase.index') }}">Orders</a>
 										</li>
 									
 									</ul>
 								</div>
+							</li>
+
+							<li>
+								<a href="/issuing">
+									<i class="icon-documents"></i>
+									<span class="menu-text">Issuing</span>
+								</a>
 							</li>
 							
 						</ul>
@@ -185,53 +213,12 @@
 					</div>
 					<div class="header-items">
 						<!-- Custom search start -->
-						<div class="custom-search">
-							<input type="text" class="search-query" placeholder="Search here ...">
-							<i class="icon-search1"></i>
-						</div>
+						
 						<!-- Custom search end -->
 
 						<!-- Header actions start -->
 						<ul class="header-actions">
-							<li class="dropdown">
-								<a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
-									<i class="icon-box"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right lrg" aria-labelledby="notifications">
-									<div class="dropdown-menu-header">
-										Tasks (05)
-									</div>
-									<ul class="header-tasks">
-										<li>
-											<p>#48 - Dashboard UI<span>90%</span></p>
-											<div class="progress">
-												<div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-													aria-valuemax="100" style="width: 90%">
-													<span class="sr-only">90% Complete (success)</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>#95 - Alignment Fix<span>60%</span></p>
-											<div class="progress">
-												<div class="progress-bar bg-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-													aria-valuemax="100" style="width: 60%">
-													<span class="sr-only">60% Complete (success)</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>#7 - Broken Button<span>40%</span></p>
-											<div class="progress">
-												<div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-													aria-valuemax="100" style="width: 40%">
-													<span class="sr-only">40% Complete (success)</span>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
+							
 							<li class="dropdown">
 								<a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
 									<i class="icon-bell"></i>
@@ -413,7 +400,11 @@
 			});
 			</script>
 			
-			
+			<script>
+				setTimeout(function() {
+					document.getElementById('success-alert').style.display = 'none';
+				}, 3000);
+			</script>
 
 	</body>
 

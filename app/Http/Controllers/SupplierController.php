@@ -9,76 +9,49 @@ class SupplierController extends Controller
 {
     //
     public function index(){
-        $supplier=Supplier::all();
+        $suppliers=Supplier::all();
      
-        return view('Pages.Supplier.index',compact('supplier'));
+        return view('Pages.Supplier.index',compact('suppliers'));
     }
     
-    public function create(){
-        $reservations=Reservation::all();
-        $tables=Table::all();
-        return view('Pages.Reservation.create',compact('reservations','tables'));
-    }
-    public function edit( $id){
-        $reservation=Reservation::find($id);
-        $tables=Table::all();
-        return view('Pages.Reservation.edit',compact('reservation','tables'));
-    }
    
     public function store(Request $request){
         
         $request->validate([
             
-            'table_id' => 'required',
-            'reservation_date' => 'required',
-            'party_size' => 'required',
-            'contact_name' => 'required',
-            'contact_number' => 'required'
-           
-           
+            'supplier_name' => 'required',
+            'contact_number' => 'required',
+            'address' => 'required' 
         ]);   
        
-       $reservations= new Reservation();
-       $statuses="Pending";
-       $reservations->table_id=$request->table_id;
-       $reservations->reservation_date=$request->reservation_date;
-       $reservations->party_size=$request->party_size;
-       $reservations->contact_name=$request->contact_name;
-       $reservations->contact_number=$request->contact_number;
-       $reservations->status=$statuses;
-       $reservations->save(); 
-       
-        return back()->with('success','Reservation created successfully!');
+       $supplier= new Supplier();
+       $supplier->supplier_name=$request->supplier_name;
+       $supplier->contact_number=$request->contact_number;
+       $supplier->address=$request->address;
+       $supplier->save();  
+        return back()->with('success','Supplier created successfully!');
     }
 
     public function update(Request $request, $id){
         
         $request->validate([
-            
-            'table_id' => 'required',
-            'reservation_date' => 'required',
-            'party_size' => 'required',
-            'contact_name' => 'required',
-            'contact_number' => 'required'
-           
-           
+             
+            'supplier_name' => 'required',
+            'contact_number' => 'required',
+            'address' => 'required' 
         ]);   
        
-       $reservations=  Reservation::find($id);
-       $statuses="Pending";
-       $reservations->table_id=$request->table_id;
-       $reservations->reservation_date=$request->reservation_date;
-       $reservations->party_size=$request->party_size;
-       $reservations->contact_name=$request->contact_name;
-       $reservations->contact_number=$request->contact_number;
-       $reservations->status=$statuses;
-       $reservations->update();
-        return back()->with('success','Reservation update successfully!');
+       $supplier=  Supplier::find($id);
+       $supplier->supplier_name=$request->supplier_name;
+       $supplier->contact_number=$request->contact_number;
+       $supplier->address=$request->address;
+       $supplier->update();
+        return back()->with('success','Supplier update successfully!');
     }
     public function destroy(String $id){
-        $reservation= Reservation::find($id);
-        $reservation->delete();
-        return back()->with('success','Reservation delete successfully!');
+        $supplier= Supplier::find($id);
+        $supplier->delete();
+        return back()->with('success','Supplier delete successfully!');
 
     }
 }

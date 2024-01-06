@@ -371,7 +371,7 @@ a.bg-pink {
 	padding: 0 1.5rem;
 	z-index: 100;
 	position: fixed;
-	left: 200px;
+	left: 150px;
 	right: 0;
 	background: $white;
 	border-bottom: 1px solid $card-border-bg;
@@ -1064,7 +1064,7 @@ ul.header-tasks {
 				left: 0px;
 			}
 			.header {
-				left: 200px;
+				left: 150px;
 			}
 		}
 		.page-content {
@@ -1450,7 +1450,7 @@ ul.header-tasks {
 	margin-bottom: 1rem;
 	background: $header-bg;
 	color: $white;
-	background: url(../th.jpeg) no-repeat;
+	background: url(../img/pic.jpeg) no-repeat;
 	background-size: cover;
 	background-position: center center;
 	display: flex;

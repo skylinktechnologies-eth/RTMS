@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Table;
 use App\Models\Waitstaff;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,12 @@ class WaitstaffController extends Controller
         $waitstaff=Waitstaff::find($id);
        
         return view('Pages.Waitstaff.edit',compact('waitstaff'));
+    }
+    public function view( $id){
+        $tables=Table::all();
+        $waitstaff=Waitstaff::find($id);
+       
+        return view('Pages.WaitstaffAssignment.create',compact('waitstaff','tables'));
     }
    
     public function store(Request $request){

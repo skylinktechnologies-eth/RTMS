@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Supplier extends Model
+class SupplyOrderItem extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'supplier_name',
-        'contact_number',
-        'address'
+        'item_id',
+        'supply_order_id',
+        'quantity',
+        'price',
+        'total'
     ];
     public function supplyOrder()
     {
-        return $this->hasMany(SupplyOrder::class,'supplier_id');
+        return $this->belongsTo(SupplyOrder::class, 'supply_order_id');
     }
+
 }

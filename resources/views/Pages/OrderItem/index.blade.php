@@ -1,117 +1,77 @@
+
+
 @extends('Frames.app')
 @section('content')
-    <style>
-        /* Optional: Add custom styling for the card */
-        .card {
-            margin: 20px;
+<style>
+     .table td img {
+            width: 70px;
+            height: 50px;
+            border-radius: 0%;
         }
+</style>
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Orders</li>
+            <li class="breadcrumb-item active">Order Item</li>
+        </ol>
 
-        /* Style for the DataTable */
-        .data_table {
-            overflow-x: auto;
-            /* Enable horizontal scrolling on small screens */
-        }
+        <ul class="app-actions">
+            <li>
+                <a href="#" id="reportrange">
+                    <span class="range-text"></span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
+                    <i class="icon-print"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                    data-original-title="Download CSV">
+                    <i class="icon-cloud_download"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-        /* Style for the DataTable header */
-        #example thead {
-            background-color: #f4f4f4;
-        }
+    <div class="main-container">
+        
 
-        /* Style for DataTable rows */
-        #example tbody tr {
-            border-bottom: 1px solid #ddd;
-            /* Add border between rows */
-        }
+        @if (session('success'))
+            <div class="row">
 
-        /* Style for DataTable cells */
-        #example td {
-            padding: 8px;
-        }
+                <div class="col-md-4">
 
-        /* Responsive table on small screens */
-        @media screen and (max-width: 767px) {
-            #example {
-                overflow-x: auto;
-                display: block;
-            }
+                </div>
+                <div class="col-md-4">
 
-            #example thead,
-            #example tbody,
-            #example th,
-            #example td,
-            #example tr {
-                display: block;
-            }
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success px-3" id="success-alert">
 
-            #example th {
-                text-align: left;
-            }
-
-            #example tbody tr {
-                margin-bottom: 10px;
-            }
-
-            #example td {
-                border-bottom: none;
-            }
-
-            /* Specify a custom font for the DataTable text */
-            .data_table table {
-                font-family: 'YourCustomFont', sans-serif;
-
-            }
-
-            /* Optional: You can also apply the custom font to the header if needed */
-            .data_table table thead th {
-                font-family: 'YourCustomFont', sans-serif;
-                font-weight: bold;
-            }
-
-            /* Optional: You can adjust the font size and  as needed */
-            .data_table table td,
-            .data_table table th {
-                font-size: 19px;
-
-                /* Add other text properties as needed */
-            }
-        }
-    </style>
-
-
-    <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
-            <a type="link" href="{{ route('orderItem.create') }}" style="color: #f4f4f4"><i class=" mdi mdi-plus"></i></a>
-        </span> Create Order Item
-    </h3>
-
-    @if (session('success'))
-        <div class="row">
-
-            <div class="col-md-4">
-
+                        {{ session('success') }}
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="alert alert-success px-3" id="success-alert">
-
-                    {{ session('success') }}
+        @endif
+        <div class="row gutters">
+            <div class="col-sm-12">
+                <div class="text-right mb-3">
+                    <!-- Button trigger modal -->
+                    <a href="{{ route('orderItem.create') }}" type="button" class="btn btn-primary">Add New
+                        OrderItem</a>
                 </div>
             </div>
         </div>
-    @endif
-    <div class="col-md-12">
-        <div class="card rounded-3 px-3">
-            <div class="card-header   rounded-3 " style="margin-top: -10px;color:#9e7b7b">
-
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div class="data_table">
-                        <table id="example" class="table  table-bordered" style="width:100%">
-                            <thead style="">
+        <!-- Row start -->
+        <div class="row gutters">
+            <div class="col-sm-12">
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table id="basicExample" class="table custom-table">
+                            <thead >
                                 <tr>
                                     <th>No</th>
                                     <th>Item Name</th>
@@ -171,10 +131,13 @@
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
-
-
-   
+    <!-- Row end -->
 @endsection
+
+
+

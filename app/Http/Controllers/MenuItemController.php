@@ -35,18 +35,21 @@ class MenuItemController extends Controller
         $request->validate([
             'category_id' => 'required',
             'item_name' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
             'price' => 'required'
         ]);
-        $filename = time() . '_' . $request->image->getClientOriginalName();
-        $filepath = $request->image->storeAs('itemImage', $filename, 'public'); // Store in the 'public' disk
-       
+
 
         $menItem = new MenuItem();
         $menItem->category_id = $request->category_id;
         $menItem->item_name = $request->item_name;
         $menItem->price = $request->price;
-        $menItem->image = $filepath;
+        if ($request->image) {
+            $filename = time() . '_' . $request->image->getClientOriginalName();
+            $filepath = $request->image->storeAs('itemImage', $filename, 'public'); // Store in the 'public' disk
+            $menItem->image = $filepath;
+        }
+
         $menItem->save();
 
         return back()->with('success', 'Menu Item created successfully!');
@@ -58,7 +61,7 @@ class MenuItemController extends Controller
         $request->validate([
             'category_id' => 'required',
             'item_name' => 'required',
-          
+
             'price' => 'required'
         ]);
 
@@ -66,12 +69,12 @@ class MenuItemController extends Controller
         $menItem->category_id = $request->category_id;
         $menItem->item_name = $request->item_name;
         $menItem->price = $request->price;
-    if($request->image){
-        $filename = time() . '_' . $request->image->getClientOriginalName();
-        $filepath = $request->image->storeAs('uploads', $filename, 'public'); // Store in the 'public' disk
-        $menItem->image = $filepath;
-    }
-        
+        if ($request->image) {
+            $filename = time() . '_' . $request->image->getClientOriginalName();
+            $filepath = $request->image->storeAs('uploads', $filename, 'public'); // Store in the 'public' disk
+            $menItem->image = $filepath;
+        }
+
         $menItem->update();
         return back()->with('success', 'Menu Item update successfully!');
     }

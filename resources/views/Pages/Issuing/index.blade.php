@@ -1,16 +1,9 @@
 @extends('Frames.app')
 @section('content')
-<style>
-     .table td img {
-            width: 70px;
-            height: 50px;
-            border-radius: 0%;
-        }
-</style>
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Orders</li>
-            <li class="breadcrumb-item active">Order</li>
+            <li class="breadcrumb-item">Issuing</li>
+            <li class="breadcrumb-item active">Issuing </li>
         </ol>
 
         <ul class="app-actions">
@@ -36,6 +29,9 @@
 
     <div class="main-container">
 
+
+
+
         @if (session('success'))
             <div class="row">
 
@@ -57,52 +53,74 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
-                    <a href="{{ route('order.create') }}" type="button" class="btn btn-primary">Add New
-                        Order</a>
+                    <a href="{{ route('issuing.create') }}" type="button" class="btn btn-primary">Add New
+                        Issuing </a>
                 </div>
             </div>
         </div>
         <!-- Row start -->
         <div class="row gutters">
             <div class="col-sm-12">
-
                 <div class="table-container">
-
                     <div class="table-responsive">
                         <table id="basicExample" class="table custom-table">
-                            <thead >
+                            <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Table Name</th>
-                                    <th>Order Date</th>
-                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+
+                                    <th> Total Quantity</th>
                                     <th>Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @php
                                     $no = 0;
                                 @endphp
-                                @foreach ($orders as $order)
+                                @php
+                                    $groupedIssuedItems = [];
+
+                                    foreach ($issuingItems as $issuingItem) {
+                                        $issuingId = $issuingItem->issuing->id;
+
+                                        if (!isset($groupedIssuedItems[$issuingId])) {
+                                            $groupedIssuedItems[$issuingId] = [
+                                                'total' => 0,
+                                                'issuingItem' => $issuingItem, // Store one representative order item for details
+                                            ];
+                                        }
+
+                                        $groupedIssuedItems[$issuingId]['total'] += $issuingItem->total;
+                                    }
+                                @endphp
+
+                                @foreach ($groupedIssuedItems as $issuingId => $groupedIssuedItem)
+                                    @php
+                                        $total = $groupedIssuedItem['total'];
+                                        $issuingItem = $groupedIssuedItem['issuingItem'];
+                                    @endphp
                                     @php
                                         $no = $no + 1;
                                     @endphp
                                     <tr>
+                                        <!-- Display details from representative order item -->
                                         <td>{{ $no }}</td>
-                                        <td>{{ $order->table->table_name }}</td>
-                                        <td>{{ $order->order_date }}</td>
-                                        <td>{{ $order->status }}</td>
+                                        <td>{{ $issuingItem->issuing->issued_date }}</td>
+                                        <td>{{ $issuingItem->issuing->location->location_name }}</td>
+
+                                        <td>{{ $total }}</td>
+
+                                        <!-- Display action buttons -->
                                         <td>
                                             <div class="d-flex">
-
-                                                <a type="link" href="{{ route('order.edit', $order->id) }}">
-                                                    <i class=" icon-edit " style="margin-right: 5px; color:blue"></i>
+                                                <a type="link"
+                                                    href="{{ route('issuing.edit', $issuingItem->issuing_id) }}">
+                                                    <i class="icon-edit" style="color: blue"></i>
                                                 </a>
 
-
-                                                <form action="{{ route('order.destroy', $order->id) }}"
+                                                <form action="{{ route('issuing.destroy', $issuingItem->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -110,15 +128,11 @@
                                                         <i class="icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
-
-
                                             </div>
-
-
                                         </td>
-
                                     </tr>
                                 @endforeach
+
 
 
                             </tbody>
@@ -132,5 +146,3 @@
     </div>
     <!-- Row end -->
 @endsection
-
-

@@ -2,8 +2,8 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Purchase</li>
-            <li class="breadcrumb-item active">Supplier</li>
+            <li class="breadcrumb-item">Mantain</li>
+            <li class="breadcrumb-item active">Item Category</li>
         </ol>
 
         <ul class="app-actions">
@@ -46,53 +46,43 @@
                 </div>
             </div>
         @endif
+
+
         <div class="row gutters">
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewSupplier">Add New
-                        Supplier</button>
-
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewCategory">Add New
+                        Category</button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="addNewSupplier" tabindex="-1" role="dialog"
-                        aria-labelledby="addNewSupplierLabel" aria-hidden="true">
+                    <div class="modal fade" id="addNewCategory" tabindex="-1" role="dialog"
+                        aria-labelledby="addNewCategoryLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addNewSupplierLabel">New Supplier</h5>
+                                    <h5 class="modal-title" id="addNewCategoryLabel">New Item Category</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="{{ route('supplier.store') }}">
+                                    <form method="POST" action="{{ route('itemCategory.store') }}">
                                         @csrf
                                         <div class="col-sm-12 col-12">
                                             <div class="form-group">
-                                                <label for="exampleInputCity1"> Name</label>
-                                                <input type="text" class="form-control" id="supplier_name"
-                                                    name="supplier_name" placeholder="supplier Name"
-                                                    value="{{ old('supplier_name') }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputCity1"> Contact number</label>
-                                                <input type="number" class="form-control" id="contact_number"
-                                                    name="contact_number" placeholder="Contact Number"
-                                                    value="{{ old('contact_number') }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputCity1"> Address</label>
-                                                <input type="text" class="form-control" id="address"
-                                                    name="address" placeholder="address"
-                                                    value="{{ old('address') }}">
+                                                <label for="exampleInputCity1">Item Category Name</label>
+                                                <input type="text" class="form-control" id="item_category_name"
+                                                    name="item_category_name" placeholder="Category Name"
+                                                    value="{{ old('item_category_name') }}">
                                             </div>
 
 
                                         </div>
                                         <div class="modal-footer custom">
 
-                                            <div class="center">
+
+                                            <div class="right-side">
                                                 <button type="submit" class="btn btn-link success btn-block">Save</button>
                                             </div>
                                         </div>
@@ -106,7 +96,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row gutters">
             <div class="col-sm-12">
 
@@ -117,9 +106,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th> Name</th>
-                                    <th>Contact Number</th>
-                                    <th>Address</th>
+                                    <th>Category Name</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -129,23 +116,21 @@
                                 @php
                                     $no = 0;
                                 @endphp
-                                @foreach ($suppliers as $supplier)
+                                @foreach ($itemCategories as $itemCategory)
                                     @php
                                         $no = $no + 1;
                                     @endphp
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $supplier->supplier_name }}</td>
-                                        <td>{{ $supplier->contact_number }}</td>
-                                        <td>{{ $supplier->address }}</td>
+                                        <td>{{ $itemCategory->item_category_name }}</td>
                                         <td>
                                             <div class="d-flex">
 
                                                 <a href="#" class="edit-card" data-toggle="modal"
-                                                    data-target="#editSupplier{{ $supplier->id }}">
+                                                    data-target="#editCategory{{ $itemCategory->id }}">
                                                     <i class="icon-edit" style="color: blue"></i>
                                                 </a>
-                                                <form action="{{ route('supplier.destroy', $supplier->id) }}"
+                                                <form action="{{ route('itemCategory.destroy', $itemCategory->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -162,12 +147,12 @@
 
                                     </tr>
 
-                                    <div class="modal fade" id="editSupplier{{ $supplier->id }}" tabindex="-1"
-                                        role="dialog" aria-labelledby="editSupplierLabel" aria-hidden="true">
+                                    <div class="modal fade" id="editCategory{{ $itemCategory->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="editCategoryLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editSupplierLabel">Edit Supplier</h5>
+                                                    <h5 class="modal-title" id="editCategoryLabel">Edit Item Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -176,27 +161,16 @@
                                                 <div class="modal-body">
 
                                                     <form method="POST"
-                                                        action="{{ route('supplier.update', $supplier->id) }}">
+                                                        action="{{ route('itemCategory.update', $itemCategory->id) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="col-sm-12 col-12">
                                                             <div class="form-group">
-                                                                <label for="exampleInputCity1"> Name</label>
-                                                                <input type="text" class="form-control" id="supplier_name"
-                                                                    name="supplier_name" placeholder="supplier Name"
-                                                                    value="{{  $supplier->supplier_name }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputCity1"> Contact number</label>
-                                                                <input type="number" class="form-control" id="contact_number"
-                                                                    name="contact_number" placeholder="Contact Number"
-                                                                    value="{{$supplier->contact_number }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exampleInputCity1"> Address</label>
-                                                                <input type="text" class="form-control" id="address"
-                                                                    name="address" placeholder="address"
-                                                                    value="{{ $supplier->address }}">
+                                                                <label for="exampleInputCity1">Item Category Name</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="item_category_name" name="item_category_name"
+                                                                    value="{{ $itemCategory->item_category_name }}"
+                                                                    placeholder="Category Name">
                                                             </div>
                                                         </div>
 
@@ -222,7 +196,5 @@
             </div>
         </div>
 
-
     </div>
-    <!-- Row end -->
 @endsection

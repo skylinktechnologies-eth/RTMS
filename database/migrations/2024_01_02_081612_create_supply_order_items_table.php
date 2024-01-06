@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('waitstaff_assignments', function (Blueprint $table) {
+        Schema::create('supply_order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('waitstaff_id')->constrained();
-            $table->foreignId('table_id')->constrained();
-            $table->date('assignment_date')->nullable();
+            $table->foreignId('supply_order_id')->constrained();
+            $table->foreignId('item_id')->constrained();
+            $table->integer('quantity');
+            $table->decimal('price');
+            $table->decimal('total')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('waitstaff_assignments');
+        Schema::dropIfExists('supply_order_items');
     }
 };

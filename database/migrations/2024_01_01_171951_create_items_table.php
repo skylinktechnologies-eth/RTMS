@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('waitstaff_assignments', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('waitstaff_id')->constrained();
-            $table->foreignId('table_id')->constrained();
-            $table->date('assignment_date')->nullable();
+            $table->string('item_name');
+            $table->foreignId('item_category_id')->constrained();
+            $table->string('unit_of_measure');
+            $table->decimal('price');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('waitstaff_assignments');
+        Schema::dropIfExists('items');
     }
 };
