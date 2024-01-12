@@ -24,19 +24,19 @@ class IssuingController extends Controller
     }
     public function edit($id)
     {
-        // $orderItems = SupplyOrderItem::where('supply_order_id', $id)->get(); // Use get() to fetch the results
-        // $supplyOrder = SupplyOrder::find($id);
-        // $suppliers = Supplier::all();
-        // $items = Item::all();
-        // foreach ($orderItems as  $orderItem) {
-        //     return  $orderItem;
-        // }
+        $issuingItems = IssuingItem::where('issuing_id', $id)->get(); // Use get() to fetch the results
+        $issuing = Issuing::find($id);
+        $locations = Location::all();
+        $items = Item::all();
+        
 
-        return view('Pages.Purchase.edit', compact('suppliers', 'items', 'orderItems', 'supplyOrder'));
+        return view('Pages.Issuing.edit', compact('locations', 'items', 'issuingItems', 'issuing'));
     }
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+
+        ]);
         $issuing = new Issuing();
         $issuing->location_id = $request->location_id;
         $issuing->issued_date = $request->issued_date;
@@ -53,5 +53,45 @@ class IssuingController extends Controller
             $issuingItem->save();
         }
         return back()->with('success','Issuing Created successfully');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'location_id'=>'required',
+            'issued_date'=>'required',
+            'issued_to'=>'required',
+            'List'=>'required',
+
+        ]);
+        $issuing =  Issuing::find($id);
+        $issuing->location_id = $request->location_id;
+        $issuing->issued_date = $request->issued_date;
+        $issuing->issued_to =  $request->issued_to;
+        $issuing->save();
+
+        IssuingItem::where('issuing_id',$id)->delete();
+        foreach ($request->List as $item) {
+            $issuingItem = new IssuingItem();
+            $issuingItem->issuing_id = $issuing->id;
+            $issuingItem->item_id = $item['item_id'];
+            $issuingItem->quantity = $item['quantity'];
+            $issuingItem->total = $item['quantity'];
+            $issuingItem->save();
+        }
+        return back()->with('success','Issuing Updated successfully');
+    }
+    public function destroy(String $id)
+    {
+        $issuingItems = IssuingItem::where('issuing_id', $id)->get();
+    
+        foreach ($issuingItems as $issuingItem) {
+            $issuingItem->delete();
+        }
+    
+       // Optionally, if you want to delete the SupplyOrder as well, uncomment the following lines:
+        $issuing = Issuing::find($id);
+        $issuing->delete();
+    
+        return back()->with('success', 'Issuing deleted successfully!');
     }
 }

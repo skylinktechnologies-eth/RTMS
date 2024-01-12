@@ -69,7 +69,7 @@
                                     <th>No</th>
                                     <th>Date</th>
                                     <th>Location</th>
-
+                                    <th>Item</th>
                                     <th> Total Quantity</th>
                                     <th>Action</th>
 
@@ -112,15 +112,92 @@
 
                                         <td>{{ $total }}</td>
 
+                                        @php
+                                        $issuingId = $issuingItem->issuing->id;
+                                    @endphp
+                                    <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
+                                            data-target="#viewItem{{ $issuingId }}">view
+                                        </button></td>
+                                       
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="viewItem{{ $issuingId }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="viewItemLabel">Items</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="{{ route('issuing.update',$issuingId) }}">
+                                                        @csrf
+
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-4">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputCity1">Item</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3 col-4">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputCity1">quantity</label>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        @foreach ($issuingItems as $issuingItem) 
+                                                        @if ($issuingItem->issuing_id ==  $issuingId )
+                                                                    <div class="row">
+                                                                        <div class="col-sm-4 col-4">
+                                                                            <div class="form-group">
+                                                                             
+                                                                                <input type="text" class="form-control"
+                                                                                    id="category_name" name="item_id" value=" {{ $issuingItem->item->item_name }}"
+                                                                                    placeholder="Category Name"style="border-block-color: white;border-color:white">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4 col-4">
+                                                                            <div class="form-group">
+                                                                              
+                                                                                <input type="text" class="form-control" 
+                                                                                    id="quantity" name="quantity[]" value="  {{ $issuingItem->quantity }}" oninput="calculateTotal()"
+                                                                                    placeholder="Category Name" style="border-block-color: white;border-color:white">
+                                                                            </div>
+                                                                        </div>
+                                                                       
+                                                                    </div>
+                                                                  
+                                                               
+                                                            
+                                                        @endif
+                                                        @endforeach
+                                                       
+                                                        <div class="modal-footer custom">
+
+                                                            <div class="right-side">
+                                                                <button type="submit"
+                                                                    class="btn btn-link success btn-block">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+
                                         <!-- Display action buttons -->
                                         <td>
                                             <div class="d-flex">
                                                 <a type="link"
-                                                    href="{{ route('issuing.edit', $issuingItem->issuing_id) }}">
+                                                    href="{{ route('issuing.edit', $issuingId) }}">
                                                     <i class="icon-edit" style="color: blue"></i>
                                                 </a>
 
-                                                <form action="{{ route('issuing.destroy', $issuingItem->id) }}"
+                                                <form action="{{ route('issuing.destroy', $issuingId) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

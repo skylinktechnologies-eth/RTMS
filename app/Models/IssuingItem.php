@@ -17,4 +17,8 @@ class IssuingItem extends Model
     {
         return $this->belongsTo(Issuing::class, 'issuing_id');
     }
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
 }

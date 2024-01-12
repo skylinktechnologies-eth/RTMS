@@ -81,8 +81,8 @@
 						
 							<li class="sidebar-dropdown">
 								<a href="#">
-									<i class="icon-calendar1"></i>
-									<span class="menu-text">Tables</span>
+									<i class="icon-rate_review"></i>
+									<span class="menu-text">Register</span>
 								</a>
 								<div class="sidebar-submenu">
 									<ul>
@@ -90,22 +90,19 @@
 											<a href="/table">Table</a>
 										</li>
 										<li>
-											<a href="/reservation">Reservation</a>
+											<a href="/category">Category</a>
 										</li>
-										
+										<li>
+											<a href="/menuItem">Product</a>
+										</li>
+									
 									</ul>
 								</div>
 							</li>
 							<li>
-								<a href="/category">
-									<i class="icon-phone1"></i>
-									<span class="menu-text">Category</span>
-								</a>
-							</li>
-							<li>
-								<a href="/menuItem">
-									<i class="icon-documents"></i>
-									<span class="menu-text">Menu Item</span>
+								<a href="/reservation">
+									<i class="icon-grid_on"></i>
+									<span class="menu-text"> Reservation</span>
 								</a>
 							</li>
 							<li class="sidebar-dropdown">
@@ -125,22 +122,11 @@
 									</ul>
 								</div>
 							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="icon-book-open"></i>
-									<span class="menu-text">Waitstaff</span>
+							<li>
+								<a href="/waitstaff">
+									<i class="icon-add-user"></i>
+									<span class="menu-text"> Waitstaff</span>
 								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="{{ route('waitstaff.index') }}">Staff</a>
-										</li>
-										{{-- <li>
-											<a href="{{ route('waitstaffAssignment.index') }}"> Assignment</a>
-										</li> --}}
-										
-									</ul>
-								</div>
 							</li>
 							
 							<li class="header-menu">Inventory</li>
@@ -160,28 +146,19 @@
 										<li>
 											<a href="{{ route('supplyItem.index') }}"> Supply Item</a>
 										</li>
-									
-									</ul>
-								</div>
-							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="icon-edit1"></i>
-									<span class="menu-text">Purchase</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
 										<li>
 											<a href="{{ route('supplier.index') }}">Supplier</a>
 										</li>
-										<li>
-											<a href="{{ route('purchase.index') }}">Orders</a>
-										</li>
 									
 									</ul>
 								</div>
 							</li>
-
+							<li>
+								<a href="/purchase">
+									<i class="icon-shopping-cart1"></i>
+									<span class="menu-text"> Purchase</span>
+								</a>
+							</li>
 							<li>
 								<a href="/issuing">
 									<i class="icon-documents"></i>

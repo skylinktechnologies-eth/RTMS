@@ -66,11 +66,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Table Name</th>
-                                    <th>Reservation Date</th>
-                                    <th>Party Size</th>
                                     <th>Contact Name</th>
                                     <th>Contact Number</th>
+                                    <th>Reservation Date</th>
+                                    <th>Party Size</th>
+                                    <th>Table</th>
                                     <th>Status</th>
                                     <th>Action</th>
 
@@ -81,17 +81,117 @@
                                 @php
                                     $no = 0;
                                 @endphp
-                                @foreach ($reservations as $reservation)
+                                @foreach ($details as $deatil)
                                     @php
                                         $no = $no + 1;
                                     @endphp
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $reservation->table->table_name }}</td>
-                                        <td>{{ $reservation->reservation_date }}</td>
-                                        <td>{{ $reservation->party_size }}</td>
-                                        <td>{{ $reservation->contact_name }}</td>
-                                        <td>{{ $reservation->contact_number }}</td>
+                                        <td>{{ $deatil->reservation->contact_name }}</td>
+                                        <td>{{ $deatil->reservation->contact_number }}</td>
+                                        <td>{{ $deatil->reservation->reservation_date }}</td>
+                                        <td>{{ $deatil->reservation->party_size }}</td>
+                                        
+                                        @php
+                                            $supplyId = $reservation->detail->id;
+                                        @endphp
+                                        <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
+                                                data-target="#viewItem{{ $supplyId }}">view
+                                            </button></td>
+                                           
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="viewItem{{ $supplyId }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewItemLabel">Items</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="{{ route('purchase.update',$supplyId) }}">
+                                                            @csrf
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">Item</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">quantity</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">price</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">total</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @foreach ($orderItems as $orderItem) 
+                                                            @if ($orderItem->supply_order_id ==  $supplyId )
+                                                                        <div class="row">
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                 
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="category_name" name="item_id" value=" {{ $orderItem->item->item_name }}"
+                                                                                        placeholder="Category Name"style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                  
+                                                                                    <input type="text" class="form-control" 
+                                                                                        id="quantity" name="quantity[]" value="  {{ $orderItem->quantity }}" oninput="calculateTotal()"
+                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                   
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="price" name="price[]" value="   {{ $orderItem->price }}" oninput="calculateTotal()"
+                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                             
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="total" name="total[]" value="  {{ $orderItem->total }}" 
+                                                                                        placeholder="total" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                      
+                                                                   
+                                                                
+                                                            @endif
+                                                            @endforeach
+                                                           
+                                                            <div class="modal-footer custom">
+
+                                                                <div class="right-side">
+                                                                    <button type="submit"
+                                                                        class="btn btn-link success btn-block">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
                                         @if ($reservation->status == 'Pending')
                                             <td style="color: #fed713">{{ $reservation->status }}</td>
                                         @else

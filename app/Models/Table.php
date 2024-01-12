@@ -14,9 +14,9 @@ class Table extends Model
         'status'
     ];
 
-    public function reservation()
+    public function reservationDetail()
     {
-        return $this->hasMany(Reservation::class, 'table_id');
+        return $this->hasMany(ReservationDetail::class, 'table_id');
     }
     public function order()
     {

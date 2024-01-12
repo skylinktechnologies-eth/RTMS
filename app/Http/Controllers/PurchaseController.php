@@ -55,29 +55,62 @@ class PurchaseController extends Controller
             $orderItem->total = $item['total'];
             $orderItem->save();
         }
-        return back()->with('success','Orders Created successfully');
+        return back()->with('success', 'Orders Created successfully');
     }
-    public function update(Request $request ,$id)
+    public function update(Request $request, $id)
     {
-        $request->validate([]);
 
-        $supplyOrder =  SupplyOrder::find($id);
+        $request->validate([
+            'List' => 'required'
+            // Add your validation rules here
+        ]);
+        $supplyOrder = SupplyOrder::find($id);
+
         $supplyOrder->supplier_id = $request->supplier_id;
         $supplyOrder->order_date = $request->order_date;
-        $supplyOrder->status = "Placed";
         $supplyOrder->save();
 
+        SupplyOrderItem::where('supply_order_id', $id)->delete();
+
+
         // Iterate through each item in the request and create a new SupplyOrderItem
-        $orderItem =  SupplyOrderItem::where('supply_order_id',$id)->get();
-      
-        
-         
+        foreach ($request->List as $item) {
+            $orderItem = new SupplyOrderItem();
             $orderItem->supply_order_id = $supplyOrder->id;
-            $orderItem->item_id = $request->item_id;
-            $orderItem->quantity = $request->quantity;
-            $orderItem->price = $request->price;
-            $orderItem->total = $request->total;
+            $orderItem->item_id = $item['item_id'];
+            $orderItem->quantity = $item['quantity'];
+            $orderItem->price = $item['price'];
+            $orderItem->total = $item['total'];
             $orderItem->save();
-       
+        }
+        return back()->with('success', 'Orders Updated successfully');
+    }
+    public function destroy(String $id)
+    {
+        $orderItems = SupplyOrderItem::where('supply_order_id', $id)->get();
+
+        foreach ($orderItems as $orderItem) {
+            $orderItem->delete();
+        }
+
+        // Optionally, if you want to delete the SupplyOrder as well, uncomment the following lines:
+        $supplyOrder = SupplyOrder::find($id);
+        $supplyOrder->delete();
+
+        return back()->with('success', 'Order deleted successfully!');
+    }
+    public function changeStatusToReceived($id)
+    {
+        $supplyOrder = SupplyOrder::find($id);
+        $supplyOrder->status = 'Recieved';
+        $supplyOrder->save();
+        return back()->with('success', 'Change Status');
+    }
+    public function changeStatusToPlaced($id)
+    {
+        $supplyOrder = SupplyOrder::find($id);
+        $supplyOrder->status = 'Placed';
+        $supplyOrder->save();
+        return back()->with('success', 'Change Status');
     }
 }

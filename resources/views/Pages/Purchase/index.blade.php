@@ -28,7 +28,7 @@
     </div>
 
     <div class="main-container">
-     
+
 
 
 
@@ -67,10 +67,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Date</th>
                                     <th>Supplier</th>
-                                  
+                                    <th>Date</th>
+                                    <th>Item</th>
                                     <th>Total</th>
+                                    <th>Status</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -80,58 +81,192 @@
                                     $no = 0;
                                 @endphp
                                 @php
-                                $groupedOrderItems = [];
-                            
-                                foreach ($orderItems as $orderItem) {
-                                    $supplyOrderId = $orderItem->supplyOrder->id;
-                            
-                                    if (!isset($groupedOrderItems[$supplyOrderId])) {
-                                        $groupedOrderItems[$supplyOrderId] = [
-                                            'total' => 0,
-                                            'orderItem' => $orderItem, // Store one representative order item for details
-                                        ];
+                                    $groupedOrderItems = [];
+
+                                    foreach ($orderItems as $orderItem) {
+                                        $supplyOrderId = $orderItem->supplyOrder->id;
+
+                                        if (!isset($groupedOrderItems[$supplyOrderId])) {
+                                            $groupedOrderItems[$supplyOrderId] = [
+                                                'total' => 0,
+                                                'orderItem' => $orderItem, // Store one representative order item for details
+                                            ];
+                                        }
+
+                                        $groupedOrderItems[$supplyOrderId]['total'] += $orderItem->total;
                                     }
-                            
-                                    $groupedOrderItems[$supplyOrderId]['total'] += $orderItem->total;
-                                }
-                            @endphp
-                            
-                            @foreach ($groupedOrderItems as $supplyOrderId => $groupedOrderItem)
-                                @php
-                                    $total = $groupedOrderItem['total'];
-                                    $orderItem = $groupedOrderItem['orderItem'];
                                 @endphp
-                             @php
-                             $no = $no + 1;
-                         @endphp
-                                <tr>
-                                    <!-- Display details from representative order item -->
-                                    <td>{{ $no }}</td>
-                                    <td>{{ $orderItem->supplyOrder->order_date }}</td>
-                                    <td>{{ $orderItem->supplyOrder->supplier->supplier_name }}</td>
-                                   
-                                    <td>{{  $total  }}</td>
-                                    
-                                    <!-- Display action buttons -->
-                                    <td>
-                                        <div class="d-flex">
-                                            <a type="link" href="{{ route('purchase.edit', $orderItem->supply_order_id) }}">
-                                                <i class="icon-edit" style="color: blue"></i>
-                                            </a>
-                            
-                                            <form action="{{ route('purchase.destroy', $orderItem->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-link p-0">
-                                                    <i class="icon-trash-2" style="color:red"></i>
-                                                </button>
-                                            </form>
+
+                                @foreach ($groupedOrderItems as $supplyOrderId => $groupedOrderItem)
+                                    @php
+                                        $total = $groupedOrderItem['total'];
+                                        $orderItem = $groupedOrderItem['orderItem'];
+                                    @endphp
+                                    @php
+                                        $no = $no + 1;
+                                    @endphp
+                                    <tr>
+                                        <!-- Display details from representative order item -->
+                                        <td>{{ $no }}</td>
+
+                                        <td>{{ $orderItem->supplyOrder->supplier->supplier_name }}</td>
+                                        <td>{{ $orderItem->supplyOrder->order_date }}</td>
+                                        
+                                        @php
+                                            $supplyId = $orderItem->supplyOrder->id;
+                                        @endphp
+                                        <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
+                                                data-target="#viewItem{{ $supplyId }}">view
+                                            </button></td>
+                                           
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="viewItem{{ $supplyId }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewItemLabel">Items</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="{{ route('purchase.update',$supplyId) }}">
+                                                            @csrf
+
+                                                            <div class="row">
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">Item</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">quantity</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">price</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-3">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputCity1">total</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @foreach ($orderItems as $orderItem) 
+                                                            @if ($orderItem->supply_order_id ==  $supplyId )
+                                                                        <div class="row">
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                 
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="category_name" name="item_id" value=" {{ $orderItem->item->item_name }}"
+                                                                                        placeholder="Category Name"style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                  
+                                                                                    <input type="text" class="form-control" 
+                                                                                        id="quantity" name="quantity[]" value="  {{ $orderItem->quantity }}" oninput="calculateTotal()"
+                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                                   
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="price" name="price[]" value="   {{ $orderItem->price }}" oninput="calculateTotal()"
+                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <div class="form-group">
+                                                                             
+                                                                                    <input type="text" class="form-control"
+                                                                                        id="total" name="total[]" value="  {{ $orderItem->total }}" 
+                                                                                        placeholder="total" style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                      
+                                                                   
+                                                                
+                                                            @endif
+                                                            @endforeach
+                                                           
+                                                            <div class="modal-footer custom">
+
+                                                                <div class="right-side">
+                                                                    <button type="submit"
+                                                                        class="btn btn-link success btn-block">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <script>
+                                                        function calculateTotal() {
+                                                            // Get quantity and price values
+                                                            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+                                                            var price = parseFloat(document.getElementById('price').value) || 0;
+                                                
+                                                            // Calculate total
+                                                            var total = quantity * price;
+                                                
+                                                            // Display the total
+                                                            document.getElementById('total').value = total;
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                               
-                            @endforeach
-                            
+                                        <td>{{ $total }}</td>
+                                        <td class="text-center">
+                                        <div class="dropdown">
+                                            @if ($orderItem->supplyOrder->status == 'Placed')
+											<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                                {{$orderItem->supplyOrder->status}}
+											</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="changeStatusToReceived-{{ $orderItem->supplyOrder->id }}">Received</a>
+											</div>
+                                            @elseif ($orderItem->supplyOrder->status == 'Recieved')
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgb(245, 174, 32)">
+                                                {{$orderItem->supplyOrder->status}}
+											</button>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="changeStatusToPlaced-{{ $orderItem->supplyOrder->id }}">Placed</a>
+											</div> 
+                                            @endif
+										</div></td>
+                                        
+
+                                        <!-- Display action buttons -->
+                                        <td>
+                                            <div class="d-flex">
+                                                <a type="link"
+                                                    href="{{ route('purchase.edit', $supplyId) }}">
+                                                    <i class="icon-edit" style="color: blue"></i>
+                                                </a>
+                                                <form action="{{ route('purchase.destroy', $supplyId) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-link p-0">
+                                                        <i class="icon-trash-2" style="color:red"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
 
 
                             </tbody>

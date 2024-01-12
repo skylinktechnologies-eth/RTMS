@@ -156,6 +156,8 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::post('purchase-store', 'store')->name('purchase.store');
     Route::put('purchase-update/{id}', 'update')->name('purchase.update');
     Route::delete('purchase-delete/{id}', 'destroy')->name('purchase.destroy');
+    Route::get('changeStatusToReceived-{id}', 'changeStatusToReceived');
+    Route::get('changeStatusToPlaced-{id}', 'changeStatusToPlaced');
 });
 //Issuing
 Route::controller(IssuingController::class)->group(function () {

@@ -19,5 +19,9 @@ class SupplyOrderItem extends Model
     {
         return $this->belongsTo(SupplyOrder::class, 'supply_order_id');
     }
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
 
 }

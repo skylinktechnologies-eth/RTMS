@@ -18,4 +18,12 @@ class Item extends Model
     {
         return $this->belongsTo(ItemCategory::class, 'item_category_id');
     }
+    public function supplyOrderItem()
+    {
+        return $this->hasMany(SupplyOrderItem::class, 'item_id');
+    }
+    public function issuingItem()
+    {
+        return $this->hasMany(IssuingItem::class, 'item_id');
+    }
 }

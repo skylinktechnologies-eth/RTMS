@@ -1,143 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+
+		<!-- Icomoon Font Icons css -->
+		<link rel="stylesheet" href="../../fonts/style.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="../../css/main.min.css">
+
+		<!-- DateRange css -->
+		<link rel="stylesheet" href="../../vendor/daterange/daterange.css" />
+
+		<!-- Chartist css -->
+		<link rel="stylesheet" href="../../vendor/chartist/css/chartist.min.css" />
+		<link rel="stylesheet" href="../../vendor/chartist/css/chartist-custom.css" />
+    <!-- Data Tables -->
+		<link rel="stylesheet" href="../../vendor/datatables/dataTables.bs4.css" />
+		<link rel="stylesheet" href="../../vendor/datatables/dataTables.bs4-custom.css" />
+		<link href="../../vendor/datatables/buttons.bs.css" rel="stylesheet" />
+    <!-- Bootstrap Select CSS -->
+		<link rel="stylesheet" href="../../vendor/bs-select/bs-select.css" />
+		<!-- jQcloud Keywords css -->
+		<link rel="stylesheet" href="../../vendor/jqcloud/jqcloud.css" />
+    @livewireStyles
+</head>
+<body style="background-color: rgb(232, 229, 229)">
+    
+    <livewire:component.order-interaction /> 
+
+    @livewireScripts
+    <script src="../../js/jquery.min.js"></script>
+		<script src="../../js/bootstrap.bundle.min.js"></script>
+		<script src="../../js/moment.js"></script>
 
 
-@extends('Frames.app')
-@section('content')
-<style>
-     .table td img {
-            width: 70px;
-            height: 50px;
-            border-radius: 0%;
-        }
-</style>
-    <div class="page-header">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Orders</li>
-            <li class="breadcrumb-item active">Order Item</li>
-        </ol>
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+		<!-- Slimscroll JS -->
+		<script src="../../vendor/slimscroll/slimscroll.min.js"></script>
+		<script src="../../vendor/slimscroll/custom-scrollbar.js"></script>
 
-        <ul class="app-actions">
-            <li>
-                <a href="#" id="reportrange">
-                    <span class="range-text"></span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
+		<!-- Daterange -->
+		<script src="../../vendor/daterange/daterange.js"></script>
+		<script src="../../vendor/daterange/custom-daterange.js"></script>
+    
+		<!-- Data Tables -->
+		<script src="../../vendor/datatables/dataTables.min.js"></script>
+		<script src="../../vendor/datatables/dataTables.bootstrap.min.js"></script>
 
-    <div class="main-container">
-        
+		<!-- Custom Data tables -->
+		<script src="../../vendor/datatables/custom/custom-datatables.js"></script>
+		<script src="../../vendor/datatables/custom/fixedHeader.js"></script>
 
-        @if (session('success'))
-            <div class="row">
+		<!-- Download / CSV / Copy / Print -->
+		<script src="../../vendor/datatables/buttons.min.js"></script>
+		<script src="../../vendor/datatables/jszip.min.js"></script>
+		<script src="../../vendor/datatables/pdfmake.min.js"></script>
+		<script src="../../vendor/datatables/vfs_fonts.js"></script>
+		<script src="../../vendor/datatables/html5.min.js"></script>
+		<script src="../../vendor/datatables/buttons.print.min.js"></script>
+		<!-- Chartist JS -->
+		<script src="../../vendor/chartist/js/chartist.min.js"></script>
+		<script src="../../vendor/chartist/js/chartist-tooltip.js"></script>
+		<script src="../../vendor/chartist/js/custom/threshold/threshold.js"></script>
+		<script src="../../vendor/chartist/js/custom/bar/bar-chart-orders.js"></script>
 
-                <div class="col-md-4">
+		<!-- jVector Maps -->
+		<script src="../../vendor/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+		<script src="../../vendor/jvectormap/world-mill-en.js"></script>
+		<script src="../../vendor/jvectormap/gdp-data.js"></script>
+		<script src="../../vendor/jvectormap/custom/world-map-markers2.js"></script>
 
-                </div>
-                <div class="col-md-4">
+		<!-- Rating JS -->
+		<script src="../../vendor/rating/raty.js"></script>
+		<script src="../../vendor/rating/raty-custom.js"></script>
+    <!-- Bootstrap Select JS -->
+		<script src="../../vendor/bs-select/bs-select.min.js"></script>
 
-                </div>
-                <div class="col-md-4">
-                    <div class="alert alert-success px-3" id="success-alert">
+		<!-- Apex Charts -->
+		<script src="../../vendor/apex/apexcharts.min.js"></script>
+		<script src="../../vendor/apex/quick-dashboard/tasks.js"></script>
+		<script src="../../vendor/apex/quick-dashboard/compare-sales.js"></script>
+		<script src="../../vendor/apex/quick-dashboard/compare-sales1.js"></script>
 
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-        <div class="row gutters">
-            <div class="col-sm-12">
-                <div class="text-right mb-3">
-                    <!-- Button trigger modal -->
-                    <a href="{{ route('orderItem.create') }}" type="button" class="btn btn-primary">Add New
-                        OrderItem</a>
-                </div>
-            </div>
-        </div>
-        <!-- Row start -->
-        <div class="row gutters">
-            <div class="col-sm-12">
-                <div class="table-container">
-                    <div class="table-responsive">
-                        <table id="basicExample" class="table custom-table">
-                            <thead >
-                                <tr>
-                                    <th>No</th>
-                                    <th>Item Name</th>
-                                    <th>Order Date</th>
-                                    <th>Quantity</th>
-                                    <th>SubTotal</th>
-                                    <th>Remark</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+		<!-- jQcloud Keywords -->
+		<script src="../../vendor/jqcloud/jqcloud-1.0.4.min.js"></script>
+		<script src="../../vendor/jqcloud/custom-jqcloud.js"></script>
 
-                                @php
-                                    $no = 0;
-                                @endphp
-                                @foreach ($orderItems as $orderItem)
-                                    @php
-                                        $no = $no + 1;
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $no }}</td>
-                                        <td>{{ $orderItem->item->item_name }}</td>
-                                        <td>{{ $orderItem->ordre->order_date }}</td>
-                                        <td>{{ $orderItem->quantity }}</td>
-                                        <td>{{ $orderItem->sub_total }}</td>
-                                        <td>{{ $orderItem->remark }}</td>
-                                        <td>{{ $orderItem->status }}</td>
-                                        <td>
-                                            <div class="d-flex">
+		<!-- jVector Maps -->
+		<script src="../../vendor/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+		<script src="../../vendor/jvectormap/gdp-data.js"></script>
+		<script src="../../vendor/jvectormap/africa-mill.js"></script>
 
-                                                <a type="link" href="{{ route('orderItem.edit', $orderItem->id) }}">
-                                                    <i class=" mdi mdi-lead-pencil " style="margin-right: 5px;"></i>
-                                                </a>
-
-
-                                                <form action="{{ route('orderItem.destroy', $orderItem->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-link p-0">
-                                                        <i class=" mdi mdi-delete" style="color:red"></i>
-                                                    </button>
-                                                </form>
-
-
-                                            </div>
-
-
-                                        </td>
-
-                                    </tr>
-                                @endforeach
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-    <!-- Row end -->
-@endsection
+		<!-- Custom JVector Maps -->
+		<script src="../../vendor/jvectormap/custom/map-africa1.js"></script>
 
 
 
+		<!-- Main JS -->
+		<script src="../../js/main.js"></script>
+</body>
+</html>

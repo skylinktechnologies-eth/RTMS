@@ -118,61 +118,78 @@
                                     <div class="mt-2">
                                         <div class="row">
                                             <div class="col-lg-8 mb-2">
-                                                <div class="table-responsive">
-                                                    <table class="table table-centered border table-nowrap mb-lg-0" id="itemList">
-                                                        <thead class="bg-light">
-                                                            <tr>
-                                                                <th style="width: 25%;">Items</th>
-                                                                <th style="width: 25%;">Quantity</th>
-                                                                <th style="width: 25%;">Price</th>
-                                                                <th style="width: 25%;">Total</th>
-                                
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($orderItems as $index => $orderItem)
-                                                                <tr>
-                                
-                                                                    <td>
-                                
-                                                                        <select class="form-control selectpicker" id="item_id{{ $index }}"
-                                                                            name="item_id[]" data-live-search="true">
-                                                                            <option value="">select Item</option>
+
+
+                                                <div class="card  mt-2">
+                                                    <div class="card-body bg-light " style="border-color:white">
+                                                        @php
+                                                            $no = 0;
+                                                        @endphp
+                                                        @foreach ($orderItems as $orderItem)
+                                                            @if ($supplyOrder->id == $orderItem->supply_order_id)
+                                                                <div class="row mt-2">
+
+                                                                    <div class="col "> <select
+                                                                            class="form-control selectpicker" id="item_id"
+                                                                            name="List[{{ $no }}][item_id]"
+                                                                            data-live-search="true">
+                                                                            {{-- <option value="">select Item</option> --}}
                                                                             @foreach ($items as $item)
                                                                                 <option value="{{ $item->id }}"
-                                                                                    {{ old('category_id', $orderItem->item_id) == $item->id ? 'selected' : '' }}>
+                                                                                    {{ old('item_id', $orderItem->item_id) == $item->id ? 'selected' : '' }}>
                                                                                     {{ $item->item_name }}</option>
                                                                             @endforeach
+
                                                                         </select>
-                                
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" onchange="getTotal()" id="quantity{{ $index }}"
-                                                                            name="quantity[]" class="form-control"
-                                                                            value="{{ $orderItem->quantity }}" placeholder="Quantity">
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" onchange="getTotal()" id="price{{ $index }}"
-                                                                            step="any" min="0" name="price[]" class="form-control"
-                                                                            value="{{ $orderItem->price }}" placeholder="Price">
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="number" onchange="getTotal()" id="total{{ $index }}"
-                                                                            step="any" min="0" name="total[]" class="form-control"
-                                                                            value="{{ $orderItem->total }}" placeholder="Total" readonly>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                                        @error('List')
+                                                                            <div class="alert alert-danger">
+                                                                                {{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="col ">
+                                                                        <input type="number" id="quantity{{ $orderItem->id }}" step="any"
+                                                                            min="0"
+                                                                            name="List[{{ $no }}][quantity]"
+                                                                            value="{{ $orderItem->quantity }}"
+                                                                            oninput="calculateTotal('{{ $orderItem->id }}')" class="form-control"
+                                                                            placeholder="Quantity">
+                                                                    </div>
+                                                                    <div class="col"> <input type="number"
+                                                                            id="price{{ $orderItem->id }}" step="any" min="0"
+                                                                            oninput="calculateTotal('{{ $orderItem->id }}')"
+                                                                            value="{{ $orderItem->price }}"
+                                                                            name="List[{{ $no }}][price]"
+                                                                            class="form-control" placeholder="U-Price">
+                                                                    </div>
+                                                                    <div class="col"> <input type="number"
+                                                                            id="total{{ $orderItem->id  }}" class="form-control"
+                                                                            name="List[{{ $no }}][total]"
+                                                                            min="0"
+                                                                            value="{{ $orderItem->total }}" readonly
+                                                                            placeholder="subTotal"></div>
+                                                                    <div class="col">
+                                                                    </div>
+                                                                </div>
+                                                                @php
+                                                                    $no = $no + 1;
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+
+                                                    </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-4">
 
                                             </div>
                                             <div class="col-lg-8">
-                                               
+
                                             </div>
+
+
+
+
 
                                             <div class="col-lg-4">
 
@@ -186,7 +203,9 @@
                                                             </thead>
                                                             <tbody>
 
-                                                             
+                                                                <tr>
+
+                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                         <div class="row m-5">
@@ -215,81 +234,16 @@
 
     <!-- Add the following script to your HTML file -->
     <script>
-        var rowIndex = 0; // Initialize rowIndex
+        function calculateTotal(Id) {
+            // Get quantity and price values
+            var quantity = parseFloat(document.getElementById('quantity' + Id).value) || 0;
+            var price = parseFloat(document.getElementById('price' + Id).value) || 0;
     
-        function addList() {
-            var itemId = document.getElementById('item_id').value;
-            var itemName = document.getElementById('item_id').options[document.getElementById('item_id').selectedIndex].text;
-            var unit = document.getElementById('unit').value;
-            var quantity = parseFloat(document.getElementById('quantity').value);
-            var price = parseFloat(document.getElementById('price').value);
+            // Calculate total
             var total = quantity * price;
     
-            // Create a new row for the item
-            var newRow = createRow(itemId, itemName, quantity, unit, price, total);
-    
-            // Append the new row to the table body
-            document.getElementById('itemList').getElementsByTagName('tbody')[0].appendChild(newRow);
-    
-            // Increment rowIndex for the next iteration
-            rowIndex++;
-    
-            // Update the summary
-            updateSummary();
-        }
-    
-        function createRow(itemId, itemName, quantity, unit, price, total) {
-            var row = document.createElement('tr');
-            
-            var columns = [
-                itemName,
-                quantity + ' ' + unit,
-                price,
-                total,
-                '<a class="btn btn-danger" onclick="removeRow(this)"><i class="icon-minus"></i></a>'
-            ];
-    
-            for (var i = 0; i < columns.length; i++) {
-                var cell = document.createElement('td');
-                cell.innerHTML = columns[i];
-                row.appendChild(cell);
-            }
-    
-            var hiddenFields = ['item_id', 'item_name', 'quantity', 'price', 'total'];
-    
-            for (var i = 0; i < hiddenFields.length; i++) {
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'item_list[' + rowIndex + '][' + hiddenFields[i] + ']';
-                input.value = (i === 0) ? itemId : (i === 1) ? itemName : (i === 2) ? quantity : (i === 3) ? price : total;
-                row.appendChild(input);
-            }
-    
-            return row;
-        }
-    
-        function removeRow(btn) {
-            var row = btn.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-    
-            // Update the summary
-            updateSummary();
-        }
-    
-        function updateSummary() {
-            var subTotal = 0;
-            var rows = document.getElementById('itemList').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-    
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td');
-                var total = parseFloat(cells[3].innerText);
-                subTotal += total;
-            }
-    
-            document.getElementById('all_sub').innerText = subTotal;
-            document.getElementById('all_total').innerText = subTotal;
-            document.getElementById('all_total').value = subTotal;
+            // Display the total
+            document.getElementById('total' + Id).value = total;
         }
     </script>
-    
 @endsection

@@ -9,15 +9,15 @@ class Reservation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'table_id',
+        'reservation_time',
         'reservation_date',
         'party_size',
         'contact_name',
         'contact_number',
         'status'
     ];
-    public function table()
+    public function reservationDetail()
     {
-        return $this->belongsTo(Table::class, 'table_id');
+        return $this->hasMany(ReservationDetail::class, 'reservation_id');
     }
 }
