@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IssuingController;
 use App\Http\Controllers\ItemCategoryController;
+use App\Http\Controllers\KitchenController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
@@ -76,6 +77,7 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('order-store', 'store')->name('order.store');
     Route::put('order-update/{id}', 'update')->name('order.update');
     Route::delete('order-delete/{id}', 'destroy')->name('order.destroy');
+    Route::get('changeStatusClose-{id}', 'changeStatusClose');
 });
 
 //OrderItem
@@ -86,6 +88,8 @@ Route::controller(OrderItemController::class)->group(function () {
     Route::post('orderItem-store', 'store')->name('orderItem.store');
     Route::put('orderItem-update/{id}', 'update')->name('orderItem.update');
     Route::delete('orderItem-delete/{id}', 'destroy')->name('orderItem.destroy');
+    Route::get('changeStatusToPreparing-{id}', 'changeStatusToPreparing'); 
+    Route::get('changeStatusToReady-{id}', 'changeStatusToReady');
 });
 
 //waitstaff
@@ -167,4 +171,8 @@ Route::controller(IssuingController::class)->group(function () {
     Route::post('issuing-store', 'store')->name('issuing.store');
     Route::put('issuing-update/{id}', 'update')->name('issuing.update');
     Route::delete('issuing-delete/{id}', 'destroy')->name('issuing.destroy');
+});
+//kitchen
+Route::controller(KitchenController::class)->group(function () {
+    Route::get('kitchen', 'index')->name('kitchen.index');
 });

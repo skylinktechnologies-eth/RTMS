@@ -100,32 +100,28 @@
 								</div>
 							</li>
 							<li>
+								<a href="/waitstaff">
+									<i class="icon-add-user"></i>
+									<span class="menu-text"> Waitstaff</span>
+								</a>
+							</li>
+							<li>
 								<a href="/reservation">
 									<i class="icon-grid_on"></i>
 									<span class="menu-text"> Reservation</span>
 								</a>
 							</li>
-							<li class="sidebar-dropdown">
-								<a href="#">
-									<i class="icon-layout"></i>
-									<span class="menu-text">Orders</span>
-								</a>
-								<div class="sidebar-submenu">
-									<ul>
-										<li>
-											<a href="{{ route('order.index') }}">Order</a>
-										</li>
-										<li>
-											<a href="{{ route('orderItem.index') }}">OrderItem</a>
-										</li>
-										
-									</ul>
-								</div>
-							</li>
 							<li>
-								<a href="/waitstaff">
+								<a href="/orderItem  ">
+									<i class="icon-layout"></i>
+									<span class="menu-text"> Order  </span>
+								</a>
+							</li>
+							
+							<li>
+								<a href="/kitchen  ">
 									<i class="icon-add-user"></i>
-									<span class="menu-text"> Waitstaff</span>
+									<span class="menu-text"> kitchen  </span>
 								</a>
 							</li>
 							

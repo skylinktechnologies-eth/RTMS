@@ -14,8 +14,9 @@ class OrderItemController extends Controller
     public function index()
     {
         $orderItems = OrderItem::all();
+        $orders=Order::all();
 
-        return view('Pages.OrderItem.index', compact('orderItems'));
+        return view('Pages.OrderItem.index', compact('orderItems','orders'));
     }
     public function create()
     {
@@ -76,4 +77,29 @@ class OrderItemController extends Controller
         $orderItem->delete();
         return back()->with('success', 'Menu Item delete successfully!');
     }
+    public function changeStatusToPreparing($id)
+    {
+
+        $orderItems = OrderItem::where( 'order_id',$id)->get();
+       
+        foreach($orderItems as $orderItem){
+            $orderItem->status = 'Preparing';
+            $orderItem->save();
+        }
+       
+        return back()->with('success', 'Change Status');
+    } 
+    public function changeStatusToReady($id)
+    {
+
+        $orderItems = OrderItem::where( 'order_id',$id)->get();
+       
+        foreach($orderItems as $orderItem){
+            $orderItem->status = 'Ready';
+            $orderItem->save();
+        }
+       
+        return back()->with('success', 'Change Status');
+    }
+
 }

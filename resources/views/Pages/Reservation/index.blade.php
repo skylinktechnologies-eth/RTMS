@@ -81,26 +81,24 @@
                                 @php
                                     $no = 0;
                                 @endphp
-                                @foreach ($details as $deatil)
+                                @foreach ($details as $detail)
                                     @php
                                         $no = $no + 1;
                                     @endphp
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $deatil->reservation->contact_name }}</td>
-                                        <td>{{ $deatil->reservation->contact_number }}</td>
-                                        <td>{{ $deatil->reservation->reservation_date }}</td>
-                                        <td>{{ $deatil->reservation->party_size }}</td>
+                                        <td>{{ $detail->reservation->contact_name }}</td>
+                                        <td>{{ $detail->reservation->contact_number }}</td>
+                                        <td>{{ $detail->reservation->reservation_date }}</td>
+                                        <td>{{ $detail->reservation->party_size }}</td>
                                         
-                                        @php
-                                            $supplyId = $reservation->detail->id;
-                                        @endphp
+                                       
                                         <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
-                                                data-target="#viewItem{{ $supplyId }}">view
+                                                data-target="#viewItem{{ $detail->id }}">view
                                             </button></td>
                                            
                                         <!-- Modal -->
-                                        <div class="modal fade" id="viewItem{{ $supplyId }}" tabindex="-1"
+                                        <div class="modal fade" id="viewItem{{ $detail->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -112,7 +110,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form method="POST" action="{{ route('purchase.update',$supplyId) }}">
+                                                        <form method="POST" action="{{ route('purchase.update') }}">
                                                             @csrf
 
                                                             <div class="row">
@@ -138,7 +136,7 @@
                                                                 </div>
                                                             </div>
                                                             @foreach ($orderItems as $orderItem) 
-                                                            @if ($orderItem->supply_order_id ==  $supplyId )
+                                                            @if ($orderItem->supply_order_id ==  $detail->id )
                                                                         <div class="row">
                                                                             <div class="col-sm-3 col-3">
                                                                                 <div class="form-group">

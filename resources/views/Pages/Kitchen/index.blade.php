@@ -251,7 +251,7 @@
                     <!-- Header actions end -->
                 </div>
             </header>
-            <livewire:component.interaction-livewire />
+            <livewire:component.kitchen-livewire />
         </div>
     </div>
 

@@ -17,4 +17,12 @@ class OrderItem extends Model
             'status'
 
     ];
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+    public function menuItem()
+    {
+        return $this->belongsTo(MenuItem::class, 'menu_item_id');
+    }
 }
