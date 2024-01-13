@@ -29,29 +29,6 @@
 
                 <div class=" card-body">
 
-                    {{-- @php
-                    $groupedOrderItems = [];
-
-                    foreach ($orderItems as $orderItem) {
-                        $orderId = $orderItem->order->id;
-
-                        if (!isset($groupedOrderItems[$orderId])) {
-                            $groupedOrderItems[$orderId] = [
-                                'sub_total' => 0,
-                                'orderItem' => $orderItem, // Store one representative order item for details
-                            ];
-                        }
-
-                        $groupedOrderItems[$orderId]['sub_total'] += $orderItem->sub_total;
-                    }
-                @endphp --}}
-
-
-                    {{-- @php
-                        $total = $groupedOrderItem['sub_total'];
-                        $orderItem = $groupedOrderItem['orderItem'];
-                    @endphp
-                --}}
                     <div class="row">
                         <div class="col-7" style=" margin-right: 15px;">
                             @php
