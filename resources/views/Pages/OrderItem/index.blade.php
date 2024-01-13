@@ -251,7 +251,7 @@
                     <!-- Header actions end -->
                 </div>
             </header>
-            <livewire:component.interaction-livewire />
+           <h2>hello</h2>
         </div>
     </div>
 
