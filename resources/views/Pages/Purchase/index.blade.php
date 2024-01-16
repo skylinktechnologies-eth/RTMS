@@ -114,6 +114,7 @@
                                         
                                         @php
                                             $supplyId = $orderItem->supplyOrder->id;
+                                            $supplyStatus = $orderItem->supplyOrder->status;
                                         @endphp
                                         <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
                                                 data-target="#viewItem{{ $supplyId }}">view
@@ -227,21 +228,21 @@
                                         <td>{{ $total }}</td>
                                         <td class="text-center">
                                         <div class="dropdown">
-                                            @if ($orderItem->supplyOrder->status == 'Placed')
+                                            @if ($supplyStatus == 'Placed')
 											<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
 												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                                {{$orderItem->supplyOrder->status}}
+                                                {{$supplyStatus}}
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="changeStatusToReceived-{{ $orderItem->supplyOrder->id }}">Received</a>
+												<a class="dropdown-item" href="changeStatusToReceived-{{ $supplyId }}">Received</a>
 											</div>
-                                            @elseif ($orderItem->supplyOrder->status == 'Recieved')
+                                            @elseif ($supplyStatus == 'Recieved')
                                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
 												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgb(245, 174, 32)">
-                                                {{$orderItem->supplyOrder->status}}
+                                                {{$supplyStatus}}
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="changeStatusToPlaced-{{ $orderItem->supplyOrder->id }}">Placed</a>
+												<a class="dropdown-item" href="changeStatusToPlaced-{{ $supplyId }}">Placed</a>
 											</div> 
                                             @endif
 										</div></td>

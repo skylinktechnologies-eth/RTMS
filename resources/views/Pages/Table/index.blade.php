@@ -78,7 +78,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputCity1">Capacity</label>
                                                 <input type="intiger" class="form-control" id="capacity" name="capacity"
-                                                    placeholder="Location">
+                                                    placeholder="Capacity">
                                             </div>
 
                                         </div>
@@ -142,7 +142,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editTableLabel">Edit Contact</h5>
+                                <h5 class="modal-title" id="editTableLabel">Edit Table</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

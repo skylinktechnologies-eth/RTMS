@@ -40,6 +40,7 @@ class WaitstaffAssignmentController extends Controller
        $waitstaff= new WaitstaffAssignment();
        $waitstaff->waitstaff_id=$id;
        $waitstaff->table_id=$request->table_id;
+       $waitstaff->assignment_date=$request->assignment_date;
        $waitstaff->save(); 
        
         return back()->with('success','Waitstaff Assign successfully!');

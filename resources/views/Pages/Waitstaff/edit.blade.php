@@ -1,5 +1,32 @@
 @extends('Frames.app')
 @section('content')
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">waitStaff</li>
+        <li class="breadcrumb-item active">Staff/Create</li>
+    </ol>
+
+    <ul class="app-actions">
+        <li>
+            <a href="#" id="reportrange">
+                <span class="range-text"></span>
+                <i class="icon-chevron-down"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
+                <i class="icon-print"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-toggle="tooltip" data-placement="top" title=""
+                data-original-title="Download CSV">
+                <i class="icon-cloud_download"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="main-container">
     @if (session('success'))
         <div class="row">
 
@@ -17,52 +44,76 @@
             </div>
         </div>
     @endif
-    <div class="col-10 grid-margin stretch-card">
-        <div class="card">
-
-            <div class="card-body">
-                <h4 class="card-title">Edit Staff</h4>
-
-                <form method="POST" action="{{ route('waitstaff.update',$waitstaff->id) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="exampleInputName1"> First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $waitstaff->first_name }}"
-                            placeholder="first_name ">
-                        @error('first_name')
-                            <div class="alert alert-danger">
-                                {{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputName1"> Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name"  value="{{ $waitstaff->last_name }}" placeholder="last_name ">
-                        @error('last_name')
-                            <div class="alert alert-danger">
-                                {{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3"> Contact Number</label>
-                        <input type="text" class="form-control" id="contact_number" name="contact_number"  value="{{ $waitstaff->contact_number }}" placeholder="contact_number ">
-                        @error('contact_number')
-                            <div class="alert alert-danger">
-                                {{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3"> Hire Date</label>
-                        <input type="date" class="form-control" id="hire_date" name="hire_date"  value="{{ $waitstaff->hire_date }}" placeholder="hire_date ">
-                        @error('hire_date')
-                            <div class="alert alert-danger">
-                                {{ $message }}</div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
-                </form>
+    <div class="card rounded-3 px-3  h-100">
+        <div class="card-header bg-primary rounded-3" style="margin-top: -10px;color:#fff">
+            <div style="display: flex; justify-content: space-between;">
+                <strong> Edit Wiatstaff </strong>
+                <a href="{{ route('waitstaff.index') }}" class="text-white"><i class="fas fa-arrow-left"></i>
+                    Back</a>
             </div>
         </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('waitstaff.update',$waitstaff->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                  
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="exampleInputName1"> First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                placeholder="first_name " value="{{ $waitstaff->first_name }}"  >
+                            @error('first_name')
+                                <div class="alert alert-danger">
+                                    {{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-4">
+
+
+                        <div class="form-group">
+                            <label for="exampleInputName1"> Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                placeholder="last_name " value="{{  $waitstaff->last_name }}" >
+                            @error('last_name')
+                                <div class="alert alert-danger">
+                                    {{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail3"> Contact Number</label>
+                            <input type="text" class="form-control" id="contact_number" name="contact_number"
+                                placeholder="contact_number " value="{{ $waitstaff->contact_number }}" >
+                            @error('contact_number')
+                                <div class="alert alert-danger">
+                                    {{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail3"> Hire Date</label> 
+                            <input type="date" class="form-control" id="hire_date" name="hire_date"
+                                placeholder=" " value="{{ $waitstaff->hire_date }}">
+                            @error('hire_date')
+                                <div class="alert alert-danger">
+                                    {{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary float-right">Submit
+                        Form</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 @endsection

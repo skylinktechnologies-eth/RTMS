@@ -3,6 +3,7 @@
     <div class="page-header">
         <ol class="breadcrumb">
             
+            <li class="breadcrumb-item">Register</li>
             <li class="breadcrumb-item active">Category</li>
         </ol>
 
@@ -51,7 +52,7 @@
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewCategory">Add New
-                        Table</button>
+                        Category</button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="addNewCategory" tabindex="-1" role="dialog"

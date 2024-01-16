@@ -15,34 +15,34 @@
 		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
 		<meta property="og:type" content="Website">
 		<meta property="og:site_name" content="Bootstrap Gallery">
-		<link rel="shortcut icon" href="../../img/favicon.svg" />
+		<link rel="shortcut icon" href="../../../img/favicon.svg" />
 
 		<!-- Title -->
 		<title>Bootstrap Admin Dashboard - Dashboard</title>
 
 		<!-- Bootstrap css -->
-		<link rel="stylesheet" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../../../css/bootstrap.min.css">
 
 		<!-- Icomoon Font Icons css -->
-		<link rel="stylesheet" href="../../fonts/style.css">
+		<link rel="stylesheet" href="../../../fonts/style.css">
 
 		<!-- Main css -->
-		<link rel="stylesheet" href="../../css/main.min.css">
+		<link rel="stylesheet" href="../../../css/main.min.css">
 
 		<!-- DateRange css -->
-		<link rel="stylesheet" href="../../vendor/daterange/daterange.css" />
+		<link rel="stylesheet" href="../../../vendor/daterange/daterange.css" />
 
 		<!-- Chartist css -->
-		<link rel="stylesheet" href="../../vendor/chartist/css/chartist.min.css" />
-		<link rel="stylesheet" href="../../vendor/chartist/css/chartist-custom.css" />
+		<link rel="stylesheet" href="../../../vendor/chartist/css/chartist.min.css" />
+		<link rel="stylesheet" href="../../../vendor/chartist/css/chartist-custom.css" />
     <!-- Data Tables -->
-		<link rel="stylesheet" href="../../vendor/datatables/dataTables.bs4.css" />
-		<link rel="stylesheet" href="../../vendor/datatables/dataTables.bs4-custom.css" />
-		<link href="../../vendor/datatables/buttons.bs.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../vendor/datatables/dataTables.bs4.css" />
+		<link rel="stylesheet" href="../../../vendor/datatables/dataTables.bs4-custom.css" />
+		<link href="../../../vendor/datatables/buttons.bs.css" rel="stylesheet" />
     <!-- Bootstrap Select CSS -->
-		<link rel="stylesheet" href="../../vendor/bs-select/bs-select.css" />
+		<link rel="stylesheet" href="../../../vendor/bs-select/bs-select.css" />
 		<!-- jQcloud Keywords css -->
-		<link rel="stylesheet" href="../../vendor/jqcloud/jqcloud.css" />
+		<link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
 
 	</head>
 
@@ -87,11 +87,10 @@
 								<div class="sidebar-submenu">
 									<ul>
 										<li>
-											<a href="/table">Table</a>
-										</li>
-										<li>
 											<a href="/category">Category</a>
 										</li>
+										<li>
+											<a href="/table">Table</a>
 										<li>
 											<a href="/menuItem">Product</a>
 										</li>
@@ -310,7 +309,7 @@
 		<script src="../../vendor/datatables/custom/fixedHeader.js"></script>
 
 		<!-- Download / CSV / Copy / Print -->
-		<script src="../../vendor/datatables/buttons.min.js"></script>
+		<script src="../../../vendor/datatables/buttons.min.js"></script>
 		<script src="../../vendor/datatables/jszip.min.js"></script>
 		<script src="../../vendor/datatables/pdfmake.min.js"></script>
 		<script src="../../vendor/datatables/vfs_fonts.js"></script>

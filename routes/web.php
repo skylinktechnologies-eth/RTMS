@@ -47,6 +47,8 @@ Route::controller(ReservationController::class)->group(function () {
     Route::post('reservation-store', 'store')->name('reservation.store');
     Route::put('reservation-update/{id}', 'update')->name('reservation.update');
     Route::delete('reservation-delete/{id}', 'destroy')->name('reservation.destroy');
+    Route::get('changeStatusToConfirmed/{id}', 'changeStatusToConfirmed');
+    Route::get('changeStatusToCancelled/{id}', 'changeStatusToCancelled');
 });
 
 //Category

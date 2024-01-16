@@ -79,25 +79,22 @@ class OrderItemController extends Controller
     }
     public function changeStatusToPreparing($id)
     {
-
-        $orderItems = OrderItem::where( 'order_id',$id)->get();
+        $orderItem=OrderItem::find($id);
        
-        foreach($orderItems as $orderItem){
             $orderItem->status = 'Preparing';
             $orderItem->save();
-        }
+        
        
         return back()->with('success', 'Change Status');
     } 
     public function changeStatusToReady($id)
     {
 
-        $orderItems = OrderItem::where( 'order_id',$id)->get();
+        $orderItem=OrderItem::find($id);
        
-        foreach($orderItems as $orderItem){
             $orderItem->status = 'Ready';
             $orderItem->save();
-        }
+        
        
         return back()->with('success', 'Change Status');
     }

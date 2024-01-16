@@ -29,6 +29,7 @@
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../vendor/jqcloud/jqcloud.css" />
     @livewireStyles
+   
 </head>
 
 <body>
@@ -256,12 +257,12 @@
     </div>
 
     @livewireScripts
-	<script>
+	{{-- <script>
 		// Refresh the page or Livewire component after 10 seconds
 		setTimeout(function () {
 			window.location.reload(); // or Livewire.reload() if you want to reload only the Livewire component
 		}, 50000); // 10000 milliseconds = 10 seconds
-	</script>
+	</script> --}}
 
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js"></script>

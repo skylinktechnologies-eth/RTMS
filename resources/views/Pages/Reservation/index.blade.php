@@ -69,7 +69,8 @@
                                     <th>Contact Name</th>
                                     <th>Contact Number</th>
                                     <th>Reservation Date</th>
-                                    <th>Party Size</th>
+                                    <th>Reservation Time</th>
+
                                     <th>Table</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -81,7 +82,7 @@
                                 @php
                                     $no = 0;
                                 @endphp
-                                @foreach ($details as $detail)
+                                @foreach ($details->unique('reservation_id') as $detail)
                                     @php
                                         $no = $no + 1;
                                     @endphp
@@ -90,119 +91,158 @@
                                         <td>{{ $detail->reservation->contact_name }}</td>
                                         <td>{{ $detail->reservation->contact_number }}</td>
                                         <td>{{ $detail->reservation->reservation_date }}</td>
-                                        <td>{{ $detail->reservation->party_size }}</td>
-                                        
-                                       
-                                        <td> <button type="button" class="btn" data-toggle="modal" style="background-color: white;color:rgb(3, 89, 180)"
-                                                data-target="#viewItem{{ $detail->id }}">view
-                                            </button></td>
-                                           
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="viewItem{{ $detail->id }}" tabindex="-1"
-                                            role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="viewItemLabel">Items</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST" action="{{ route('purchase.update') }}">
-                                                            @csrf
+                                        <td>{{ $detail->reservation->reservation_time }} </td>
+                                        @php
+                                            $detailStatus = $detail->reservation->status;
+                                        @endphp
+                                        <td> <button type="button" class="btn" data-toggle="modal"
+                                                style="background-color: white;color:rgb(3, 89, 180)"
+                                                data-target="#viewItem{{ $detail->reservation->id }}">view
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="viewItem{{ $detail->reservation->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="viewItemLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewItemLabel">Reservation Tables
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" action="">
+                                                                @csrf
 
-                                                            <div class="row">
-                                                                <div class="col-sm-3 col-3">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputCity1">Item</label>
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 col-4">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputCity1">Table</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3 col-3">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputCity1">quantity</label>
+                                                                    <div class="col-sm-4 col-4">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputCity1">Occupacy Start
+                                                                                date</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-3 col-3">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputCity1">price</label>
+                                                                    <div class="col-sm-4 col-4">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputCity1">Occupacy End
+                                                                                date</label>
+                                                                        </div>
                                                                     </div>
+
                                                                 </div>
-                                                                <div class="col-sm-3 col-3">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputCity1">total</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            @foreach ($orderItems as $orderItem) 
-                                                            @if ($orderItem->supply_order_id ==  $detail->id )
+                                                                @php
+                                                                    $detailId = $detail->reservation->id;
+                                                                @endphp
+                                                                @foreach ($details as $detail)
+                                                                    @if ($detail->reservation_id == $detailId)
                                                                         <div class="row">
-                                                                            <div class="col-sm-3 col-3">
+                                                                            <div class="col-sm-4 col-4">
                                                                                 <div class="form-group">
-                                                                                 
-                                                                                    <input type="text" class="form-control"
-                                                                                        id="category_name" name="item_id" value=" {{ $orderItem->item->item_name }}"
+
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="category_name" name="item_id"
+                                                                                        value=" {{ $detail->table->table_name }}"
                                                                                         placeholder="Category Name"style="border-block-color: white;border-color:white">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-sm-3 col-3">
+                                                                            <div class="col-sm-4 col-4">
                                                                                 <div class="form-group">
-                                                                                  
-                                                                                    <input type="text" class="form-control" 
-                                                                                        id="quantity" name="quantity[]" value="  {{ $orderItem->quantity }}" oninput="calculateTotal()"
-                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-3 col-3">
-                                                                                <div class="form-group">
-                                                                                   
-                                                                                    <input type="text" class="form-control"
-                                                                                        id="price" name="price[]" value="   {{ $orderItem->price }}" oninput="calculateTotal()"
-                                                                                        placeholder="Category Name" style="border-block-color: white;border-color:white">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-3 col-3">
-                                                                                <div class="form-group">
-                                                                             
-                                                                                    <input type="text" class="form-control"
-                                                                                        id="total" name="total[]" value="  {{ $orderItem->total }}" 
-                                                                                        placeholder="total" style="border-block-color: white;border-color:white">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                            @endif
-                                                            @endforeach
-                                                           
-                                                            <div class="modal-footer custom">
 
-                                                                <div class="right-side">
-                                                                    <button type="submit"
-                                                                        class="btn btn-link success btn-block">Save</button>
+                                                                                    <input type="text"
+                                                                                        class="form-control" id="quantity"
+                                                                                        name="quantity[]"
+                                                                                        value="  {{ $detail->occupancy_start_date }}"
+                                                                                        placeholder="Category Name"
+                                                                                        style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-4 col-4">
+                                                                                <div class="form-group">
+
+                                                                                    <input type="text"
+                                                                                        class="form-control" id="price"
+                                                                                        name="price[]"
+                                                                                        value="   {{ $detail->occupancy_end_date }}"
+                                                                                        placeholder="Category Name"
+                                                                                        style="border-block-color: white;border-color:white">
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+
+                                                                <div class="modal-footer custom">
+
+
                                                                 </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
+
                                                     </div>
-                                                  
                                                 </div>
                                             </div>
-                                        </div>
-                                        @if ($reservation->status == 'Pending')
-                                            <td style="color: #fed713">{{ $reservation->status }}</td>
-                                        @else
-                                            <td>{{ $reservation->status }}</td>
-                                        @endif
+                                        </td>
 
 
+
+                                        <td class="text-center"> 
+                                            <div class="dropdown">
+
+                                                @if ($detailStatus == 'Pending')
+                                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false"
+                                                        style="background-color: rgb(221, 193, 8)">
+                                                        {{ $detailStatus }}
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item"
+                                                            href="changeStatusToConfirmed/{{ $detailId }}">Confirmed
+                                                            {{ $detailStatus }}</a>
+                                                        <a class="dropdown-item"
+                                                            href="changeStatusToCancelled/{{ $detailId }}">Cancelled</a>
+                                                    </div>
+                                                @elseif ($detailStatus == 'Confirmed')
+                                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false"
+                                                        style="background-color: rgb(5, 111, 37)">
+                                                        {{ $detailStatus }}
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item"
+                                                            href="changeStatusToCancelled/{{ $detailId }}">Cancelled</a>
+                                                    </div>
+                                                @elseif ($detailStatus == 'Cancelled')
+                                                    <button class="btn btn-primary " type="button"
+                                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false"
+                                                        style="background-color: rgb(154, 11, 11)">
+                                                        {{ $detailStatus }}
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex">
 
-                                                <a type="link" href="{{ route('reservation.edit', $reservation->id) }}">
+                                                <a type="link"
+                                                    href="{{ route('reservation.edit', $detailId) }}">
                                                     <i class="icon-edit" style="color: blue"></i>
                                                 </a>
 
 
-                                                <form action="{{ route('reservation.destroy', $reservation->id) }}"
+                                                <form
+                                                    action="{{ route('reservation.destroy', $detailId) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -231,6 +271,4 @@
         </div>
     </div>
     <!-- Row end -->
-   
-
 @endsection
