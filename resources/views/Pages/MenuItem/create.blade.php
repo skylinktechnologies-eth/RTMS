@@ -51,7 +51,7 @@
 
                 <div class="card m-0">
                     <div class="card-header">
-                        <h4>Create Menu Item</h4>
+                        <h4>Create Product Menu </h4>
                     </div>
                     <div class="card-body">
 
