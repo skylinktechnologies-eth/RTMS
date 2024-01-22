@@ -37,30 +37,25 @@
                                 $uniqueOrderItem->status == 'Pending' ||
                                     $uniqueOrderItem->status == 'Preparing' ||
                                     ($uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close'))
-                                <div class="col-6 " style="margin-bottom: 30px;">
+                                <div class=" col-lg-6 col-sm-12"  style="margin-bottom: 30px;">
                                     <div class="card rounded-3 px-3   ">
                                         <div class="card-header bg-primary rounded-3"
                                             style="margin-top: -10px;color:#fff">
                                             <div style="display: flex; justify-content: space-between;">
                                                 <strong> {{ $uniqueOrderItem->order->table->table_name }} </strong>
-                                                <a href="" class="text-white"><i class="fas fa-arrow-left"></i>
-                                                    {{ $uniqueOrderItem->order->order_date }}</a>
+                                                
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row mt-2">
-                                                <div class="col-sm-2 col-2">
+                                            <div class="row ">
+                                                <div class="col-sm-3 col-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputCity1">
                                                             Item</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2 col-2">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputCity1">quantity</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-2 col-2">
+                                               
+                                                <div class="col-sm-3 col-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputCity1">remark</label>
                                                     </div>
@@ -84,16 +79,15 @@
                                             <div class="row mt-2 ">
                                                 @foreach ($orderItems as $orderItem)
                                                     @if ($orderItem->order_id == $uniqueOrderItem->order_id)
-                                                        <div class="col-sm-3 col-3 ">
-                                                            <h6>{{ $orderItem->menuItem->item_name }}</h6>
+                                                  
+                                                        <div class="col-sm-3 col-3 pt-2" >
+                                                            <h6>  {{ $orderItem->quantity }}-{{ $orderItem->menuItem->item_name }}</h6>
                                                         </div>
-                                                        <div class="col-sm-1 col-1 ">
-                                                            <h6> {{ $orderItem->quantity }}</h6>
-                                                        </div>
-                                                        <div class="col-sm-2 col-2 ">
+                                                       
+                                                        <div class="col-sm-3 col-3  pt-2 ">
                                                             <h6> {{ $orderItem->remark }}</h6>
                                                         </div>
-                                                        <div class="col-sm-3 col-3 ">
+                                                        <div class="col-sm-3 col-3   pt-2">
                                                             @if ($uniqueOrderItem->status == 'Pending')
                                                                 <h6 class="bg-warning" style="color: white"> {{ $orderItem->status }}</h6>
                                                                 @elseif  ($uniqueOrderItem->status == 'Preparing')
@@ -104,7 +98,7 @@
                                                                 </p>
                                                                 @endif
                                                         </div>
-                                                        <div class="col-sm-2 col-2 ">
+                                                        <div class="col-sm-2 col-2  pt-2 ">
                                                             @if ($orderItem->status == 'Pending')
                                                                  
                                                                         <a href=" changeStatusToPreparing-{{ $orderItem->id }}"
