@@ -13,7 +13,7 @@ class IssuingController extends Controller
     //
     public function index()
     {
-        $issuingItems=IssuingItem::all();
+        $issuingItems=IssuingItem::orderBy('created_at', 'desc')->get();
         return view('Pages.Issuing.index',compact('issuingItems'));
     }
     public function create()
@@ -52,7 +52,7 @@ class IssuingController extends Controller
             $issuingItem->total = $item['quantity'];
             $issuingItem->save();
         }
-        return back()->with('success','Issuing Created successfully');
+        return redirect()->route('issuing.index');
     }
     public function update(Request $request, $id)
     {

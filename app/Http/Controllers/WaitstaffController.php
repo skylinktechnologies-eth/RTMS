@@ -12,7 +12,7 @@ class WaitstaffController extends Controller
     //
     public function index()
     {
-        $waitstaffs = Waitstaff::all();
+        $waitstaffs = Waitstaff::orderBy('created_at', 'desc')->get();
         return view('Pages.Waitstaff.index', compact('waitstaffs'));
     }
 
@@ -57,7 +57,7 @@ class WaitstaffController extends Controller
         $waitstaff->status = $statuses;
         $waitstaff->save();
 
-        return back()->with('success', 'Waitstaff created successfully!');
+        return redirect()->route('waitstaff.index');
     }
 
     public function update(Request $request, $id)

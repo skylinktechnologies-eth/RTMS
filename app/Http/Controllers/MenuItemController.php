@@ -12,7 +12,7 @@ class MenuItemController extends Controller
 
     public function index()
     {
-        $items = MenuItem::all();
+        $items = MenuItem::orderBy('created_at', 'desc')->get();
 
         return view('Pages.MenuItem.index', compact('items'));
     }
@@ -52,7 +52,7 @@ class MenuItemController extends Controller
 
         $menItem->save();
 
-        return back()->with('success', 'Menu Item created successfully!');
+        return redirect()->route('menuItem.index');
     }
 
     public function update(Request $request, $id)

@@ -13,7 +13,7 @@ class PurchaseController extends Controller
     //
     public function index()
     {
-        $orderItems = SupplyOrderItem::all();
+        $orderItems = SupplyOrderItem::orderBy('created_at', 'desc')->get();
         $supplyOrder = SupplyOrder::all();
         return view('Pages.Purchase.index', compact('orderItems'));
     }
@@ -56,7 +56,7 @@ class PurchaseController extends Controller
             $orderItem->total = $item['total'];
             $orderItem->save();
         }
-        return back()->with('success', 'Orders Created successfully');
+        return redirect()->route('purchase.index');
     }
     public function update(Request $request, $id)
     {

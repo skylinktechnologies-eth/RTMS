@@ -10,7 +10,7 @@ class TableController extends Controller
 {
     //
     public function index(){
-        $tables=Table::all();
+        $tables=Table::orderBy('created_at', 'desc')->get();
         return view('Pages.Table.index',compact('tables'));
     }
 
@@ -36,7 +36,7 @@ class TableController extends Controller
        $tables->status=$statuses;
        $tables->save(); 
        
-        return back()->with('success','Table created successfully!');
+       return redirect()->route('table.index');
     }
 
     public function update(Request $request, $id){

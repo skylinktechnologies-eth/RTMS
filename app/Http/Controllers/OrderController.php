@@ -35,8 +35,8 @@ class OrderController extends Controller
       
     
         $request->validate([
-            // 'order_date' => 'required',
-            // 'table_id' => 'required',
+            'order_date' => 'required',
+            'table_id' => 'required',
             // 'item_id' => 'array',
             // 'price' => 'array',
             // 'quantity' => 'array',

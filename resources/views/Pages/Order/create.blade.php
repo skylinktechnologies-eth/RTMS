@@ -56,6 +56,10 @@
                                                 @endforeach
 
                                             </select>
+                                            @error('table_id')
+                                            <div class="alert alert-danger">
+                                                {{ $message }}</div>
+                                        @enderror
                                         </div>
 
                                     </div>

@@ -9,7 +9,7 @@ class ItemCategoryController extends Controller
 {
     //
     public function index(){
-        $itemCategories=ItemCategory::all();
+        $itemCategories=ItemCategory::orderBy('created_at', 'desc')->get();
         return view('Pages.ItemCategory.index',compact('itemCategories'));
     }
     public function store(Request $request)

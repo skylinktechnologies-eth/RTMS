@@ -16,7 +16,7 @@ class ReservationController extends Controller
     {
 
         $reservations = Reservation::all();
-        $details = ReservationDetail::all();
+        $details = ReservationDetail::orderBy('created_at', 'desc')->get();
         return view('Pages.Reservation.index', compact('reservations', 'details'));
     }
 
@@ -65,7 +65,7 @@ class ReservationController extends Controller
             $detail->save();
         }
 
-        return back()->with('success', 'Reservation created successfully!');
+        return redirect()->route('reservation.index');
     }
 
     public function update(Request $request, $id)

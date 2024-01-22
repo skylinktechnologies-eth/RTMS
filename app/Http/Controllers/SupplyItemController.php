@@ -12,7 +12,7 @@ class SupplyItemController extends Controller
     //
     public function index()
     {
-        $supplyItems = Item::all();
+        $supplyItems = Item::orderBy('created_at', 'desc')->get();
 
         return view('Pages.SupplyItem.index', compact('supplyItems'));
     }
