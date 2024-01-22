@@ -91,7 +91,8 @@ Route::controller(OrderItemController::class)->group(function () {
     Route::put('orderItem-update/{id}', 'update')->name('orderItem.update');
     Route::delete('orderItem-delete/{id}', 'destroy')->name('orderItem.destroy');
     Route::get('changeStatusToPreparing-{id}', 'changeStatusToPreparing'); 
-    Route::get('changeStatusToReady-{id}', 'changeStatusToReady');
+    Route::get('changeStatusToReady-{id}', 'changeStatusToReady');  
+    Route::get('changeStatusToServe-{id}', 'changeStatusToServe'); 
 });
 
 //waitstaff

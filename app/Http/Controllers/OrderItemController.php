@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KitchenInteraction;
 use App\Models\MenuItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -14,9 +15,9 @@ class OrderItemController extends Controller
     public function index()
     {
         $orderItems = OrderItem::all();
-        $orders=Order::all();
+        $orders = Order::all();
 
-        return view('Pages.OrderItem.index', compact('orderItems','orders'));
+        return view('Pages.OrderItem.index', compact('orderItems', 'orders'));
     }
     public function create()
     {
@@ -37,21 +38,21 @@ class OrderItemController extends Controller
     {
 
         $request->validate([
-            'order_id'=>'required',
-            'menu_item_id'=>'required',
-            'quantity'=>'required',
-            'sub_total'=>'required',
-            'remark'=>'required',
-            'status'=>'required'
+            'order_id' => 'required',
+            'menu_item_id' => 'required',
+            'quantity' => 'required',
+            'sub_total' => 'required',
+            'remark' => 'required',
+            'status' => 'required'
         ]);
 
         $orderItem = new OrderItem();
-        $orderItem->order_id=$request->order_id;
-        $orderItem->menu_item_id=$request->menu_item_id;
-        $orderItem->quantity=$request->quantity;
-        $orderItem->sub_total=$request->sub_total;
-        $orderItem->remark=$request->remark;
-        $orderItem->status=$request->status;
+        $orderItem->order_id = $request->order_id;
+        $orderItem->menu_item_id = $request->menu_item_id;
+        $orderItem->quantity = $request->quantity;
+        $orderItem->sub_total = $request->sub_total;
+        $orderItem->remark = $request->remark;
+        $orderItem->status = $request->status;
         $orderItem->save();
 
         return back()->with('success', 'Order Item created successfully!');
@@ -79,24 +80,43 @@ class OrderItemController extends Controller
     }
     public function changeStatusToPreparing($id)
     {
-        $orderItem=OrderItem::find($id);
-       
-            $orderItem->status = 'Preparing';
-            $orderItem->save();
-        
-       
+        $orderItem = OrderItem::find($id);
+
+        $orderItem->status = 'Preparing';
+        $orderItem->save();
+        $interaction = new KitchenInteraction();
+        $interaction->order_item_id = $id;
+        $interaction->interaction_type = "StartPreparation";
+        $interaction->interaction_date = today();
+        $interaction->save();
+
         return back()->with('success', 'Change Status');
-    } 
+    }
     public function changeStatusToReady($id)
     {
 
-        $orderItem=OrderItem::find($id);
+        $orderItem = OrderItem::find($id);
+        $interaction = KitchenInteraction::where('order_item_id',$id)->first();
        
-            $orderItem->status = 'Ready';
-            $orderItem->save();
-        
-       
+        $interaction->interaction_type = 'FinishPreparation';
+        $interaction->save();
+        $orderItem->status = 'Ready';
+        $orderItem->save();
+
+
         return back()->with('success', 'Change Status');
     }
+    public function changeStatusToServe($id)
+    {
 
+       
+        $interaction = KitchenInteraction::where('order_item_id',$id)->first();
+       
+        $interaction->interaction_type = 'Serve';
+        $interaction->save();
+       
+
+
+        return back()->with('success', 'Change Status');
+    }
 }

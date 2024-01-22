@@ -25,4 +25,8 @@ class OrderItem extends Model
     {
         return $this->belongsTo(MenuItem::class, 'menu_item_id');
     }
+    public function kitchenInteraction()
+    {
+        return $this->hasMany(KitchenInteraction::class, 'order_item_id');
+    }
 }

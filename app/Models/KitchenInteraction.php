@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderInteraction extends Model
+class KitchenInteraction extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'order_id',
-        'waitstaff_id',
+        'order_item_id',
         'interaction_type',
         'interaction_date'
     ];
-    public function order()
+    public function OrderItem()
     {
-        return $this->belongsTo(Order::class, 'order_id');
+        return $this->belongsTo(OrderItem::class, 'order_item_id');
     }
+
 }
