@@ -46,7 +46,7 @@
                             @if (
                                 $uniqueOrderItem->status == 'Pending' ||
                                     $uniqueOrderItem->status == 'Preparing' ||
-                                    ($uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close'))
+                                    $uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close')
                                 <div class=" col-lg-6 col-sm-12" style="margin-bottom: 30px;">
                                     <div class="card rounded-3 px-3   ">
                                         <div class="card-header bg-primary rounded-3"
@@ -76,7 +76,7 @@
                                                             Status</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-2 col-2">
+                                                <div class="col-sm-3 col-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputCity1">
                                                             Action</label>
@@ -111,11 +111,24 @@
                                                                 </p>
                                                             @endif
                                                         </div>
-                                                        <div class="col-sm-2 col-2 pt-2">
-                                                            <a href=" changeStatusToServe-{{ $orderItem->id }}"
-                                                                type="button" class="btn btn-info">
-                                                                Deliver </a>
+                                                        <div class="col-sm-3 col-3 pt-2">
+                                                            @php
+                                                                $interaction = \App\Models\KitchenInteraction::where('order_item_id', $orderItem->id)
+                                                                    ->where('interaction_type', 'Serve')
+                                                                    ->get();
+                                                            @endphp
+                                                        
+                                                            @if ($interaction->isEmpty())
+                                                                <a href=" changeStatusToServe-{{ $orderItem->id }}" type="button" class="btn btn-info">
+                                                                    Deliver
+                                                                </a>
+                                                            @else
+                                                                <p class="" style="color: rgb(4, 95, 252)">
+                                                                    <strong> Delivered </strong>
+                                                                </p>
+                                                            @endif
                                                         </div>
+                                                        
                                                         @php
                                                             $total += $orderItem->sub_total;
                                                         @endphp

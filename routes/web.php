@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplyItemController;
@@ -178,4 +179,8 @@ Route::controller(IssuingController::class)->group(function () {
 //kitchen
 Route::controller(KitchenController::class)->group(function () {
     Route::get('kitchen', 'index')->name('kitchen.index');
+});
+//Report
+Route::controller(ReportController::class)->group(function () {
+    Route::get('report', 'index')->name('report.index');
 });

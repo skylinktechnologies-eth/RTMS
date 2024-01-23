@@ -31,6 +31,7 @@
 <div class="main-container">
 
     <!-- Row start -->
+    
     <div class="row gutters">
         <div class="col-xl-4 col-lg-6 col-sm-12 col-12">
             <div class="user-details h-320">

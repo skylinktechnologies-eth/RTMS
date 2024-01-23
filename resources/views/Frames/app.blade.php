@@ -160,6 +160,14 @@
 									<span class="menu-text">Issuing</span>
 								</a>
 							</li>
+
+							<li class="header-menu">Reports</li>
+							<li>
+								<a href="/report  ">
+									<i class="icon-add-user"></i>
+									<span class="menu-text"> Report  </span>
+								</a>
+							</li>
 							
 						</ul>
 					</div>
