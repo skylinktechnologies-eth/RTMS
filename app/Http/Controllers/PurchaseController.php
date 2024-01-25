@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\Supplier;
 use App\Models\SupplyOrder;
@@ -46,6 +47,9 @@ class PurchaseController extends Controller
         $supplyOrder->status = "Placed";
         $supplyOrder->save();
 
+        // $table->foreignId('item_id')->constrained();
+        // $table->integer('quantity');
+        // $table->date('last_update');
         // Iterate through each item in the request and create a new SupplyOrderItem
         foreach ($request->item_list as $item) {
             $orderItem = new SupplyOrderItem();
@@ -55,6 +59,13 @@ class PurchaseController extends Controller
             $orderItem->price = $item['price'];
             $orderItem->total = $item['total'];
             $orderItem->save();
+            $inventory= new Inventory();
+            $inventory->item_id= $orderItem->item_id;
+            $inventory->quantity= +($orderItem->quantity);
+            $inventory->last_update= now()->format('Y-m-d');
+            $inventory->save();
+
+
         }
         return redirect()->route('purchase.index');
     }
@@ -83,8 +94,14 @@ class PurchaseController extends Controller
             $orderItem->price = $item['price'];
             $orderItem->total = $item['total'];
             $orderItem->save();
+            Inventory::where('item_id', $orderItem->item_id)->delete();
+            $inventory= new Inventory();
+            $inventory->item_id= $orderItem->item_id;
+            $inventory->quantity= +($orderItem->quantity);
+            $inventory->last_update= now()->format('Y-m-d');
+            $inventory->save();
         }
-        return back()->with('success', 'Orders Updated successfully');
+        return redirect()->route('purchase.index');
     }
     public function destroy(String $id)
     {

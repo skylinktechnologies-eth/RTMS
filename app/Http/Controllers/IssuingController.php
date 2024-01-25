@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Issuing;
 use App\Models\IssuingItem;
 use App\Models\Item;
@@ -51,6 +52,12 @@ class IssuingController extends Controller
             $issuingItem->quantity = $item['quantity'];
             $issuingItem->total = $item['quantity'];
             $issuingItem->save();
+        
+            $inventory= new Inventory();
+            $inventory->item_id= $issuingItem->item_id;
+            $inventory->quantity= -($issuingItem->quantity);
+            $inventory->last_update= now()->format('Y-m-d');
+            $inventory->save();
         }
         return redirect()->route('issuing.index');
     }
@@ -77,8 +84,14 @@ class IssuingController extends Controller
             $issuingItem->quantity = $item['quantity'];
             $issuingItem->total = $item['quantity'];
             $issuingItem->save();
+            Inventory::where('item_id', $issuingItem->item_id)->delete();
+            $inventory= new Inventory();
+            $inventory->item_id= $issuingItem->item_id;
+            $inventory->quantity= -($issuingItem->quantity);
+            $inventory->last_update= now()->format('Y-m-d');
+            $inventory->save();
         }
-        return back()->with('success','Issuing Updated successfully');
+        return redirect()->route('issuing.index');
     }
     public function destroy(String $id)
     {

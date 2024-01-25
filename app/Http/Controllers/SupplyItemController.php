@@ -37,7 +37,7 @@ class SupplyItemController extends Controller
         $supplyItem->unit_of_measure = $request->unit_of_measure;
         $supplyItem->price = $request->price;
         $supplyItem->save();
-        return back()->with('success', 'Supply Item created successfully');
+        return redirect()->route('supplyItem.index');
     }
     public function edit($id)
     {
@@ -61,7 +61,7 @@ class SupplyItemController extends Controller
         $supplyItem->unit_of_measure = $request->unit_of_measure;
         $supplyItem->price = $request->price;
         $supplyItem->update();
-        return back()->with('success', 'Supply Item updated successfully');
+        return redirect()->route('supplyItem.index');
     }
     public function destroy($id)
     {

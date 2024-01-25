@@ -52,106 +52,113 @@
 			<!-- Sidebar content start -->
 			<div class="sidebar-content">
 
-				<!-- sidebar menu start -->
-				<div class="sidebar-menu">
-					<ul>
-						
-						<li class=" ">
-							<a href="/">
-								<i class="icon-devices_other"></i>
-								<span class="menu-text">Dashboards</span>
-							</a>
-							
-						</li>
-					
-						<li class="sidebar-dropdown">
-							<a href="#">
-								<i class="icon-rate_review"></i>
-								<span class="menu-text">Register</span>
-							</a>
-							<div class="sidebar-submenu">
-								<ul>
-									<li>
-										<a href="/table">Table</a>
-									</li>
-									<li>
-										<a href="/category">Category</a>
-									</li>
-									<li>
-										<a href="/menuItem">Product</a>
-									</li>
-								
-								</ul>
-							</div>
-						</li>
-						<li>
-							<a href="/waitstaff">
-								<i class="icon-add-user"></i>
-								<span class="menu-text"> Waitstaff</span>
-							</a>
-						</li>
-						<li>
-							<a href="/reservation">
-								<i class="icon-grid_on"></i>
-								<span class="menu-text"> Reservation</span>
-							</a>
-						</li>
-						<li>
-							<a href="/orderItem  ">
-								<i class="icon-layout"></i>
-								<span class="menu-text"> Order  </span>
-							</a>
-						</li>
-						
-						<li>
-							<a href="/kitchen  ">
-								<i class="icon-add-user"></i>
-								<span class="menu-text"> kitchen  </span>
-							</a>
-						</li>
-						
-						<li class="header-menu">Inventory</li>
-						<li class="sidebar-dropdown">
-							<a href="#">
-								<i class="icon-edit1"></i>
-								<span class="menu-text">Maintain</span>
-							</a>
-							<div class="sidebar-submenu">
-								<ul>
-									<li>
-										<a href="{{ route('location.index') }}"> Item Location</a>
-									</li>
-									<li>
-										<a href="{{ route('itemCategory.index') }}"> Item Category</a>
-									</li>
-									<li>
-										<a href="{{ route('supplyItem.index') }}"> Supply Item</a>
-									</li>
-									<li>
-										<a href="{{ route('supplier.index') }}">Supplier</a>
-									</li>
-								
-								</ul>
-							</div>
-						</li>
-						<li>
-							<a href="/purchase">
-								<i class="icon-shopping-cart1"></i>
-								<span class="menu-text"> Purchase</span>
-							</a>
-						</li>
-						<li>
-							<a href="/issuing">
-								<i class="icon-documents"></i>
-								<span class="menu-text">Issuing</span>
-							</a>
-						</li>
-						
-					</ul>
-				</div>
-				<!-- sidebar menu end -->
+                <!-- sidebar menu start -->
+                <div class="sidebar-menu">
+                    <ul>
+                        
+                        <li class=" ">
+                            <a href="/">
+                                <i class="icon-devices_other"></i>
+                                <span class="menu-text">Dashboards</span>
+                            </a>
+                            
+                        </li>
+                    
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="icon-rate_review"></i>
+                                <span class="menu-text">Register</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/category">Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="/table">Table</a>
+                                    <li>
+                                        <a href="/menuItem">Product</a>
+                                    </li>
+                                
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/waitstaff">
+                                <i class="icon-add-user"></i>
+                                <span class="menu-text"> Waitstaff</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/reservation">
+                                <i class="icon-grid_on"></i>
+                                <span class="menu-text"> Reservation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/orderItem  ">
+                                <i class="icon-layout"></i>
+                                <span class="menu-text"> Order  </span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/kitchen  ">
+                                <i class="icon-add-user"></i>
+                                <span class="menu-text"> kitchen  </span>
+                            </a>
+                        </li>
+                        
+                        <li class="header-menu">Inventory</li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="icon-edit1"></i>
+                                <span class="menu-text">Maintain</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('location.index') }}"> Item Location</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('itemCategory.index') }}"> Item Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('supplyItem.index') }}"> Supply Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('supplier.index') }}">Supplier</a>
+                                    </li>
+                                
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/purchase">
+                                <i class="icon-shopping-cart1"></i>
+                                <span class="menu-text"> Purchase</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/issuing">
+                                <i class="icon-documents"></i>
+                                <span class="menu-text">Issuing</span>
+                            </a>
+                        </li>
 
-			</div>
+                        <li class="header-menu">Reports</li>
+                        <li>
+                            <a href="/report  ">
+                                <i class="icon-add-user"></i>
+                                <span class="menu-text"> Report  </span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- sidebar menu end -->
+
+            </div>
 			<!-- Sidebar content end -->
 		</nav>
         <!-- Sidebar wrapper end -->

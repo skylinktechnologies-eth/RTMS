@@ -16,6 +16,9 @@ use App\Http\Controllers\SupplyItemController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\WaitstaffAssignmentController;
 use App\Http\Controllers\WaitstaffController;
+use App\Models\MenuItem;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +33,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $order=Order::all()->count();
+    $product=MenuItem::all()->count();
+    $sales=OrderItem::all();
+    return view('welcome',compact('order','product','sales'));
 });
  //Table
 Route::controller(TableController::class)->group(function () {
@@ -183,4 +189,6 @@ Route::controller(KitchenController::class)->group(function () {
 //Report
 Route::controller(ReportController::class)->group(function () {
     Route::get('report', 'index')->name('report.index');
+    Route::get('PurchaseReport', 'purchase')->name('report.purchase');
+    Route::get('inventoryReport', 'inventory')->name('report.inventory');
 });

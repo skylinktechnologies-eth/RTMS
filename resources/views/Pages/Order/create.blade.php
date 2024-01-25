@@ -31,7 +31,7 @@
                     <div class="row gutters ">
 
 
-                        <div class="col-7 ">
+                        <div class="col-md-7 col-sm-12 ">
                             <div class="card ">
                                 <div class="card-header">
                                     <div class="row">
@@ -67,7 +67,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach ($menuItems as $menuItem)
-                                            <div class="col-4">
+                                            <div class="col-md-4 col-sm-6 ">
                                                 <div class="card" style="">
                                                     <div class="accordion toggle-icons" id="toggleIcons">
                                                         <div class="accordion-container" style="">
@@ -126,7 +126,7 @@
 
                         </div>
 
-                        <div class="col-5">
+                        <div class="col-md-5 c0l-sm-12">
                             <div class="card">
                                 <div class="card-header"></div>
                                 <div class="card-body">

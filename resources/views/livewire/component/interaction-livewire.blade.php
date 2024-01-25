@@ -18,144 +18,157 @@
     </div>
     <div class="row gutters">
         <div class="col-sm-3">
-            
+
         </div>
-      
-        <div class="col-sm-3">
-            <div class="form-group">
-           
-                <select class="form-control" id="statusFilter">
-                    <option value="">All Statuses</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Preparing">Preparing</option>
-                    <option value="Ready">Ready</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
+
+        <div class="col-sm-6" style="display: flex; justify-content: space-between; align-items: center;">
+            <form class="d-flex align-items-center" wire:submit.prevent="loadOrderItems">
+                    @csrf
+                    <div class="form-group mb-0 mr-2">
+                        <select id="category_id" wire:model="selectedCategoryId" class="form-control">
+                            <option value="">All Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">
+                                    {{ $category->category_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-0 mr-2">
+                        <select id="table_id" wire:model="selectedTableId" class="form-control">
+                            <option value="">All Table</option>
+                            @foreach ($tables as $table)
+                                <option value="{{ $table->id }}">
+                                    {{ $table->table_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-0 mr-2">
+                        <input type="date" id="order_date" wire:model="selectedDate" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-info">Filter</button>
+                </form>
         </div>
     </div>
 
-    <div class="row pt-4">
-        <div class="col-md-12">
-            <div class="d-flex align-items-center mb-3">
-                <i style="font-size: 2rem" class="fas fa-file-alt text-primary"></i>
-                <div style="margin-left: 20px">
-                  
-                    <div class="row gutters   ">
-                        @foreach ($orderItems->unique('order_id') as $uniqueOrderItem)
-                            @if (
-                                $uniqueOrderItem->status == 'Pending' ||
-                                    $uniqueOrderItem->status == 'Preparing' ||
-                                    $uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close')
-                                <div class=" col-lg-6 col-sm-12" style="margin-bottom: 30px;">
-                                    <div class="card rounded-3 px-3   ">
-                                        <div class="card-header bg-primary rounded-3"
-                                            style="margin-top: -10px;color:#fff">
-                                            <div style="display: flex; justify-content: space-between;">
-                                                <strong> {{ $uniqueOrderItem->order->table->table_name }} </strong>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row mt-2">
-                                                <div class="col-sm-3 col-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputCity1">
-                                                            Item</label>
-                                                    </div>
-                                                </div>
-                                               
-                                                <div class="col-sm-3 col-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputCity1">remark</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputCity1">
-                                                            Status</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputCity1">
-                                                            Action</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @php
-                                                $total = 0;
-                                            @endphp
-                                            <div class="row mt-2 ">
-                                                @foreach ($orderItems as $orderItem)
-                                                    @if ($orderItem->order_id == $uniqueOrderItem->order_id)
-                                                        <div class="col-sm-3 col-3 ">
-                                                            <h6>{{ $orderItem->quantity }}-{{ $orderItem->menuItem->item_name }}</h6>
-                                                        </div>
-                                                       
-                                                        <div class="col-sm-3 col-3 ">
-                                                            <h6> {{ $orderItem->remark }}</h6>
-                                                        </div>
-                                                        <div class="col-sm-3 col-3 ">
-                                                            @if ($uniqueOrderItem->status == 'Pending')
-                                                                <p class="" style="color: rgb(246, 140, 1)">
-                                                                    <strong> {{ $orderItem->status }} </strong>
-                                                                </p>
-                                                            @elseif ($uniqueOrderItem->status == 'Preparing')
-                                                                <p class="" style="color: rgb(4, 91, 198)">
-                                                                    <strong> {{ $orderItem->status }} </strong>
-                                                                </p>
-                                                                @elseif ($uniqueOrderItem->status == 'Ready')
-                                                                <p class="" style="color: rgb(255, 72, 0)">
-                                                                    <strong> {{ $orderItem->status }} </strong>
-                                                                </p>
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-sm-3 col-3 pt-2">
-                                                            @php
-                                                                $interaction = \App\Models\KitchenInteraction::where('order_item_id', $orderItem->id)
-                                                                    ->where('interaction_type', 'Serve')
-                                                                    ->get();
-                                                            @endphp
-                                                        
-                                                            @if ($interaction->isEmpty())
-                                                                <a href=" changeStatusToServe-{{ $orderItem->id }}" type="button" class="btn btn-info">
-                                                                    Deliver
-                                                                </a>
-                                                            @else
-                                                                <p class="" style="color: rgb(4, 95, 252)">
-                                                                    <strong> Delivered </strong>
-                                                                </p>
-                                                            @endif
-                                                        </div>
-                                                        
-                                                        @php
-                                                            $total += $orderItem->sub_total;
-                                                        @endphp
-                                                    @endif
-                                                @endforeach  
-                                            </div>
-                                            <div style="display: flex; justify-content: space-between;">
-                                                <p>Total:{{ $total }}</p>
-                                            </div>
-                                            <div class="text-center">
-                                                <a href=" changeStatusClose-{{ $uniqueOrderItem->order->id }}" type="button" class="btn btn-primary">
-                                                    Paid
-                                                </a>
-                                            </div>
-                                        </div>
+    <div class="row pt-4" style="margin-left: 20px; margin-right: 10px">
+        @foreach ($orderItems->unique('order_id') as $uniqueOrderItem)
+            @if (
+                $uniqueOrderItem->status == 'Pending' ||
+                    $uniqueOrderItem->status == 'Preparing' ||
+                    ($uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close'))
+                <div class=" col-lg-6 col-sm-12" style="margin-bottom: 30px;">
+                    <div class="card rounded-3 px-3   ">
+                        <div class="card-header bg-primary rounded-3" style="margin-top: -10px;color:#fff">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong> {{ $uniqueOrderItem->order->table->table_name }} </strong>
 
-                                     
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mt-2">
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputCity1">
+                                            Item</label>
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
+
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputCity1">remark</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputCity1">
+                                            Status</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputCity1">
+                                            Action</label>
+                                    </div>
+                                </div>
+                            </div>
+                            @php
+                                $total = 0;
+                            @endphp
+                            <div class="row mt-2 ">
+                                @foreach ($orderItems as $orderItem)
+                                    @if ($orderItem->order_id == $uniqueOrderItem->order_id)
+                                        <div class="col-sm-3 col-3 ">
+                                            <h6>{{ $orderItem->quantity }}-{{ $orderItem->menuItem->item_name }}</h6>
+                                        </div>
+
+                                        <div class="col-sm-3 col-3 ">
+                                            <h6> {{ $orderItem->remark }}</h6>
+                                        </div>
+                                        <div class="col-sm-3 col-3 ">
+                                            @if ($uniqueOrderItem->status == 'Pending')
+                                                <p class="" style="color: rgb(246, 140, 1)">
+                                                    <strong> {{ $orderItem->status }} </strong>
+                                                </p>
+                                            @elseif ($uniqueOrderItem->status == 'Preparing')
+                                                <p class="" style="color: rgb(4, 91, 198)">
+                                                    <strong> {{ $orderItem->status }} </strong>
+                                                </p>
+                                            @elseif ($uniqueOrderItem->status == 'Ready')
+                                                <p class="" style="color: rgb(255, 72, 0)">
+                                                    <strong> {{ $orderItem->status }} </strong>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-3 col-3 pt-2">
+                                            @php
+                                                $interaction = \App\Models\KitchenInteraction::where('order_item_id', $orderItem->id)
+                                                    ->where('interaction_type', 'Serve')
+                                                    ->get();
+                                            @endphp
+
+                                            @if ($interaction->isEmpty())
+                                                <a href=" changeStatusToServe-{{ $orderItem->id }}" type="button"
+                                                    class="btn btn-info">
+                                                    Deliver
+                                                </a>
+                                            @else
+                                                <p class="" style="color: rgb(4, 95, 252)">
+                                                    <strong> Delivered </strong>
+                                                </p>
+                                            @endif
+                                        </div>
+
+                                        @php
+                                            $total += $orderItem->sub_total;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <p>Total:{{ $total }}</p>
+                            </div>
+                            <div class="text-center">
+                                <a href=" changeStatusClose-{{ $uniqueOrderItem->order->id }}" type="button"
+                                    class="btn btn-primary">
+                                    Paid
+                                </a>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    {{-- <div class="card">
+            @endif
+        @endforeach
+
+
+
+
+        {{-- <div class="card">
         <div class=" card-body">
 
             <div class=" card-body">
@@ -527,4 +540,4 @@
         </div>
 
     </div> --}}
-</div>
+    </div>

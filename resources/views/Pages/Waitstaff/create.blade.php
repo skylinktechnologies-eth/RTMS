@@ -45,7 +45,7 @@
             </div>
         @endif
 
-        <div class="card rounded-3 px-3  h-100">
+        <div class="card rounded-3 px-3  " style="height: 450px;">
             <div class="card-header bg-primary rounded-3" style="margin-top: -10px;color:#fff">
                 <div style="display: flex; justify-content: space-between;">
                     <strong> Create Wiatstaff </strong>

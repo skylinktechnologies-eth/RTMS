@@ -26,4 +26,8 @@ class Item extends Model
     {
         return $this->hasMany(IssuingItem::class, 'item_id');
     }
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'item_id');
+    }
 }
