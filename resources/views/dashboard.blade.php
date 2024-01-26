@@ -40,7 +40,7 @@
                                     Total Product</h4>
                                 <h3 class="text-center" style="color: #34495e;">
                                     <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
+                                        style="color: #2ecc71; font-size: 24px;">{{ $product }}</span>
                                 </h3>
 
                             </div>
@@ -71,7 +71,7 @@
                                     Total Orders</h4>
                                 <h3 class="text-center" style="color: #34495e;">
                                     <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
+                                        style="color: #2ecc71; font-size: 24px;">{{ $order }}</span>
                                 </h3>
 
                             </div>
@@ -99,7 +99,7 @@
                                     Total Sales</h4>
                                 <h3 class="text-center" style="color: #34495e;">
                                     <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
+                                        style="color: #2ecc71; font-size: 24px;">{{ $sales->count() }}</span>
                                 </h3>
 
                             </div>
@@ -126,13 +126,18 @@
 
                                 <h5 class="mb-0" style="color: #34495e; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
                                     Collected Amount</h5>
-                                
+                                <?php
+                                $total = $sales->where('order.status', 'Close')->sum('sub_total');
+                                ?>
                                 <h3 class="text-center" style="color: #34495e;">
                                     <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
+                                        style="color: #2ecc71; font-size: 24px;">{{ $total }}</span>
                                 </h3>
 
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -156,7 +161,7 @@
                                 <div class="info-stats3 shade-one-a">
                                     <i class="icon-turned_in"></i>
                                     <h6>Q3 - Overall Sales</h6>
-                                    <h3></h3>
+                                    <h3>45,000</h3>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-12 col-12">
@@ -177,9 +182,6 @@
             </div>
         </div>
         <!-- Row end -->
-
-
-
     </div>
     <!-- Main container end -->
 @endsection

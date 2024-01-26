@@ -34,7 +34,7 @@ var options = {
     },
 	},
 	xaxis: {
-		categories: ['Electronics', 'Grocery', 'Beauty', 'Toys'],
+		categories: ['Food', 'Soft Drink', 'Cake','Drink'],
 		// labels: {
 	 //    show: false
 	 //  }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IssuingController;
 use App\Http\Controllers\ItemCategoryController;
@@ -32,14 +33,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $order=Order::all()->count();
+Route::redirect(uri: '/', destination: 'login');
+Route::get('/dashboard', function () {
+     $order=Order::all()->count();
     $product=MenuItem::all()->count();
     $sales=OrderItem::all();
-    return view('welcome',compact('order','product','sales'));
-});
+    return view('dashboard',compact('order','product','sales'));
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
  //Table
-Route::controller(TableController::class)->group(function () {
+ Route::controller(TableController::class)->group(function () {
     Route::get('table', 'index')->name('table.index');
     Route::post('table-store', 'store')->name('table.store');
     Route::put('table-update/{id}', 'update')->name('table.update');
@@ -192,3 +201,7 @@ Route::controller(ReportController::class)->group(function () {
     Route::get('PurchaseReport', 'purchase')->name('report.purchase');
     Route::get('inventoryReport', 'inventory')->name('report.inventory');
 });
+});
+
+
+require __DIR__.'/auth.php';
