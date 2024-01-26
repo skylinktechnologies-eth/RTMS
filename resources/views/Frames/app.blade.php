@@ -78,6 +78,20 @@
 								</a>
 								
 							</li>
+							<li class=" ">
+								<a href="{{ route('users.index') }}">
+									<i class="icon-devices_other"></i>
+									<span class="menu-text">user</span>
+								</a>
+								
+							</li>
+							<li class=" ">
+								<a href="{{ route('roles.index') }}">
+									<i class="icon-devices_other"></i>
+									<span class="menu-text">roles</span>
+								</a>
+								
+							</li>
 						
 							<li class="sidebar-dropdown">
 								<a href="#">

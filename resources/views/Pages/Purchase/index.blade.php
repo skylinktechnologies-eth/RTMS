@@ -245,7 +245,8 @@
 												<a class="dropdown-item" href="changeStatusToPlaced-{{ $supplyId }}">Placed</a>
 											</div> 
                                             @endif
-										</div></td>
+										</div>
+                                    </td>
                                         
 
                                         <!-- Display action buttons -->
