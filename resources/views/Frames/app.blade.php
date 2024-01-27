@@ -55,10 +55,10 @@
 			<nav id="sidebar" class="sidebar-wrapper">
 				<!-- Sidebar brand start  -->
 				<div class="sidebar-brand">
-					<a href="index.html" class="logo">
+					<a href="/" class="logo">
 						<img src="img/logo.svg" alt="Bootstrap Admin Dashboard" />
 					</a>
-					<a href="index.html" class="logo-sm">
+					<a href="/" class="logo-sm">
 						<img src="img/logo-sm.svg" alt="Bootstrap Admin Dashboard" />
 					</a>
 				</div>
