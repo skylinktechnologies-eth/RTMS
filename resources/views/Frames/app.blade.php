@@ -82,6 +82,22 @@
 							<li class="sidebar-dropdown">
 								<a href="#">
 									<i class="icon-rate_review"></i>
+									<span class="menu-text">User Managment</span>
+								</a>
+								<div class="sidebar-submenu">
+									<ul>
+										<li>
+											<a href="/users">User</a>
+										</li>
+										<li>
+											<a href="/roles">Role</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="sidebar-dropdown">
+								<a href="#">
+									<i class="icon-rate_review"></i>
 									<span class="menu-text">Register</span>
 								</a>
 								<div class="sidebar-submenu">
@@ -91,6 +107,7 @@
 										</li>
 										<li>
 											<a href="/table">Table</a>
+										</li>
 										<li>
 											<a href="/menuItem">Product</a>
 										</li>
