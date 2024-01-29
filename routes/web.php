@@ -12,9 +12,11 @@ use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplyItemController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitstaffAssignmentController;
 use App\Http\Controllers\WaitstaffController;
 use App\Models\MenuItem;
@@ -45,7 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 
  //Table
  Route::controller(TableController::class)->group(function () {
