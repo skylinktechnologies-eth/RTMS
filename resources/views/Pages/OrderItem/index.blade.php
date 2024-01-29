@@ -28,6 +28,26 @@
     <link rel="stylesheet" href="../../vendor/bs-select/bs-select.css" />
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../vendor/jqcloud/jqcloud.css" />
+    <style>
+		/* For Firefox */
+		.sidebar-menu {
+			scrollbar-width: thin;
+			scrollbar-color: #888 #eee;
+		}
+
+		/* For Chrome, Safari, and Opera */
+		.sidebar-menu::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		.sidebar-menu::-webkit-scrollbar-thumb {
+			background-color: #569c6b;
+		}
+
+		.sidebar-menu::-webkit-scrollbar-track {
+			background-color: #eee;
+		}
+	</style>
     @livewireStyles
 </head>
 
@@ -36,33 +56,56 @@
     <div class="page-wrapper">
 
         <!-- Sidebar wrapper start -->
-		<nav id="sidebar" class="sidebar-wrapper">
-			<!-- Sidebar brand start  -->
-			<div class="sidebar-brand">
-				<a href="index.html" class="logo">
-					<img src="img/logo.svg" alt="Bootstrap Admin Dashboard" />
-				</a>
-				<a href="index.html" class="logo-sm">
-					<img src="img/logo-sm.svg" alt="Bootstrap Admin Dashboard" />
-				</a>
-			</div>
-			<!-- Sidebar brand end  -->
+        <nav id="sidebar" class="sidebar-wrapper">
+            <!-- Sidebar brand start  -->
+            <div class="sidebar-brand">
 
-			<!-- Sidebar content start -->
-			<div class="sidebar-content">
+                <a href="/" class="logo" style="padding:5px">
+                    <span class="logo-lg">
+                        <img src="rectangle_logo.png" style="border-radius: 50%" height="45px" alt="">
+                        <span class="logo-lg-" style="color: white">Restaurant</span>
+                    </span>
+                </a>
+
+                <a href="/" class="logo-sm">
+                    <img src="rectangle_logo.png" alt="Bootstrap Admin Dashboard" style="border-radius: 50%"
+                        height="45px" />
+                </a>
+            </div>
+            <!-- Sidebar brand end  -->
+
+            <!-- Sidebar content start -->
+            <div class="sidebar-content" style="height: 100%;">
+              
 
                 <!-- sidebar menu start -->
-                <div class="sidebar-menu">
+                <div class="sidebar-menu" style=" overflow-y: auto; height: 100%;">
                     <ul>
-                        
+
                         <li class=" ">
                             <a href="/">
                                 <i class="icon-devices_other"></i>
                                 <span class="menu-text">Dashboards</span>
                             </a>
-                            
+
                         </li>
-                    
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="icon-rate_review"></i>
+                                <span class="menu-text">User Managment</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/users">User</a>
+                                    </li>
+                                    <li>
+                                        <a href="/roles">Role</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="icon-rate_review"></i>
@@ -75,10 +118,11 @@
                                     </li>
                                     <li>
                                         <a href="/table">Table</a>
+                                    </li>
                                     <li>
                                         <a href="/menuItem">Product</a>
                                     </li>
-                                
+
                                 </ul>
                             </div>
                         </li>
@@ -97,17 +141,17 @@
                         <li>
                             <a href="/orderItem  ">
                                 <i class="icon-layout"></i>
-                                <span class="menu-text"> Order  </span>
+                                <span class="menu-text"> Order </span>
                             </a>
                         </li>
-                        
+
                         <li>
                             <a href="/kitchen  ">
                                 <i class="icon-add-user"></i>
-                                <span class="menu-text"> kitchen  </span>
+                                <span class="menu-text"> kitchen </span>
                             </a>
                         </li>
-                        
+
                         <li class="header-menu">Inventory</li>
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -128,7 +172,7 @@
                                     <li>
                                         <a href="{{ route('supplier.index') }}">Supplier</a>
                                     </li>
-                                
+
                                 </ul>
                             </div>
                         </li>
@@ -149,17 +193,17 @@
                         <li>
                             <a href="/report  ">
                                 <i class="icon-add-user"></i>
-                                <span class="menu-text"> Report  </span>
+                                <span class="menu-text"> Report </span>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
                 <!-- sidebar menu end -->
 
             </div>
-			<!-- Sidebar content end -->
-		</nav>
+            <!-- Sidebar content end -->
+        </nav>
         <!-- Sidebar wrapper end -->
 
         <!-- Page content start  -->

@@ -16,9 +16,9 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
+            <div class="center">
                <a href="/" class="logo">
-						<img src="img/logo.svg" alt="Bootstrap Admin Dashboard" />
+						<img src="rectangle_logo.png" alt="Bootstrap Admin Dashboard"  style="width: 150px;height:80px" />
 					</a>
             </div>
 
