@@ -43,26 +43,33 @@
     <link rel="stylesheet" href="../../../vendor/bs-select/bs-select.css" />
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
-	<style>
-		/* For Firefox */
-		.sidebar-menu {
-			scrollbar-width: thin;
-			scrollbar-color: #888 #eee;
-		}
+    <style>
+        /* For Firefox */
+        /* For Firefox */
+        .sidebar-menu {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #eee;
+        }
 
-		/* For Chrome, Safari, and Opera */
-		.sidebar-menu::-webkit-scrollbar {
-			width: 6px;
-		}
+        /* For Chrome, Safari, and Opera */
+        .sidebar-menu::-webkit-scrollbar {
+            width: 6px;
+        }
 
-		.sidebar-menu::-webkit-scrollbar-thumb {
-			background-color: #569c6b;
-		}
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background-color: #569c6b;
+        }
 
-		.sidebar-menu::-webkit-scrollbar-track {
-			background-color: #eee;
-		}
-	</style>
+        .sidebar-menu::-webkit-scrollbar-track {
+            background-color: #eee;
+        }
+
+        /* Additional styles for touch devices */
+        .sidebar-menu {
+            -webkit-overflow-scrolling: touch;
+            /* Enable smooth scrolling on iOS devices */
+        }
+    </style>
 </head>
 
 <body>
@@ -90,8 +97,8 @@
             <!-- Sidebar brand end  -->
 
             <!-- Sidebar content start -->
-            <div class="sidebar-content" style="height: 100%;">
-              
+            <div class="sidebar-content">
+
 
                 <!-- sidebar menu start -->
                 <div class="sidebar-menu" style=" overflow-y: auto; height: 100%;">
