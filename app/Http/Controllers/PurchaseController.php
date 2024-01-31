@@ -38,7 +38,7 @@ class PurchaseController extends Controller
     }
     public function store(Request $request)
     {
-       
+
         $request->validate([]);
 
         $supplyOrder = new SupplyOrder();
@@ -59,14 +59,29 @@ class PurchaseController extends Controller
             $orderItem->price = $item['price'];
             $orderItem->total = $item['total'];
             $orderItem->save();
-            $inventory= new Inventory();
-            $inventory->item_id= $orderItem->item_id;
-            $inventory->quantity= +($orderItem->quantity);
-            $inventory->last_update= now()->format('Y-m-d');
-            $inventory->save();
-
-
+        
+            $inventoryItems = Inventory::where('item_id', $orderItem->item_id)->get();
+        
+          
+        
+            if ($inventoryItems->isNotEmpty()) {
+                foreach ($inventoryItems as $inventoryItem) {
+                    if ($inventoryItem->quantity > 0) {
+                        $inventoryItem->quantity += $orderItem->quantity;
+                        $inventoryItem->save();
+                    }
+                }
+            } else {
+            
+        
+                $inventory = new Inventory();
+                $inventory->item_id = $orderItem->item_id;
+                $inventory->quantity = $orderItem->quantity;
+                $inventory->last_update = now()->format('Y-m-d');
+                $inventory->save();
+            }
         }
+        
         return redirect()->route('purchase.index');
     }
     public function update(Request $request, $id)
@@ -95,10 +110,10 @@ class PurchaseController extends Controller
             $orderItem->total = $item['total'];
             $orderItem->save();
             Inventory::where('item_id', $orderItem->item_id)->delete();
-            $inventory= new Inventory();
-            $inventory->item_id= $orderItem->item_id;
-            $inventory->quantity= +($orderItem->quantity);
-            $inventory->last_update= now()->format('Y-m-d');
+            $inventory = new Inventory();
+            $inventory->item_id = $orderItem->item_id;
+            $inventory->quantity = + ($orderItem->quantity);
+            $inventory->last_update = now()->format('Y-m-d');
             $inventory->save();
         }
         return redirect()->route('purchase.index');

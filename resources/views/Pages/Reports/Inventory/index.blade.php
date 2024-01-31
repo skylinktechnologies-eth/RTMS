@@ -1,7 +1,23 @@
 @extends('Frames.app')
 @section('content')
     <div class="main-container">
+        @if (session('success'))
+        <div class="row">
 
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+                <div class="alert alert-success px-3" id="success-alert">
+
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
         <div class="card pt-1" style="">
             <div class="row d-flex align-items-end">
 
@@ -61,12 +77,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($inventoryData as $item)
+                                @foreach ($inventories as $inventory)
                                     <tr>
-                                        <td>{{ $item['item_name'] }}</td>
-                                        <td>{{ $item['purchased_quantity'] }}</td>
-                                        <td>{{ $item['issued_quantity'] }}</td>
-                                        <td>{{ $item['balance'] }}</td>
+                                        <td>{{ $inventory->item->item_name }}</td>
+                                        <td>{{ $inventory->purchased_quantity }}</td>
+                                        <td>{{ $inventory->issued_quantity  }}</td>
+                                        <td>
+                                           {{ $inventory->purchased_quantity -  $inventory->issued_quantity }} 
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

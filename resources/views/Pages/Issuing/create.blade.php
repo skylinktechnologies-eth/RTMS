@@ -1,7 +1,4 @@
 
-
-
-
 @extends('Frames.app')
 @section('content')
     <div class="page-header">
@@ -52,12 +49,53 @@
                 </div>
             @endif
             <!-- start page title -->
-            <div class="row">
+            
                 <div class="col-12">
 
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+
+                        <div class="card">
+                            <div class="table-container">
+								<div class="t-header">purchase Product</div>
+                            <div class="table-responsive">
+                                <table id="basicExample" class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Item </th>
+                                            <th> Total Quantity</th>
+                                            <th>Action</th>
+        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 0;
+                                        @endphp
+                                       
+        
+                                       @foreach ($inventories as $inventory)
+                                       @if ($inventory->quantity > 0)
+                                            <tr>
+                                                <!-- Display details from representative order item -->
+                                                <td>{{ $no+1 }}</td>
+                                                <td>{{$inventory->item->item_name }}</td>
+                                                
+                                                <td>{{  $inventory->quantity }}</td>
+                                            </tr>
+                                            @endif 
+                                        @endforeach
+        
+        
+        
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+
                         <div class="card">
 
                             <div class="card-header border-bottom bg-transparent">
@@ -73,6 +111,7 @@
 
 
                             </div>
+
                             <div class="card-body">
                                 <form method="POST" action="{{ route('issuing.store') }}">
                                     @csrf
@@ -127,9 +166,11 @@
                                                             <div class="col "> <select class="form-control selectpicker"
                                                                     id="item_id" name="item_id[]" data-live-search="true">
                                                                     <option value="">select Item</option>
-                                                                    @foreach ($items as $item)
-                                                                        <option value="{{ $item->id }}">
-                                                                            {{ $item->item_name }}</option>
+                                                                    @foreach ($inventories as $inventory)
+                                                                    @if ($inventory->quantity > 0)
+                                                                        <option value="{{ $inventory->item->id }}">
+                                                                            {{ $inventory->item->item_name }}</option>
+                                                                            @endif
                                                                     @endforeach
 
                                                                 </select>
@@ -218,13 +259,40 @@
                     <!-- end card -->
 
                 </div>
-            </div>
+          
         </div>
 
 
 
 
     </div>
+    <!-- Include this script in your HTML file -->
+<script>
+   function calculateTotal() {
+    // Your existing calculation logic
+
+    // Check if the entered quantity is greater than the inventory quantity
+    var selectedItemId = document.getElementById('item_id').value;
+    var inventoryQuantity = getInventoryQuantity(selectedItemId); // Replace with your logic to get the inventory quantity
+    var enteredQuantity = parseFloat(document.getElementById('quantity').value);
+
+    if (enteredQuantity > inventoryQuantity) {
+        alert('The quantity you entered is greater than the available inventory quantity. Please enter a valid quantity.');
+        // Optionally, you can reset the entered quantity to the maximum available
+        document.getElementById('quantity').value = inventoryQuantity;
+    }
+}
+
+// Replace this function with your logic to get the inventory quantity based on the selected item
+function getInventoryQuantity(itemId) {
+    // Your logic to fetch the inventory quantity based on the selected item
+    // Replace this with your actual logic
+    // Example: return inventoryQuantity[selectedItemId];
+    return 100; // Replace with the actual inventory quantity for the selected item
+}
+
+</script>
+
 
     <!-- Add the following script to your HTML file -->
     <script>

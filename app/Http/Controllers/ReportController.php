@@ -62,37 +62,16 @@ class ReportController extends Controller
     
 public function inventory(Request $request)
 {
-    // Retrieve distinct item_ids from both SupplyOrderItem and IssuingItem
-    $itemIds = array_merge(
-        SupplyOrderItem::distinct('item_id')->pluck('item_id')->toArray(),
-        IssuingItem::distinct('item_id')->pluck('item_id')->toArray()
-    );
+    $inventories = Inventory::select(
+        'item_id',
+        DB::raw('SUM(CASE WHEN quantity > 0 THEN quantity ELSE 0 END) as purchased_quantity'),
+        DB::raw('SUM(CASE WHEN quantity < 0 THEN ABS(quantity) ELSE 0 END) as issued_quantity')
+    )
+    ->groupBy('item_id')
+    ->with('item') // Load the 'item' relationship
+    ->get();
 
-    // Initialize an empty array to store inventory data
-    $inventoryData = [];
-
-    // Iterate through each unique item_id and calculate purchased, issued, and balance quantities
-    foreach (array_unique($itemIds) as $itemId) {
-        $item = Item::find($itemId); // Retrieve the Item model for the given item_id
-
-        if ($item) {
-            $purchasedQuantity = SupplyOrderItem::where('item_id', $itemId)->sum('quantity');
-            $issuedQuantity = IssuingItem::where('item_id', $itemId)->sum('quantity');
-
-            // Calculate the balance (purchased - issued)
-            $balance = $purchasedQuantity - $issuedQuantity;
-
-            // Create an array with item details and calculated quantities
-            $inventoryData[] = [
-                'item_name' => $item->item_name, // Use item name instead of ID
-                'purchased_quantity' => $purchasedQuantity,
-                'issued_quantity' => $issuedQuantity,
-                'balance' => $balance,
-            ];
-        }
-    }
-
-    return view('Pages.Reports.Inventory.index', compact('inventoryData'));
+return view('Pages.Reports.Inventory.index', compact('inventories'));
 }
     
 
