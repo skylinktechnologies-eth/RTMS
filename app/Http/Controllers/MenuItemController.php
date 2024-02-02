@@ -9,7 +9,13 @@ use Illuminate\Http\Request;
 class MenuItemController extends Controller
 {
     //
-
+    function __construct()
+    {
+         $this->middleware('permission:menuItem-list|menuItem-create|menuItem-edit|menuItem-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:menuItem-create', ['only' => ['create','store']]);
+         $this->middleware('permission:menuItem-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:menuItem-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $items = MenuItem::orderBy('created_at', 'desc')->get();

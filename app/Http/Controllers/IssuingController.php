@@ -12,6 +12,13 @@ use Illuminate\Http\Request;
 class IssuingController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:issuing-list|issuing-create|issuing-edit|issuing-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:issuing-create', ['only' => ['create','store']]);
+         $this->middleware('permission:issuing-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:issuing-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
 

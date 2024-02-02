@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\ItemCategory;
-use App\Models\SupplyItem;
 use Illuminate\Http\Request;
 
 class SupplyItemController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:supplyItem-list|supplyItem-create|supplyItem-edit|supplyItem-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:supplyItem-create', ['only' => ['create','store']]);
+         $this->middleware('permission:supplyItem-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:supplyItem-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $supplyItems = Item::orderBy('created_at', 'desc')->get();

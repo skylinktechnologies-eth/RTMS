@@ -1,8 +1,21 @@
 @extends('Frames.app')
 @section('content')
-    <div class="page-header">
-        <input type="text" name="" id="" placeholder="test">
-    </div>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Order</li>
+        <li class="breadcrumb-item active">order/create</li>
+    </ol>
+
+    <ul class="app-actions">
+        <li>
+            <a href="#" id="reportrange">
+                <span class="range-text"></span>
+                <i class="icon-chevron-down"></i>
+            </a>
+        </li>
+       
+    </ul>
+</div>
     <div class="main-container">
 
 
@@ -49,7 +62,7 @@
                                         <div class="col-sm-4">
                                             <select class="form-control selectpicker" id="table_id" name="table_id"
                                                 data-live-search="true">
-                                                <option value="">select Item</option>
+                                                <option value="">select Table</option>
                                                 @foreach ($tables as $table)
                                                     <option value="{{ $table->id }}">
                                                         {{ $table->table_name }}</option>

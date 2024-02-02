@@ -1,14 +1,12 @@
-
-
 @extends('Frames.app')
 @section('content')
-<style>
-     .table td img {
+    <style>
+        .table td img {
             width: 70px;
             height: 50px;
             border-radius: 0%;
         }
-</style>
+    </style>
     <div class="page-header">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Waitstaff</li>
@@ -59,8 +57,11 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
-                    <a href="{{ route('waitstaff.create') }}" type="button" class="btn btn-primary">Add New
-                        Staff</a>
+                    @can('waitstaff-create')
+                        <a href="{{ route('waitstaff.create') }}" type="button" class="btn btn-primary">Add New
+                            Staff</a>
+                    @endcan
+
                 </div>
             </div>
         </div>
@@ -98,23 +99,29 @@
                                         <td>{{ $waitstaff->contact_number }}</td>
                                         <td>{{ $waitstaff->hire_date }}</td>
                                         <td>{{ $waitstaff->status }}</td>
-                                        <td> <a href="{{ route('waitstaff.view', $waitstaff->id) }}" type="button" class="btn btn-info">View
+                                        <td> <a href="{{ route('waitstaff.view', $waitstaff->id) }}" type="button"
+                                                class="btn btn-info">View
                                             </a></td>
                                         <td>
                                             <div class="d-flex">
+                                                @can('waitstaff-edit')
+                                                    <a type="link" href="{{ route('waitstaff.edit', $waitstaff->id) }}">
+                                                        <i class="icon-edit" style="color: blue"></i>
+                                                    </a>
+                                                @endcan
 
-                                                <a type="link" href="{{ route('waitstaff.edit', $waitstaff->id) }}">
-                                                    <i class="icon-edit" style="color: blue"></i>
-                                                </a>
 
-                                                <form action="{{ route('waitstaff.destroy', $waitstaff->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-link p-0">
-                                                        <i class=" icon-trash-2" style="color:red"></i>
-                                                    </button>
-                                                </form>
+                                                @can('waitstaff-delete')
+                                                    <form action="{{ route('waitstaff.destroy', $waitstaff->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-link p-0">
+                                                            <i class=" icon-trash-2" style="color:red"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+
                                             </div>
                                         </td>
 
@@ -129,8 +136,3 @@
     </div>
     <!-- Row end -->
 @endsection
-
-
-
-
-

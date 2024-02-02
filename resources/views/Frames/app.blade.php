@@ -70,12 +70,64 @@
             /* Enable smooth scrolling on iOS devices */
         }
     </style>
+     @livewireStyles
 </head>
 
 <body>
 
     <!-- Page wrapper start -->
     <div class="page-wrapper">
+        @php
+
+            $roleList = auth()
+                ->user()
+                ->can('role-list');
+            $userList = auth()
+                ->user()
+                ->can('user-list');
+            $waitstaffList = auth()
+                ->user()
+                ->can('waitstaff-list');
+            $tableList = auth()
+                ->user()
+                ->can('table-list');
+            $supplierList = auth()
+                ->user()
+                ->can('supplier-list');
+            $reservationList = auth()
+                ->user()
+                ->can('reservation-list');
+            $supplyItemList = auth()
+                ->user()
+                ->can('supplyItem-list');
+            $reportList = auth()
+                ->user()
+                ->can('report-manage');
+            $purchaseList = auth()
+                ->user()
+                ->can('purchase-list');
+            $orderList = auth()
+                ->user()
+                ->can('order-list');
+            $menuItemList = auth()
+                ->user()
+                ->can('menuItem-list');
+            $locationList = auth()
+                ->user()
+                ->can('location-list');
+            $supplyItemCategoryList = auth()
+                ->user()
+                ->can('supplyItemCategory-list');
+            $issuingList = auth()
+                ->user()
+                ->can('issuing-list');
+            $menuCategoryList = auth()
+                ->user()
+                ->can('menuCategory-list');
+                $kitchenList = auth()
+                ->user()
+                ->can('kitchen-list');
+        @endphp
 
         <!-- Sidebar wrapper start -->
         <nav id="sidebar" class="sidebar-wrapper">
@@ -111,114 +163,157 @@
                             </a>
 
                         </li>
+                        @if ($userList || $roleList || Auth::user()->hasRole('Admin'))
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="icon-rate_review"></i>
+                                    <span class="menu-text">User Managment</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        @can('user-list')
+                                            <li>
+                                                <a href="/users">User</a>
+                                            </li>
+                                        @endcan
+                                        @can('role-list')
+                                            <li>
+                                                <a href="/roles">Role</a>
+                                            </li>
+                                        @endcan
 
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="icon-rate_review"></i>
-                                <span class="menu-text">User Managment</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/users">User</a>
-                                    </li>
-                                    <li>
-                                        <a href="/roles">Role</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="icon-rate_review"></i>
-                                <span class="menu-text">Register</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/category">Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="/table">Table</a>
-                                    </li>
-                                    <li>
-                                        <a href="/menuItem">Product</a>
-                                    </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+                        @if ($menuCategoryList || $tableList || $menuItemList)
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="icon-rate_review"></i>
+                                    <span class="menu-text">Register</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        @can('menuCategory-list')
+                                            <li>
+                                                <a href="/category">Category</a>
+                                            </li>
+                                        @endcan
+                                        @can('table-list')
+                                            <li>
+                                                <a href="/table">Table</a>
+                                            </li>
+                                        @endcan
+                                        @can('menuItem-list')
+                                            <li>
+                                                <a href="/menuItem">Product</a>
+                                            </li>
+                                        @endcan
 
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/waitstaff">
-                                <i class="icon-add-user"></i>
-                                <span class="menu-text"> Waitstaff</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/reservation">
-                                <i class="icon-grid_on"></i>
-                                <span class="menu-text"> Reservation</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/orderItem  ">
-                                <i class="icon-layout"></i>
-                                <span class="menu-text"> Order </span>
-                            </a>
-                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+                        @can('waitstaff-list')
+                            <li>
+                                <a href="/waitstaff">
+                                    <i class="icon-add-user"></i>
+                                    <span class="menu-text"> Waitstaff</span>
+                                </a>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="/kitchen  ">
-                                <i class="icon-add-user"></i>
-                                <span class="menu-text"> kitchen </span>
-                            </a>
-                        </li>
+
+                        @can('reservation-list')
+                            <li>
+                                <a href="/reservation">
+                                    <i class="icon-grid_on"></i>
+                                    <span class="menu-text"> Reservation</span>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('order-list')
+                            <li>
+                                <a href="/orderItem  ">
+                                    <i class="icon-layout"></i>
+                                    <span class="menu-text"> Order </span>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('kitchen-list')
+                            <li>
+                                <a href="/kitchen  ">
+                                    <i class="icon-add-user"></i>
+                                    <span class="menu-text"> kitchen </span>
+                                </a>
+                            </li>
+                        @endcan
+
 
                         <li class="header-menu">Inventory</li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="icon-edit1"></i>
-                                <span class="menu-text">Maintain</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('location.index') }}"> Item Location</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('itemCategory.index') }}"> Item Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('supplyItem.index') }}"> Supply Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('supplier.index') }}">Supplier</a>
-                                    </li>
+                        @if ($locationList || $supplyItemCategoryList || $supplyItemList || $supplier)
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="icon-edit1"></i>
+                                    <span class="menu-text">Maintain</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        @can('location-list')
+                                            <li>
+                                                <a href="{{ route('location.index') }}"> Item Location</a>
+                                            </li>
+                                        @endcan
+                                        @can('supplyItemCategory-list')
+                                            <li>
+                                                <a href="{{ route('itemCategory.index') }}"> Item Category</a>
+                                            </li>
+                                        @endcan
+                                        @can('supplyItem-list')
+                                            <li>
+                                                <a href="{{ route('supplyItem.index') }}"> Supply Item</a>
+                                            </li>
+                                        @endcan
+                                        @can('supplier-list')
+                                            <li>
+                                                <a href="{{ route('supplier.index') }}">Supplier</a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+                        @can('purchase-list')
+                            <li>
+                                <a href="/purchase">
+                                    <i class="icon-shopping-cart1"></i>
+                                    <span class="menu-text"> Purchase</span>
+                                </a>
+                            </li>
+                        @endcan
 
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/purchase">
-                                <i class="icon-shopping-cart1"></i>
-                                <span class="menu-text"> Purchase</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/issuing">
-                                <i class="icon-documents"></i>
-                                <span class="menu-text">Issuing</span>
-                            </a>
-                        </li>
+                        @can('issuing-list')
+                            <li>
+                                <a href="/issuing">
+                                    <i class="icon-documents"></i>
+                                    <span class="menu-text">Issuing</span>
+                                </a>
+                            </li>
+                        @endcan
 
-                        <li class="header-menu">Reports</li>
-                        <li>
-                            <a href="/report  ">
-                                <i class="icon-add-user"></i>
-                                <span class="menu-text"> Report </span>
-                            </a>
-                        </li>
-
+                        @if ($reportList)
+                            <li class="header-menu">Reports</li>
+                            @can('report-manage')
+                                <li>
+                                    <a href="/report  ">
+                                        <i class="icon-add-user"></i>
+                                        <span class="menu-text"> Report </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        @endif
                     </ul>
                 </div>
                 <!-- sidebar menu end -->
@@ -340,6 +435,10 @@
         <!-- Page content end -->
 
     </div>
+
+
+    @livewireScripts
+	
     <!-- Page wrapper end -->
 
     <!--**************************

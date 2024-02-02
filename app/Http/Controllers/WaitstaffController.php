@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 class WaitstaffController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:waitstaff-list|waitstaff-create|waitstaff-edit|waitstaff-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:waitstaff-create', ['only' => ['create','store']]);
+         $this->middleware('permission:waitstaff-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:waitstaff-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $waitstaffs = Waitstaff::orderBy('created_at', 'desc')->get();

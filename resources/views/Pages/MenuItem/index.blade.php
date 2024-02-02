@@ -58,8 +58,11 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
+                    @can('menuItem-create')
                     <a href="{{ route('menuItem.create') }}" type="button" class="btn btn-primary">Add New
                         Menu</a>
+                    @endcan
+                 
                 </div>
             </div>
         </div>
@@ -102,9 +105,13 @@
                                         <td>{{ $item->price }}</td>
                                         <td>
                                             <div class="d-flex">
+                                                @can('menuItem-edit')   
                                                 <a type="link" href="{{ route('menuItem.edit', $item->id) }}">
                                                     <i class=" icon-edit " style="margin-right: 5px; color:blue"></i>
                                                 </a>
+                                                @endcan
+                                                
+                                                @can('menuItem-delete')
                                                 <form action="{{ route('menuItem.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -112,6 +119,8 @@
                                                         <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
+                                                @endcan
+                                               
 
 
                                             </div>

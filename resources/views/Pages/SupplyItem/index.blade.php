@@ -50,8 +50,11 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
+                    @can('supplyItem-create')
                     <a href="{{ route('supplyItem.create') }}" type="button" class="btn btn-primary">Add New
                         Supply Item</a>
+                    @endcan
+                   
                 </div>
             </div>
         </div>
@@ -92,11 +95,13 @@
                                         
                                         <td>
                                             <div class="d-flex">
-
-                                                <a type="link" href="{{ route('supplyItem.edit', $supplyItem->id) }}">
-                                                    <i class="icon-edit" style="color: blue"></i>
-                                                </a>
-
+                                          @can('supplyItem-edit')
+                                          <a type="link" href="{{ route('supplyItem.edit', $supplyItem->id) }}">
+                                            <i class="icon-edit" style="color: blue"></i>
+                                        </a> 
+                                          @endcan
+                                              
+                                                @can('supplyItem-edit')
                                                 <form action="{{ route('supplyItem.destroy', $supplyItem->id) }}"
                                                     method="POST">
                                                     @csrf
@@ -105,6 +110,8 @@
                                                         <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
+                                                @endcan
+                                               
                                             </div>
                                         </td>
                                     </tr>

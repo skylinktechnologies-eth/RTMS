@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 class OrderItemController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','store','changeStatusToServe']]);
+         $this->middleware('permission:order-create', ['only' => ['create','store']]);
+         $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:order-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -78,34 +85,7 @@ class OrderItemController extends Controller
         $orderItem->delete();
         return back()->with('success', 'Menu Item delete successfully!');
     }
-    public function changeStatusToPreparing($id)
-    {
-        $orderItem = OrderItem::find($id);
-
-        $orderItem->status = 'Preparing';
-        $orderItem->save();
-        $interaction = new KitchenInteraction();
-        $interaction->order_item_id = $id;
-        $interaction->interaction_type = "StartPreparation";
-        $interaction->interaction_date = today();
-        $interaction->save();
-
-        return back()->with('success', 'Change Status');
-    }
-    public function changeStatusToReady($id)
-    {
-
-        $orderItem = OrderItem::find($id);
-        $interaction = KitchenInteraction::where('order_item_id',$id)->first();
-       
-        $interaction->interaction_type = 'FinishPreparation';
-        $interaction->save();
-        $orderItem->status = 'Ready';
-        $orderItem->save();
-
-
-        return back()->with('success', 'Change Status');
-    }
+  
     public function changeStatusToServe($id)
     {
 

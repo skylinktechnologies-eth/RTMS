@@ -122,10 +122,13 @@
                                         <td>{{ $category->category_name }}</td>
                                         <td>
                                             <div class="d-flex">
+                                                @can('menuCategory-edit')
                                                 <a href="#" class="edit-card" data-toggle="modal"
                                                 data-target="#editCategory{{ $category->id }}">
                                                 <i class="icon-edit" style="color: blue"></i>
                                                 </a>
+                                                @endcan
+                                                @can('menuCategory-delete')
                                                 <form action="{{ route('category.destroy', $category->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -133,6 +136,8 @@
                                                         <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
+                                                @endcan
+                                               
 
 
                                             </div>

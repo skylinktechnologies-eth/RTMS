@@ -29,6 +29,7 @@
                         <h3 class="text-white"></h3>
                     </div>
                     <ul class="nav nav-tabs  nav-bordered">
+                       
                         <li class="nav-item">
                             <a href="{{ route('report.index') }}" aria-expanded="true" class="nav-link ">
                                 <span class="d-inline-block d-sm-none"><i class="mdi mdi-account"></i></span>

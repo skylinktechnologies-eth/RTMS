@@ -111,10 +111,13 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                     <figure class="user-card">
                         <figcaption>
+                            @can('table-edit')
                             <a href="#" class="edit-card" data-toggle="modal"
-                                data-target="#editTable{{ $table->id }}">
-                                <i class="icon-mode_edit"></i>
-                            </a>
+                            data-target="#editTable{{ $table->id }}">
+                            <i class="icon-mode_edit"></i>
+                        </a>
+                            @endcan
+                            
                             <img src="tableimage.jpg" alt="Admin Templates & Dashboards" class="profile">
                             <h5>{{ $table->table_name }}</h5>
                             <ul class="list-group">
@@ -126,6 +129,7 @@
                                 @endif
                              
                             </ul>
+                            @can('table-edit')
                             <form action="{{ route('table.destroy', $table->id) }}"
                                 method="POST">
                                 @csrf
@@ -134,6 +138,8 @@
                                     <i class=" icon-trash-2" style="color:red"></i>
                                 </button>
                             </form>
+                            @endcan
+                           
                         </figcaption>
                     </figure>
                 </div>

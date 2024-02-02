@@ -41,6 +41,8 @@ Route::get('/dashboard', function () {
     $product=MenuItem::all()->count();
     $sales=OrderItem::all();
     return view('dashboard',compact('order','product','sales'));
+    Route::get('/test', 'TestController@index')->name('test.index');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -109,8 +111,6 @@ Route::controller(OrderItemController::class)->group(function () {
     Route::post('orderItem-store', 'store')->name('orderItem.store');
     Route::put('orderItem-update/{id}', 'update')->name('orderItem.update');
     Route::delete('orderItem-delete/{id}', 'destroy')->name('orderItem.destroy');
-    Route::get('changeStatusToPreparing-{id}', 'changeStatusToPreparing'); 
-    Route::get('changeStatusToReady-{id}', 'changeStatusToReady');  
     Route::get('changeStatusToServe-{id}', 'changeStatusToServe'); 
 });
 
@@ -197,6 +197,8 @@ Route::controller(IssuingController::class)->group(function () {
 //kitchen
 Route::controller(KitchenController::class)->group(function () {
     Route::get('kitchen', 'index')->name('kitchen.index');
+    Route::get('changeStatusToPreparing-{id}', 'changeStatusToPreparing'); 
+    Route::get('changeStatusToReady-{id}', 'changeStatusToReady'); 
 });
 //Report
 Route::controller(ReportController::class)->group(function () {

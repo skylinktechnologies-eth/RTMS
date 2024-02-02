@@ -83,9 +83,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputCity1"> Address</label>
-                                                <input type="text" class="form-control" id="address"
-                                                    name="address" placeholder="address"
-                                                    value="{{ old('address') }}">
+                                                <input type="text" class="form-control" id="address" name="address"
+                                                    placeholder="address" value="{{ old('address') }}">
                                             </div>
 
 
@@ -140,19 +139,24 @@
                                         <td>{{ $supplier->address }}</td>
                                         <td>
                                             <div class="d-flex">
+                                                @can('supplier-edit')
+                                                    <a href="#" class="edit-card" data-toggle="modal"
+                                                        data-target="#editSupplier{{ $supplier->id }}">
+                                                        <i class="icon-edit" style="color: blue"></i>
+                                                    </a>
+                                                @endcan
 
-                                                <a href="#" class="edit-card" data-toggle="modal"
-                                                    data-target="#editSupplier{{ $supplier->id }}">
-                                                    <i class="icon-edit" style="color: blue"></i>
-                                                </a>
-                                                <form action="{{ route('supplier.destroy', $supplier->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-link p-0">
-                                                        <i class=" icon-trash-2" style="color:red"></i>
-                                                    </button>
-                                                </form>
+                                                @can('supplier-delete')
+                                                    <form action="{{ route('supplier.destroy', $supplier->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-link p-0">
+                                                            <i class=" icon-trash-2" style="color:red"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+
 
 
                                             </div>
@@ -182,15 +186,17 @@
                                                         <div class="col-sm-12 col-12">
                                                             <div class="form-group">
                                                                 <label for="exampleInputCity1"> Name</label>
-                                                                <input type="text" class="form-control" id="supplier_name"
-                                                                    name="supplier_name" placeholder="supplier Name"
-                                                                    value="{{  $supplier->supplier_name }}">
+                                                                <input type="text" class="form-control"
+                                                                    id="supplier_name" name="supplier_name"
+                                                                    placeholder="supplier Name"
+                                                                    value="{{ $supplier->supplier_name }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputCity1"> Contact number</label>
-                                                                <input type="number" class="form-control" id="contact_number"
-                                                                    name="contact_number" placeholder="Contact Number"
-                                                                    value="{{$supplier->contact_number }}">
+                                                                <input type="number" class="form-control"
+                                                                    id="contact_number" name="contact_number"
+                                                                    placeholder="Contact Number"
+                                                                    value="{{ $supplier->contact_number }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputCity1"> Address</label>

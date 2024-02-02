@@ -52,6 +52,7 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
+                   
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewLocation">Add New
                         Location</button>
 
@@ -125,11 +126,14 @@
                                         <td>{{ $location->location_name }}</td>
                                         <td>
                                             <div class="d-flex">
-
+                                                @can('location-edit')
                                                 <a href="#" class="edit-card" data-toggle="modal"
-                                                    data-target="#editLocation{{ $location->id }}">
-                                                    <i class="icon-edit" style="color: blue"></i>
-                                                </a>
+                                                data-target="#editLocation{{ $location->id }}">
+                                                <i class="icon-edit" style="color: blue"></i>
+                                            </a>
+                                                @endcan
+                                               
+                                                @can('location-delete')
                                                 <form action="{{ route('location.destroy', $location->id) }}"
                                                     method="POST">
                                                     @csrf
@@ -138,8 +142,7 @@
                                                         <i class=" icon-trash-2" style="color:red"></i>
                                                     </button>
                                                 </form>
-
-
+                                                @endcan
                                             </div>
 
 

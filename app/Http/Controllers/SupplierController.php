@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class SupplierController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:supplier-list|supplier-create|supplier-edit|supplier-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:supplier-create', ['only' => ['index','store']]);
+         $this->middleware('permission:supplier-edit', ['only' => ['index','update']]);
+         $this->middleware('permission:supplier-delete', ['only' => ['destroy']]);
+    }
     public function index(){
         $suppliers=Supplier::orderBy('created_at', 'desc')->get();
      

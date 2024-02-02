@@ -50,8 +50,11 @@
             <div class="col-sm-12">
                 <div class="text-right mb-3">
                     <!-- Button trigger modal -->
-                    <a href="{{ route('reservation.create') }}" type="button" class="btn btn-primary">Add New
-                        Reservation</a>
+                    @can('reservation-create')
+                        <a href="{{ route('reservation.create') }}" type="button" class="btn btn-primary">Add New
+                            Reservation</a>
+                    @endcan
+
                 </div>
             </div>
         </div>
@@ -194,7 +197,7 @@
 
 
 
-                                        <td class="text-center"> 
+                                        <td class="text-center">
                                             <div class="dropdown">
 
                                                 @if ($detailStatus == 'Pending')
@@ -234,29 +237,26 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
+                                                @can('reservation-edit')
+                                                    <a type="link" href="{{ route('reservation.edit', $detailId) }}">
+                                                        <i class="icon-edit" style="color: blue"></i>
+                                                    </a>
+                                                @endcan
 
-                                                <a type="link"
-                                                    href="{{ route('reservation.edit', $detailId) }}">
-                                                    <i class="icon-edit" style="color: blue"></i>
-                                                </a>
 
-
-                                                <form
-                                                    action="{{ route('reservation.destroy', $detailId) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-link p-0">
-                                                        <i class=" icon-trash-2" style="color:red"></i>
-                                                    </button>
-                                                </form>
-
+                                                @can('reservation-delete')
+                                                    <form action="{{ route('reservation.destroy', $detailId) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-link p-0">
+                                                            <i class=" icon-trash-2" style="color:red"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
 
                                             </div>
-
-
                                         </td>
-
                                     </tr>
                                 @endforeach
 

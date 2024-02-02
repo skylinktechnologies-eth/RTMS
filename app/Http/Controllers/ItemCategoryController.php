@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class ItemCategoryController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:supplyItemCategory-list|supplyItemCategory-create|supplyItemCategory-edit|supplyItemCategory-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:supplyItemCategory-create', ['only' => ['index','store']]);
+         $this->middleware('permission:supplyItemCategory-edit', ['only' => ['index','update']]);
+         $this->middleware('permission:supplyItemCategory-delete', ['only' => ['destroy']]);
+    }
     public function index(){
         $itemCategories=ItemCategory::orderBy('created_at', 'desc')->get();
         return view('Pages.ItemCategory.index',compact('itemCategories'));

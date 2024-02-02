@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 class TableController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:table-list|table-create|table-edit|table-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:table-create', ['only' => ['index','store']]);
+         $this->middleware('permission:table-edit', ['only' => ['index','update']]);
+         $this->middleware('permission:table-delete', ['only' => ['destroy']]);
+    }
+
     public function index(){
         $tables=Table::orderBy('created_at', 'desc')->get();
         return view('Pages.Table.index',compact('tables'));

@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     //
+    function __construct()
+    {
+         $this->middleware('permission:menuCategory-list|menuCategory-create|menuCategory-edit|menuCategory-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:menuCategory-create', ['only' => ['index','store']]);
+         $this->middleware('permission:menuCategory-edit', ['only' => ['index','update']]);
+         $this->middleware('permission:menuCategory-delete', ['only' => ['destroy']]);
+    }
      
     public function index(){
         $categories=Category::orderBy('created_at', 'desc')->get();
