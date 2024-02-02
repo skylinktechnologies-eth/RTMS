@@ -253,7 +253,7 @@
 
 
                         <li class="header-menu">Inventory</li>
-                        @if ($locationList || $supplyItemCategoryList || $supplyItemList || $supplier)
+                        @if ($locationList || $supplyItemCategoryList || $supplyItemList || $supplierList)
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="icon-edit1"></i>
