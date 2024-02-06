@@ -23,10 +23,10 @@ class WaitstaffAssignmentController extends Controller
         return view('Pages.WaitstaffAssignment.create',compact('waitstaffs','tables'));
     }
     public function edit( $id){
-        $assignment=WaitstaffAssignment::find($id);
-        $waitstaffs=Waitstaff::all();
-        $tables= Table::all();
-        return view('Pages.WaitstaffAssignment.edit',compact('waitstaffs','assignment','tables'));
+        $tables = Table::all();
+        $waitstaffs = Waitstaff::all();
+        $staffAssigns = WaitstaffAssignment::find($id);
+        return view('Pages.WaitstaffAssignment.edit',compact('waitstaffs','staffAssigns','tables'));
     }
    
     public function store(Request $request,$id){
@@ -48,15 +48,15 @@ class WaitstaffAssignmentController extends Controller
 
     public function update(Request $request, $id){
         
+     
         $request->validate([
             
-            'waitstaff_id' => 'required',
+           
             'table_id' => 'required',
             'assignment_date' => 'required'
         ]);   
        
        $assignment=  WaitstaffAssignment::find($id);
-       $assignment->waitstaff_id=$request->waitstaff_id;
        $assignment->table_id=$request->table_id;
        $assignment->assignment_date=$request->assignment_date;
        $assignment->update(); 

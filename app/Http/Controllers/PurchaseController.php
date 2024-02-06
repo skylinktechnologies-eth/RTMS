@@ -14,10 +14,10 @@ class PurchaseController extends Controller
     //
     function __construct()
     {
-         $this->middleware('permission:purchase-list|purchase-create|purchase-edit|purchase-delete', ['only' => ['index','store','changeStatusToReceived','changeStatusToPlaced']]);
-         $this->middleware('permission:purchase-create', ['only' => ['create','store']]);
-         $this->middleware('permission:purchase-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:purchase-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:purchase-list|purchase-create|purchase-edit|purchase-delete', ['only' => ['index', 'store', 'changeStatusToReceived', 'changeStatusToPlaced']]);
+        $this->middleware('permission:purchase-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:purchase-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:purchase-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -67,21 +67,23 @@ class PurchaseController extends Controller
             $orderItem->price = $item['price'];
             $orderItem->total = $item['total'];
             $orderItem->save();
-        
-            $inventoryItems = Inventory::where('item_id', $orderItem->item_id)->get();
-        
-          
-        
+
+            $inventoryItems = Inventory::where('item_id', $item['item_id'])->get();
+
+
+
             if ($inventoryItems->isNotEmpty()) {
                 foreach ($inventoryItems as $inventoryItem) {
                     if ($inventoryItem->quantity > 0) {
                         $inventoryItem->quantity += $orderItem->quantity;
                         $inventoryItem->save();
+                    } else {
+
                     }
                 }
             } else {
-            
-        
+
+
                 $inventory = new Inventory();
                 $inventory->item_id = $orderItem->item_id;
                 $inventory->quantity = $orderItem->quantity;
@@ -89,7 +91,7 @@ class PurchaseController extends Controller
                 $inventory->save();
             }
         }
-        
+
         return redirect()->route('purchase.index');
     }
     public function update(Request $request, $id)
@@ -100,11 +102,10 @@ class PurchaseController extends Controller
             // Add your validation rules here
         ]);
         $supplyOrder = SupplyOrder::find($id);
-
         $supplyOrder->supplier_id = $request->supplier_id;
         $supplyOrder->order_date = $request->order_date;
         $supplyOrder->save();
-
+        $getItem = SupplyOrderItem::where('supply_order_id', $id)->get();
         SupplyOrderItem::where('supply_order_id', $id)->delete();
 
 
@@ -117,20 +118,25 @@ class PurchaseController extends Controller
             $orderItem->price = $item['price'];
             $orderItem->total = $item['total'];
             $orderItem->save();
-            $inventoryItems = Inventory::where('item_id', $orderItem->item_id)->get();
-        
-          
-        
+            $inventoryItems = Inventory::where('item_id', $item['item_id'])->get();
+
+
+
             if ($inventoryItems->isNotEmpty()) {
                 foreach ($inventoryItems as $inventoryItem) {
+                    foreach ($getItem as $items) {
                     if ($inventoryItem->quantity > 0) {
-                        $inventoryItem->quantity += $orderItem->quantity;
-                        $inventoryItem->save();
+                       
+                            if ($items->item_id == $inventoryItem->item_id) {
+                                $inventoryItem->quantity =  $inventoryItem->quantity - $items->quantity + $orderItem->quantity;
+                                $inventoryItem->save();
+                            }
+                        }
                     }
                 }
             } else {
-            
-        
+
+
                 $inventory = new Inventory();
                 $inventory->item_id = $orderItem->item_id;
                 $inventory->quantity = $orderItem->quantity;

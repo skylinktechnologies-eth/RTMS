@@ -2,8 +2,8 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Mantain</li>
-            <li class="breadcrumb-item active">Supply Item</li>
+            <li class="breadcrumb-item">Waitstaff</li>
+            <li class="breadcrumb-item active">Assign waitstaff</li>
         </ol>
 
         <ul class="app-actions">
@@ -114,7 +114,6 @@
                                         <thead style="">
                                             <tr>
                                                 <th>No</th>
-                                                <th>Waitstaff Name</th>
                                                 <th>Table Name</th>
                                                 <th>Assignment Date</th>
                                                 <th>Action</th>
@@ -132,8 +131,6 @@
                                                     @endphp
                                                     <tr>
                                                         <td>{{ $no }}</td>
-                                                        <td>{{ $staffAssign->waitstaff->first_name }}
-                                                            {{ $staffAssign->waitstaff->last_name }}</td>
                                                         <td>{{ $staffAssign->table->table_name }}</td>
                                                         <td>{{ $staffAssign->assignment_date }}</td>
                                                         <td>

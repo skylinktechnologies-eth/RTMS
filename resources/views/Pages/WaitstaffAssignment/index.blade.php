@@ -115,7 +115,7 @@
                             <thead style="">
                                 <tr>
                                     <th>No</th>
-                                    <th>Waitstaff Name</th>
+                                  
                                     <th>Table Name</th>
                                     <th>Assignment Date</th>
                                     <th>Action</th>
@@ -132,7 +132,6 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $no }}</td>
-                                        <td>{{ $assignment->waitstaff->first_name }} {{ $assignment->waitstaff->last_name }}</td>
                                         <td>{{ $assignment->table->table_name }}</td>
                                         <td>{{ $assignment->assignment_date }}</td>
                                         <td>

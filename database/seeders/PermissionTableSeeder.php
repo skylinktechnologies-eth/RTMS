@@ -22,17 +22,17 @@ class PermissionTableSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
-            
+
             'user-list',
             'user-create',
             'user-edit',
-            'user-delete', 
-            
+            'user-delete',
+
             'menuCategory-list',
             'menuCategory-create',
             'menuCategory-edit',
             'menuCategory-delete',
-            
+
             'issuing-list',
             'issuing-create',
             'issuing-edit',
@@ -42,7 +42,7 @@ class PermissionTableSeeder extends Seeder
             'supplyItemCategory-create',
             'supplyItemCategory-edit',
             'supplyItemCategory-delete',
-            
+
             'location-list',
             'location-create',
             'location-edit',
@@ -63,7 +63,7 @@ class PermissionTableSeeder extends Seeder
             'purchase-edit',
             'purchase-delete',
 
-           'report-manage',
+            'report-manage',
 
             'reservation-list',
             'reservation-create',
@@ -95,13 +95,15 @@ class PermissionTableSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-'
-            kitchen-list',
-           
+            'kitchen-list',
+
         ];
-       
+
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            // Check if the permission already exists
+            if (!Permission::where('name', $permission)->exists()) {
+                Permission::create(['name' => $permission]);
+            }
         }
     }
 }

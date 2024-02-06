@@ -44,6 +44,7 @@ class IssuingController extends Controller
     }
     public function store(Request $request)
     {
+        
         $request->validate([]);
         $issuing = new Issuing();
         $issuing->location_id = $request->location_id;
@@ -55,23 +56,35 @@ class IssuingController extends Controller
         foreach ($request->item_list as $item) {
             $issuingItem = new IssuingItem();
             $inventoryItems = Inventory::where('item_id', $item['item_id'])->get();
-        
+           
             $issuingItem->issuing_id = $issuing->id;
             $issuingItem->item_id = $item['item_id'];
             $issuingItem->quantity = $item['quantity']; // Set the quantity directly
         
             foreach ($inventoryItems as $inventoryItem) {
+            
                 if ($inventoryItem->quantity > 0) {
+                   
                     // Check if the issuing quantity is less than or equal to the purchased quantity
                     if ($item['quantity'] > abs($inventoryItem->quantity)) {
                         // If any item has a quantity greater than the purchased quantity, delete the issuing record
                         Issuing::where('id', $issuing->id)->delete();
                         return back()->with('success', 'Issuing quantity is greater than available quantity.');
                     }
-                } else {
-                    // Handle the case where the item is not found in inventory (quantity >= 0)
-                    Issuing::where('id', $issuing->id)->delete();
-                    return back()->with('success', 'Issuing quantity is greater than available quantity');
+                    else {
+                        foreach ($inventoryItems as $inventoryItem) {
+                            if ($inventoryItem->quantity < 0) {
+                                $inventoryItem->quantity += -($issuingItem->quantity);
+                                $inventoryItem->save();
+                            } else {
+                                $inventory = new Inventory();
+                                $inventory->item_id = $issuingItem->item_id;
+                                $inventory->quantity = -($issuingItem->quantity);
+                                $inventory->last_update = now()->format('Y-m-d');
+                                $inventory->save();
+                            }
+                        }
+                } 
                 }
             }
         
@@ -108,7 +121,7 @@ class IssuingController extends Controller
         $issuing->issued_date = $request->issued_date;
         $issuing->issued_to =  $request->issued_to;
         $issuing->save();
-
+        $getItem = IssuingItem::where('issuing_id', $id)->get();
         IssuingItem::where('issuing_id', $id)->delete();
         foreach ($request->List as $item) {
             $issuingItem = new IssuingItem();
@@ -117,13 +130,29 @@ class IssuingController extends Controller
             $issuingItem->quantity = $item['quantity'];
             $issuingItem->total = $item['quantity'];
             $issuingItem->save();
-            Inventory::where('item_id', $issuingItem->item_id)->delete();
-            $inventory = new Inventory();
-            $inventory->item_id = $issuingItem->item_id;
-            $inventory->quantity = - ($issuingItem->quantity);
-            $inventory->last_update = now()->format('Y-m-d');
-            $inventory->save();
+            $inventoryItems = Inventory::where('item_id', $item['item_id'])->get();
+
+            if ($inventoryItems->isNotEmpty()) {
+                foreach ($inventoryItems as $inventoryItem) {
+                    foreach ($getItem as $items) {
+                    if ($inventoryItem->quantity < 0) {
+                       
+                            if ($items->item_id == $inventoryItem->item_id) {
+                                $inventoryItem->quantity =  $inventoryItem->quantity + $items->quantity - $issuingItem->quantity;
+                                $inventoryItem->save();
+                            }
+                        }
+                    }
+                }
+            } else {
+                $inventory = new Inventory();
+                $inventory->item_id = $issuingItem->item_id;
+                $inventory->quantity = $issuingItem->quantity;
+                $inventory->last_update = now()->format('Y-m-d');
+                $inventory->save();
+            }
         }
+    
         return redirect()->route('issuing.index');
     }
     public function destroy(String $id)
