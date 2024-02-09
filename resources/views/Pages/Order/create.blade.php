@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <select class="form-control selectpicker" id="table_id" name="table_id"
-                                                data-live-search="true">
+                                                data-live-search="true" required>
                                                 <option value="">select Table</option>
                                                 @foreach ($tables as $table)
                                                     <option value="{{ $table->id }}">
@@ -69,10 +69,7 @@
                                                 @endforeach
 
                                             </select>
-                                            @error('table_id')
-                                            <div class="alert alert-danger">
-                                                {{ $message }}</div>
-                                        @enderror
+                                           
                                         </div>
 
                                     </div>
@@ -112,7 +109,7 @@
                                                                     <div class="form-group">
                                                                         <input type="text" class="form-control"
                                                                             id="quantity{{ $menuItem->id }}"
-                                                                            name="quantity[]" placeholder="Quantity"
+                                                                            name="quantity[]" placeholder="Quantity" value="{{ old('quantity[]') }}"
                                                                             aria-label="filter">
                                                                     </div>
                                                                     <div class="form-group">

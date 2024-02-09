@@ -89,17 +89,16 @@
                     </div>
 
                    
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="form-group">
-    
+                    <div class="col-lg-12 col-12 mb-2">
+                        <div class="form-group">
+                            <label class="mb-1">
                                 <strong>Role:</strong>
-    
-                                {!! Form::select('roles[]', $roles, [], ['class' => 'form-select']) !!}
-                            </div>
+                            </label>
+                            {!! Form::select('roles[]', $roles, [], ['class' => 'form-control']) !!}
                         </div>
-    
                     </div>
+                    
+                    
                     <div class="col-12 text-center mb-2">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

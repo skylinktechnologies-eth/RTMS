@@ -89,15 +89,14 @@ class OrderItemController extends Controller
     public function changeStatusToServe($id)
     {
 
-       
         $interaction = KitchenInteraction::where('order_item_id',$id)->first();
-       
+       if($interaction ){
         $interaction->interaction_type = 'Serve';
         $interaction->save();
-       
-       
-
-
         return back()->with('success', 'Change Status');
+       }else{
+        return back()->with('warning', 'Please stay until the status is ready');
+       }
+       
     }
 }

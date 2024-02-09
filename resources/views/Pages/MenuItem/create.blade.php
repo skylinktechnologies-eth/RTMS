@@ -45,75 +45,66 @@
                 </div>
             </div>
         @endif
-
-        <div class="row justify-content-center gutters">
-            <div class="col-lg-10 col-sm-12 col-12">
-
-                <div class="card m-0">
-                    <div class="card-header">
-                        <h4>Create Product Menu </h4>
-                    </div>
-                    <div class="card-body">
-
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-lg-10 col-sm-12 col-12">
-                                <form method="POST" action="{{ route('menuItem.store') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="exampleInputName1"> Category Name</label>
-                                        <select class="form-control selectpicker" id="category_id" name="category_id"
-                                            data-live-search="true">
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                            @endforeach
-
-                                        </select>
-
-                                        @error('category_id')
-                                            <div class="alert alert-danger">
-                                                {{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail3"> Item Name</label>
-                                        <input type="text" class="form-control" id="item_name" name="item_name"
-                                            placeholder="Item name">
-                                        @error('item_name')
-                                            <div class="alert alert-danger">
-                                                {{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="party_size">Image</label>
-                                        <input type="file" class="form-control" id="image" placeholder="image"
-                                            name="image">
-                                       
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contact_name">Price</label>
-                                        <input type="number" class="form-control" id="price" name="price"
-                                            placeholder="Price">
-                                        @error('price')
-                                            <div class="alert alert-danger">
-                                                {{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-xl-12">
-                                        <button type="submit" id="submit" name="submit"
-                                            class="btn btn-primary float-right">Submit
-                                            Form</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card rounded-3 px-3  " style="height: 450px;">
+            <div class="card-header bg-primary rounded-3" style="margin-top: -10px;color:#fff">
+                <div style="display: flex; justify-content: space-between;">
+                    <strong> Create Product Menu  </strong>
+                    <a href="{{ route('menuItem.index') }}" class="text-white"><i class="fas fa-arrow-left"></i>
+                        Back</a>
                 </div>
             </div>
+            <div class="card-body">
+                <form method="POST" action="{{ route('menuItem.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="exampleInputName1"> Category Name</label>
+                        <select class="form-control selectpicker" id="category_id" name="category_id"
+                            data-live-search="true">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach
 
-        </div>
+                        </select>
+
+                        @error('category_id')
+                            <div class="alert alert-danger">
+                                {{ $message }}</div>
+                        @enderror
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="exampleInputEmail3"> Item Name</label>
+                        <input type="text" class="form-control" id="item_name" name="item_name"
+                            placeholder="Item name">
+                        @error('item_name')
+                            <div class="alert alert-danger">
+                                {{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="party_size">Image</label>
+                        <input type="file" class="form-control" id="image" placeholder="image"
+                            name="image">
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_name">Price</label>
+                        <input type="number" class="form-control" id="price" name="price"
+                            placeholder="Price">
+                        @error('price')
+                            <div class="alert alert-danger">
+                                {{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-xl-12">
+                        <button type="submit" id="submit" name="submit"
+                            class="btn btn-primary float-right">Submit
+                            Form</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
     </div>
 @endsection
 

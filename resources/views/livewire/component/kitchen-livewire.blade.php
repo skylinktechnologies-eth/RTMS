@@ -98,19 +98,22 @@
                                         <div class="col-sm-3 col-3  pt-2 ">
                                             <h6> {{ $orderItem->remark }}</h6>
                                         </div>
-                                        <div class="col-sm-3 col-3   pt-2">
+                                        <div class="col-sm-3 col-3 text-center pt-2">
                                             @if ($uniqueOrderItem->status == 'Pending')
-                                                <h6 class="bg-warning" style="color: white">
-                                                    {{ $orderItem->status }}</h6>
+                                                <p class="bg-warning text-white rounded" style="font-size:16px;padding:3px">
+                                                    <strong>{{ $orderItem->status }}</strong>
+                                                </p>
                                             @elseif ($uniqueOrderItem->status == 'Preparing')
-                                                <h6 class="bg-info" style="color: white">
-                                                    {{ $orderItem->status }}</h6>
+                                                <p class="bg-info text-white rounded" style="font-size:16px;padding:3px">
+                                                    <strong>{{ $orderItem->status }}</strong>
+                                                </p>
                                             @elseif ($uniqueOrderItem->status == 'Ready')
-                                                <p class="bg-danger"style="color: white">
-                                                    <strong> {{ $orderItem->status }} </strong>
+                                                <p class="bg-success text-white rounded" style="font-size:16px;padding:3px">
+                                                    <strong>{{ $orderItem->status }}</strong>
                                                 </p>
                                             @endif
                                         </div>
+                                        
                                         <div class="col-sm-2 col-2  pt-2 ">
                                             @if ($orderItem->status == 'Pending')
                                                 <a href=" changeStatusToPreparing-{{ $orderItem->id }}" type="button"

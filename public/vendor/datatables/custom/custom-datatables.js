@@ -1,7 +1,7 @@
 // Basic DataTable
 $(function(){
 	$('#basicExample').DataTable({
-		'iDisplayLength': 4,
+		'iDisplayLength': 10,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 			"info": "Showing Page _PAGE_ of _PAGES_",
@@ -22,7 +22,7 @@ $(function(){
 			'pdfHtml5',
 			'print'
 		],
-		'iDisplayLength': 5,
+		'iDisplayLength': 10,
 	});
 });
 
@@ -31,7 +31,7 @@ $(function(){
 $(document).ready(function(){
 	var table = $('#fixedHeader').DataTable({
 		fixedHeader: true,
-		'iDisplayLength': 4,
+		'iDisplayLength': 10,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 			"info": "Showing Page _PAGE_ of _PAGES_",
@@ -55,7 +55,7 @@ $(function(){
 // Row Selection
 $(function(){
 	$('#rowSelection').DataTable({
-		'iDisplayLength': 4,
+		'iDisplayLength': 5,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 			"info": "Showing Page _PAGE_ of _PAGES_",
@@ -77,7 +77,7 @@ $(function(){
 // Highlighting rows and columns
 $(function(){
 	$('#highlightRowColumn').DataTable({
-		'iDisplayLength': 4,
+		'iDisplayLength': 10,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 		}
@@ -95,7 +95,7 @@ $(function(){
 // Using API in callbacks
 $(function(){
 	$('#apiCallbacks').DataTable({
-		'iDisplayLength': 4,
+		'iDisplayLength': 10,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 		},
@@ -112,8 +112,8 @@ $(function(){
 // Hiding Search and Show entries
 $(function(){
 	$('#hideSearchExample').DataTable({
-		'iDisplayLength': 4,
-		"searching": false,
+		'iDisplayLength': 10,
+		"searching": true,
 		"language": {
 			"lengthMenu": "Display _MENU_ Records Per Page",
 			"info": "Showing Page _PAGE_ of _PAGES_",

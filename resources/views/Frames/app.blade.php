@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="../../../vendor/bs-select/bs-select.css" />
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
+    
     <style>
         /* For Firefox */
         /* For Firefox */
@@ -540,7 +541,17 @@
     <script>
         setTimeout(function() {
             document.getElementById('success-alert').style.display = 'none';
-        }, 3000);
+        }, 5000);
+    </script>
+     <script>
+        setTimeout(function() {
+            document.getElementById('danger-alert').style.display = 'none';
+        }, 5000);
+    </script>
+     <script>
+        setTimeout(function() {
+            document.getElementById('warning-alert').style.display = 'none';
+        }, 5000);
     </script>
 
 </body>

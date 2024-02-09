@@ -5,6 +5,7 @@ namespace App\Livewire\Component;
 use App\Models\Category;
 use App\Models\KitchenInteraction;
 use App\Models\MenuItem;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Table;
 use Livewire\Component;
@@ -15,6 +16,7 @@ class InteractionLivewire extends Component
     public $kitchenInteractions;
     public $categories;
     public $tables;
+    public $orders;
     public $selectedCategoryId;
     public $selectedTableId;
     public $selectedDate;
@@ -22,6 +24,7 @@ class InteractionLivewire extends Component
     {
         // Load the order items when the component is mounted
         $this->orderItems = OrderItem::orderBy('created_at', 'desc')->get();
+        $this->orders = Order::orderBy('created_at', 'desc')->get();
         $this->kitchenInteractions = KitchenInteraction::all ();
         $this->categories = Category::all();
         $this->tables = Table::all();
@@ -34,26 +37,24 @@ class InteractionLivewire extends Component
     public function loadOrderItems()
     {
         $query = OrderItem::query();
-
+    
         if ($this->selectedCategoryId) {
-            $menuItem = MenuItem::where('category_id', $this->selectedCategoryId)->first();
-            $menuItemId = $menuItem ? $menuItem->id : null;
-
-            if ($menuItemId) {
-                $query->where('menu_item_id', $menuItemId);
+            $menuItemsInCategory = MenuItem::where('category_id', $this->selectedCategoryId)->pluck('id');
+    
+            if ($menuItemsInCategory->isNotEmpty()) {
+                $query->whereIn('menu_item_id', $menuItemsInCategory);
             } else {
-                // No matching menu item, set an empty collection
-                $this->orderItems = collect();
-                return;
+                // No matching menu items in the category, continue with the query without category filter
             }
         }
-
+    
         if ($this->selectedTableId) {
             // Update the relationship in the where clause
             $query->whereHas('order.table', function ($subQuery) {
                 $subQuery->where('id', $this->selectedTableId);
             });
         }
+    
         if ($this->selectedDate) {
             $query->whereHas('order', function ($subQuery) {
                 $subQuery->whereDate('order_date', $this->selectedDate);
@@ -64,9 +65,11 @@ class InteractionLivewire extends Component
                 $subQuery->whereDate('order_date', today());
             });
         }
-
+    
         $this->orderItems = $query->orderBy('created_at', 'desc')->get();
     }
+    
+    
 
     public function updatedSelectedCategoryId()
     {

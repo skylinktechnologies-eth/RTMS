@@ -28,15 +28,15 @@
     </div>
 
     <div class="main-container">
-        @if (session('success'))
+        @if (session('danger'))
             <div class="row">
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                    <div class="alert alert-success px-3" id="success-alert">
-                        {{ session('success') }}
+                    <div class="alert alert-danger px-3" id="danger-alert">
+                        {{ session('danger') }}
                     </div>
                 </div>
             </div>

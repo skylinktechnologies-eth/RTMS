@@ -50,6 +50,48 @@
                
                     <div class="col-lg-12">
                         <div class="card">
+                            <div class="table-container">
+                                <div class="t-header">purchase Product</div>
+                                <div class="table-responsive">
+                                    <table id="rowSelection" class="table custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Item </th>
+                                                <th> Total Quantity</th>
+    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                            $no = 0;
+                                        @endphp
+    
+                                            @foreach ($inventories as $inventory)
+                                                @php
+                                                    $no = $no + 1;
+                                                @endphp
+                                               
+                                                    <tr>
+                                                        <!-- Display details from representative order item -->
+                                                        <td>{{ $no }}</td>
+                                                        <td>{{ $inventory->item->item_name }}</td>
+                                                       
+                                                        <td>
+                                                            {{ $inventory->purchased_quantity - $inventory->issued_quantity }}
+                                                        </td>
+                                                    </tr>
+                                               
+                                            @endforeach
+    
+    
+    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
                             <form method="POST" action="{{ route('issuing.update', $issuing->id) }}">
                                 @csrf
                                 @method('put')

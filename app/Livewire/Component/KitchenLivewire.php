@@ -14,7 +14,6 @@ class KitchenLivewire extends Component
     public $selectedItemStatus;
     public $selectedDate;
 
-
     public function mount()
     {
         $this->categories = Category::all();
@@ -29,21 +28,18 @@ class KitchenLivewire extends Component
         $query = OrderItem::query();
 
         if ($this->selectedCategoryId) {
-            $menuItem = MenuItem::where('category_id', $this->selectedCategoryId)->first();
-            $menuItemId = $menuItem ? $menuItem->id : null;
+            $menuItems = MenuItem::where('category_id', $this->selectedCategoryId)->pluck('id');
 
-            if ($menuItemId) {
-                $query->where('menu_item_id', $menuItemId);
-            } else {
-                // No matching menu item, set an empty collection
-                $this->orderItems = collect();
-                return;
+            if ($menuItems->isNotEmpty()) {
+                $query->whereIn('menu_item_id', $menuItems);
             }
+            // If no menu items found, continue with the query without category filter
         }
 
         if ($this->selectedItemStatus) {
             $query->where('status', $this->selectedItemStatus);
         }
+
         if ($this->selectedDate) {
             $query->whereHas('order', function ($subQuery) {
                 $subQuery->whereDate('order_date', $this->selectedDate);
@@ -67,14 +63,17 @@ class KitchenLivewire extends Component
     {
         $this->loadOrderItems();
     }
+
     public function updatedSelectedDate()
-{
-    $this->loadOrderItems();
-}
+    {
+        $this->loadOrderItems();
+    }
 
     public function render()
     {
         return view('livewire.component.kitchen-livewire');
     }
 }
+
+
 

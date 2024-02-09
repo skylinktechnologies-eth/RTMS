@@ -36,12 +36,18 @@ class WaitstaffAssignmentController extends Controller
             'table_id' => 'required', 
         ]);
 
-       
-       $waitstaff= new WaitstaffAssignment();
-       $waitstaff->waitstaff_id=$id;
-       $waitstaff->table_id=$request->table_id;
-       $waitstaff->assignment_date=$request->assignment_date;
-       $waitstaff->save(); 
+        $assignTable=WaitstaffAssignment::where('table_id',$request->table_id)->get();
+      
+        if($assignTable->isNotEmpty()){
+            return back()->with('danger','Table is already assign!');
+        }else{
+            $waitstaff= new WaitstaffAssignment();
+            $waitstaff->waitstaff_id=$id;
+            $waitstaff->table_id=$request->table_id;
+            $waitstaff->assignment_date=$request->assignment_date;
+            $waitstaff->save(); 
+        }
+     
        
         return back()->with('success','Waitstaff Assign successfully!');
     }
