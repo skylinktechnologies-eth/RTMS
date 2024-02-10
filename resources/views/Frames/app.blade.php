@@ -44,7 +44,7 @@
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
 
-    <style>
+    {{-- <style>
         /* For Firefox */
         /* For Firefox */
         .sidebar-menu {
@@ -77,7 +77,7 @@
             -webkit-overflow-scrolling: touch;
             /* Enable smooth scrolling on iOS devices */
         }
-    </style>
+    </style> --}}
     @livewireStyles
 </head>
 
