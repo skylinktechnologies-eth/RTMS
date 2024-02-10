@@ -129,7 +129,7 @@
 
 
                 <!-- sidebar menu start -->
-                <div class="sidebar-menu" style=" overflow-y: auto; height: 100%;">
+                <div class="sidebar-menu" style=" overflow-y: auto; ">
                     <ul>
 
                         <li class=" ">
