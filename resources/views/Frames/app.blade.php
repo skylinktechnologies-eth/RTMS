@@ -46,9 +46,12 @@
 
     <style>
         /* Default styles for sidebar-menu without scrollbar */
+        .slimScrollDiv {
+            overflow: auto !important;
+        }
+
         .sidebar-content {
             overflow-y: auto;
-            /* Enable scrolling by default */
             height: 100%;
         }
 
@@ -80,7 +83,18 @@
 </head>
 
 <body>
+<script>
+    $(document).ready(function() {
+    // Your code to ensure the content is loaded
+    $('.sidebar-content').css('overflow-y', 'auto');
+});
+$(document).ready(function() {
+    setTimeout(function() {
+        $('.sidebar-content').css('overflow-y', 'auto');
+    }, 100);
+});
 
+</script>
     <!-- Page wrapper start -->
     <div class="page-wrapper">
         @php
@@ -127,7 +141,7 @@
 
 
                 <!-- sidebar menu start -->
-                <div class="sidebar-menu">
+                <div class="sidebar-menu" style="">
                     <ul>
 
                         <li class=" ">
