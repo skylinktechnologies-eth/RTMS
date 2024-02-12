@@ -43,35 +43,39 @@
     <link rel="stylesheet" href="../../../vendor/bs-select/bs-select.css" />
     <!-- jQcloud Keywords css -->
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
-    
+
     <style>
-        /* For Firefox */
-        /* For Firefox */
+        /* Default styles for sidebar-menu without scrollbar */
         .sidebar-menu {
-            scrollbar-width: thin;
-            scrollbar-color: #888 #eee;
+            overflow-y: hidden;
+            /* Hide the scrollbar by default */
+            height: 100%;
         }
 
-        /* For Chrome, Safari, and Opera */
-        .sidebar-menu::-webkit-scrollbar {
-            width: 6px;
-        }
+        /* Styles for scrollbar on larger devices */
+        @media screen and (min-width: 768px) {
+            .sidebar-menu {
+                overflow-y: auto;
+                /* Show scrollbar on larger devices */
+                scrollbar-width: thin;
+                scrollbar-color: #888 #eee;
+            }
 
-        .sidebar-menu::-webkit-scrollbar-thumb {
-            background-color: #569c6b;
-        }
+            /* For Chrome, Safari, and Opera */
+            .sidebar-menu::-webkit-scrollbar {
+                width: 6px;
+            }
 
-        .sidebar-menu::-webkit-scrollbar-track {
-            background-color: #eee;
-        }
+            .sidebar-menu::-webkit-scrollbar-thumb {
+                background-color: #569c6b;
+            }
 
-        /* Additional styles for touch devices */
-        .sidebar-menu {
-            -webkit-overflow-scrolling: touch;
-            /* Enable smooth scrolling on iOS devices */
+            .sidebar-menu::-webkit-scrollbar-track {
+                background-color: #eee;
+            }
         }
     </style>
-     @livewireStyles
+    @livewireStyles
 </head>
 
 <body>
@@ -80,54 +84,22 @@
     <div class="page-wrapper">
         @php
 
-            $roleList = auth()
-                ->user()
-                ->can('role-list');
-            $userList = auth()
-                ->user()
-                ->can('user-list');
-            $waitstaffList = auth()
-                ->user()
-                ->can('waitstaff-list');
-            $tableList = auth()
-                ->user()
-                ->can('table-list');
-            $supplierList = auth()
-                ->user()
-                ->can('supplier-list');
-            $reservationList = auth()
-                ->user()
-                ->can('reservation-list');
-            $supplyItemList = auth()
-                ->user()
-                ->can('supplyItem-list');
-            $reportList = auth()
-                ->user()
-                ->can('report-manage');
-            $purchaseList = auth()
-                ->user()
-                ->can('purchase-list');
-            $orderList = auth()
-                ->user()
-                ->can('order-list');
-            $menuItemList = auth()
-                ->user()
-                ->can('menuItem-list');
-            $locationList = auth()
-                ->user()
-                ->can('location-list');
-            $supplyItemCategoryList = auth()
-                ->user()
-                ->can('supplyItemCategory-list');
-            $issuingList = auth()
-                ->user()
-                ->can('issuing-list');
-            $menuCategoryList = auth()
-                ->user()
-                ->can('menuCategory-list');
-                $kitchenList = auth()
-                ->user()
-                ->can('kitchen-list');
+            $roleList = auth()->user()->can('role-list');
+            $userList = auth()->user()->can('user-list');
+            $waitstaffList = auth()->user()->can('waitstaff-list');
+            $tableList = auth()->user()->can('table-list');
+            $supplierList = auth()->user()->can('supplier-list');
+            $reservationList = auth()->user()->can('reservation-list');
+            $supplyItemList = auth()->user()->can('supplyItem-list');
+            $reportList = auth()->user()->can('report-manage');
+            $purchaseList = auth()->user()->can('purchase-list');
+            $orderList = auth()->user()->can('order-list');
+            $menuItemList = auth()->user()->can('menuItem-list');
+            $locationList = auth()->user()->can('location-list');
+            $supplyItemCategoryList = auth()->user()->can('supplyItemCategory-list');
+            $issuingList = auth()->user()->can('issuing-list');
+            $menuCategoryList = auth()->user()->can('menuCategory-list');
+            $kitchenList = auth()->user()->can('kitchen-list');
         @endphp
 
         <!-- Sidebar wrapper start -->
@@ -154,7 +126,7 @@
 
 
                 <!-- sidebar menu start -->
-                <div class="sidebar-menu" style=" overflow-y: auto; height: 100%;">
+                <div class="sidebar-menu">
                     <ul>
 
                         <li class=" ">
@@ -439,7 +411,7 @@
 
 
     @livewireScripts
-	
+
     <!-- Page wrapper end -->
 
     <!--**************************
@@ -543,12 +515,12 @@
             document.getElementById('success-alert').style.display = 'none';
         }, 5000);
     </script>
-     <script>
+    <script>
         setTimeout(function() {
             document.getElementById('danger-alert').style.display = 'none';
         }, 5000);
     </script>
-     <script>
+    <script>
         setTimeout(function() {
             document.getElementById('warning-alert').style.display = 'none';
         }, 5000);
