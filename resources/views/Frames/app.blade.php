@@ -47,9 +47,11 @@
     <style>
         /* Default styles for sidebar-menu without scrollbar */
         .sidebar-menu {
-            overflow-y: hidden;
-            /* Hide the scrollbar by default */
+            overflow-y: auto;
+            /* Enable scrolling by default */
             height: 100%;
+            -webkit-overflow-scrolling: touch;
+            /* Enable touch scrolling on iOS */
         }
 
         /* Styles for scrollbar on larger devices */
