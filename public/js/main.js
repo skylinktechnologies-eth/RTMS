@@ -172,7 +172,11 @@ jQuery(function ($) {
 		}
 	});
 
-
+	$(document).ready(function() {
+		setTimeout(function() {
+			$('.sidebar-content').css('overflow-y', 'auto');
+		}, 100);
+	});
 
 	//toggle sidebar
 	$("#toggle-sidebar").click(function () {
