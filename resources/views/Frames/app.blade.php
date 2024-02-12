@@ -46,16 +46,16 @@
 
     <style>
         /* Default styles for sidebar-menu without scrollbar */
-        .sidebar-menu {
+        .sidebar-content {
             overflow-y: auto;
             /* Enable scrolling by default */
             height: 100%;
-            /* Enable touch scrolling on iOS */
         }
+
 
         /* Styles for scrollbar on larger devices */
         @media screen and (min-width: 768px) {
-            .sidebar-menu {
+            .sidebar-content {
                 overflow-y: auto;
                 /* Show scrollbar on larger devices */
                 scrollbar-width: thin;
@@ -63,15 +63,15 @@
             }
 
             /* For Chrome, Safari, and Opera */
-            .sidebar-menu::-webkit-scrollbar {
+            .sidebar-content::-webkit-scrollbar {
                 width: 6px;
             }
 
-            .sidebar-menu::-webkit-scrollbar-thumb {
+            .sidebar-content::-webkit-scrollbar-thumb {
                 background-color: #569c6b;
             }
 
-            .sidebar-menu::-webkit-scrollbar-track {
+            .sidebar-content::-webkit-scrollbar-track {
                 background-color: #eee;
             }
         }
