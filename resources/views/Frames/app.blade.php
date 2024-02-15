@@ -420,14 +420,6 @@
    **************************
   **************************-->
     <!-- Required jQuery first, then Bootstrap Bundle JS -->
-    <script>
-        $(document).ready(function() {
-		// Your code to ensure the content is loaded
-		$('.sidebar-content').css('overflow-y', 'auto');
-	});
-
-    </script>
-     <script src="../../js/main.js"></script>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/moment.js"></script>
@@ -498,7 +490,7 @@
 
 
     <!-- Main JS -->
-   
+    <script src="../../js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get the current URL path
