@@ -9,8 +9,6 @@
     <!-- Meta -->
     <meta name="description" content="Admin Templates & Dashboard UI Kits">
     <meta name="author" content="Bootstrap Gallery" />
-    <link rel="canonical" href="../../https://www.bootstrap.gallery/">
-    <meta property="og:url" content="../../https://www.bootstrap.gallery">
     <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
     <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
     <meta property="og:type" content="Website">
@@ -45,11 +43,7 @@
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
 
     <style>
-        /* Default styles for sidebar-menu without scrollbar */
-        .slimScrollDiv {
-            overflow: auto !important;
-        }
-
+       
         .sidebar-content {
             overflow-y: auto;
             height: 100%;
