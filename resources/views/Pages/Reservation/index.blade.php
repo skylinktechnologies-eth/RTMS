@@ -72,8 +72,6 @@
                                     <th>Contact Name</th>
                                     <th>Contact Number</th>
                                     <th>Reservation Date</th>
-                                    <th>Reservation Time</th>
-
                                     <th>Table</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -94,7 +92,6 @@
                                         <td>{{ $detail->reservation->contact_name }}</td>
                                         <td>{{ $detail->reservation->contact_number }}</td>
                                         <td>{{ $detail->reservation->reservation_date }}</td>
-                                        <td>{{ $detail->reservation->reservation_time }} </td>
                                         @php
                                             $detailStatus = $detail->reservation->status;
                                         @endphp
@@ -271,4 +268,5 @@
         </div>
     </div>
     <!-- Row end -->
+    
 @endsection

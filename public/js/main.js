@@ -173,9 +173,8 @@ jQuery(function ($) {
 	});
 
 	$(document).ready(function() {
-		setTimeout(function() {
-			$('.sidebar-content').css('overflow-y', 'auto');
-		}, 100);
+		// Your code to ensure the content is loaded
+		$('.sidebar-content').css('overflow-y', 'auto');
 	});
 
 	//toggle sidebar

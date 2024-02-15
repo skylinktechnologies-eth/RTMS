@@ -37,64 +37,103 @@
                 </div>
             </div>
             <hr>
-        
-<div class="card rounded-3 border-primary px-3 mt-3" style="height: 450px;">
-    <div class="card-header border-all bg-white rounded-3" style="margin-top: -10px;">
-        <div class="d-flex justify-content-between align-items-center">
-            <h4 class="text-info">Sales Report</h4>
-            <form class="d-flex align-items-center" method="GET" action="">
-                @csrf
-                <div class="form-group mb-0">
-                    <div class="row">
-                        <div class="col">
-                            <label for="start_date">From</label>
-                            <input class="form-control date" type="date"  id="start_date" name="start_date">
-                            
-                        </div>
-                        <div class="col">
-                            <label for="end_date">To</label>
-                            <input class="form-control date" type="date" id="end_date" name="end_date" >
-                               
-                           
-                        </div>
-                        <div class="col-auto mt-3">
-                            <button type="submit" class="btn btn-primary">Go</button>
-                        </div>
+
+            <div class="card rounded-3 border-primary px-3 mt-3">
+                <div class="card-header border-all bg-white rounded-3" style="margin-top: -10px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="text-info">Sales Report</h4>
+                        <form class="d-flex align-items-center" method="GET" action="">
+                            @csrf
+                            <div class="form-group mb-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="start_date">From</label>
+                                        <input class="form-control date" type="date" id="start_date" name="start_date">
+
+                                    </div>
+                                    <div class="col">
+                                        <label for="end_date">To</label>
+                                        <input class="form-control date" type="date" id="end_date" name="end_date">
+
+
+                                    </div>
+                                    <div class="col-auto mt-3">
+                                        <button type="submit" class="btn btn-primary">Go</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
-            </form>
-           
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table id="copy-print-csv" class="table custom-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Date</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Total Amount</th>
-                    </tr>
-                </thead>
-               <tbody>
-                @foreach ($orderItems as $index => $orderItem)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{$orderItem->order_date }}</td>
-                    <td>{{ $orderItem->menuItem->item_name }}</td>
-                    <td>{{ $orderItem->total_quantity }}</td>
-                    <td>{{ $orderItem->sub_total }}</td>
-                </tr>
-            @endforeach
-            
-</tbody>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="copy-print-csv" class="table custom-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Date</th>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($orderItems as $index => $orderItem)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $orderItem->order_date }}</td>
+                                        <td>{{ $orderItem->menuItem->item_name }}</td>
+                                        <td>{{ $orderItem->total_quantity }}</td>
+                                        <td>{{ $orderItem->sub_total }}</td>
+                                    </tr>
+                                @endforeach
 
-            </table>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-        </div>
-    </div>
+    <script>
+        var monthText = 'Employees information report';
+        $(document).ready(function() {
+            var table = $('#copy-print-csv').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        title: function () {
+                            return monthText;
+                        },
+                        customize: function(win) {
+                            $(win.document.body).find('h1').text(monthText);
+                        }
+                    },
+                    {
+                        extend: 'copyHtml5',
+                        title: function () {
+                            return monthText;
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        title: function () {
+                            return monthText;
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: function () {
+                            return monthText;
+                        },
+                        orientation: 'landscape'
+                    }
+                ]
+            });
+        });
+    </script>
+    
 @endsection

@@ -62,29 +62,19 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Reservation Date</label>
                                 <input type="date" class="form-control" id="reservation_date"
-                                    name="reservation_date" placeholder="reservation_date">
+                                    name="reservation_date" placeholder="reservation date" value="{{ old('reservation_date') }}">
                                 @error('reservation_date')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
+                       
                         <div class=" col-md-4 ">
                             <div class="form-group">
-                                <label for="exampleInputEmail3">Reservation Time</label>
-                                <input type="time" class="form-control" id="reservation_time"
-                                    name="reservation_time" placeholder="reservation_time">
-                                @error('reservation_time')
-                                    <div class="alert alert-danger">
-                                        {{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class=" col-md-4 ">
-                            <div class="form-group">
-                                <label for="party_size">Party Size</label>
+                                <label for="party_size">Number of Customer</label>
                                 <input type="number" class="form-control" id="party_size"
-                                    placeholder="party_size" name="party_size">
+                                    placeholder="no of customer" name="party_size" value="{{ old('party_size') }}">
                                 @error('party_size')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -97,7 +87,7 @@
                             <div class="form-group">
                                 <label for="contact_name">Contact Name</label>
                                 <input type="text" class="form-control" id="contact_name"
-                                    name="contact_name" placeholder="contact_name">
+                                    name="contact_name" placeholder="contact name" value="{{ old('contact_name') }}">
                                 @error('contact_name')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -108,7 +98,7 @@
                             <div class="form-group">
                                 <label for="contact_number">Contact Number</label>
                                 <input type="text" class="form-control" id="contact_number"
-                                    name="contact_number" placeholder="contact_number">
+                                    name="contact_number" placeholder="contact number" value="{{ old('contact_number') }}">
 
                                 @error('contact_number')
                                     <div class="alert alert-danger">
@@ -125,9 +115,9 @@
                                     <thead class="">
                                         <tr>
                                             <th style="width: 25%">Tables</th>
-                                            <th style="width: 25%"> start date</th>
-                                            <th style="width: 25%"> end date</th>
-
+                                            <th style="width: 22%"> Start Date</th>
+                                            <th style="width: 22%"> End Date</th>
+                                            <th style="width: 25%"> Reservation Time</th>
                                             <th></th>
 
                                         </tr>
@@ -140,12 +130,12 @@
 
                             <div class="row" >
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select class="form-control selectpicker" id="table_id"
                                         name="table_id[]" data-live-search="true">
                                         <option value="">select Table</option>
                                         @foreach ($tables as $table)
-                                            <option value="{{ $table->id }}">
+                                            <option value="{{ $table->id }}" >
                                                 {{ $table->table_name }}</option>
                                         @endforeach
 
@@ -156,7 +146,7 @@
                                         <input type="date" onchange="getTotal()"
                                             id="occupancy_start_date" step="any" min="0"
                                             name="occupancy_start_date[]" class="form-control"
-                                            placeholder="Start Date">
+                                            placeholder="Start Date" >
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -168,7 +158,16 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="time" onchange="getTotal()"
+                                            id="reservation_time" step="any" min="0"
+                                            name="reservation_time[]" class="form-control"
+                                            placeholder="Time">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
                                     <a class="btn btn-primary" onclick="addList()"><i class="icon-plus"
                                             style="color: white"></i></a>
                                 </div>
@@ -207,6 +206,7 @@
             var tableId = document.getElementById('table_id').value;
             var tableSelect = document.getElementById('table_id');
             var selectedTable = tableSelect.options[tableSelect.selectedIndex].text;
+            var reservationTime = document.getElementById('reservation_time').value;
             var occupancyStartdate = document.getElementById('occupancy_start_date').value;
             var occupancyEnddate = document.getElementById('occupancy_end_date').value;
     
@@ -221,14 +221,18 @@
             var cell2 = newRow.insertCell(1);
             var cell3 = newRow.insertCell(2);
             var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
     
             // Set cell content
             cell1.innerHTML = '<td>' + selectedTable + '</td>';
             cell2.innerHTML = '<td>' + occupancyStartdate + '</td>';
             cell3.innerHTML = '<td>' + occupancyEnddate + '</td>';
-            cell4.innerHTML = '<td><a class="btn btn-danger" onclick="removeRow(this)"><i class="icon-minus"></i></a>' +
+            cell4.innerHTML = '<td>' + reservationTime + '</td>';
+            cell5.innerHTML = '<td><a class="btn btn-danger" onclick="removeRow(this)"><i class="icon-minus"></i></a>' +
                 '<input type="hidden" name="table_list[' + i + '][table_id]" value="' + tableId + '">' +
                 '<input type="hidden" name="table_list[' + i + '][occupancy_start_date]" value="' + occupancyStartdate +
+                '">' + 
+                '<input type="hidden" name="table_list[' + i + '][reservation_time]" value="' + reservationTime +
                 '">' +
                 '<input type="hidden" name="table_list[' + i + '][occupancy_end_date]" value="' + occupancyEnddate + '"></td>';
     

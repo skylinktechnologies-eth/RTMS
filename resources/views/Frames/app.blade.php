@@ -83,18 +83,7 @@
 </head>
 
 <body>
-<script>
-    $(document).ready(function() {
-    // Your code to ensure the content is loaded
-    $('.sidebar-content').css('overflow-y', 'auto');
-});
-$(document).ready(function() {
-    setTimeout(function() {
-        $('.sidebar-content').css('overflow-y', 'auto');
-    }, 100);
-});
 
-</script>
     <!-- Page wrapper start -->
     <div class="page-wrapper">
         @php

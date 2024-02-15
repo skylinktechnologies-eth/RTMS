@@ -11,6 +11,7 @@ class ReservationDetail extends Model
     protected $fillable=[
         'table_id',
          'reservation_id',
+         'reservation_time',
          'occupancy_start_date',
          'occupancy_end_date'
     ];

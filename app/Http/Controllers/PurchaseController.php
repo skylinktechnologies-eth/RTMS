@@ -78,7 +78,6 @@ class PurchaseController extends Controller
                         $inventoryItem->quantity += $orderItem->quantity;
                         $inventoryItem->save();
                     } else {
-
                     }
                 }
             } else {
@@ -125,8 +124,8 @@ class PurchaseController extends Controller
             if ($inventoryItems->isNotEmpty()) {
                 foreach ($inventoryItems as $inventoryItem) {
                     foreach ($getItem as $items) {
-                    if ($inventoryItem->quantity > 0) {
-                       
+                        if ($inventoryItem->quantity > 0) {
+
                             if ($items->item_id == $inventoryItem->item_id) {
                                 $inventoryItem->quantity =  $inventoryItem->quantity - $items->quantity + $orderItem->quantity;
                                 $inventoryItem->save();
@@ -149,12 +148,27 @@ class PurchaseController extends Controller
     public function destroy(String $id)
     {
         $orderItems = SupplyOrderItem::where('supply_order_id', $id)->get();
+        $inventories = Inventory::all();
 
         foreach ($orderItems as $orderItem) {
-            $orderItem->delete();
+            foreach ($inventories as $inventory) {
+               
+                if ($inventory->item_id == $orderItem->item_id &&  $inventory->quantity > 0) {
+                   
+                    $inventory->quantity =  $inventory->quantity - $orderItem->quantity;
+                    $inventory->save();
+                }
+            }
         }
-
-        // Optionally, if you want to delete the SupplyOrder as well, uncomment the following lines:
+        foreach ($inventories as $inventory) {
+            if($inventory->quantity==0){
+                $inventory->delete();
+            }
+          
+        }
+        SupplyOrderItem::where('supply_order_id', $id)->delete();
+      
+        //Optionally, if you want to delete the SupplyOrder as well, uncomment the following lines:
         $supplyOrder = SupplyOrder::find($id);
         $supplyOrder->delete();
 

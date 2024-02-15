@@ -99,15 +99,15 @@
                                             <h6> {{ $orderItem->remark }}</h6>
                                         </div>
                                         <div class="col-sm-3 col-3 text-center pt-2">
-                                            @if ($uniqueOrderItem->status == 'Pending')
+                                            @if ($orderItem->status == 'Pending')
                                                 <p class="bg-warning text-white rounded" style="font-size:16px;padding:3px">
                                                     <strong>{{ $orderItem->status }}</strong>
                                                 </p>
-                                            @elseif ($uniqueOrderItem->status == 'Preparing')
+                                            @elseif ($orderItem->status == 'Preparing')
                                                 <p class="bg-info text-white rounded" style="font-size:16px;padding:3px">
                                                     <strong>{{ $orderItem->status }}</strong>
                                                 </p>
-                                            @elseif ($uniqueOrderItem->status == 'Ready')
+                                            @elseif ($orderItem->status == 'Ready')
                                                 <p class="bg-success text-white rounded" style="font-size:16px;padding:3px">
                                                     <strong>{{ $orderItem->status }}</strong>
                                                 </p>

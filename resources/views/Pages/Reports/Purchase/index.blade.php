@@ -38,7 +38,7 @@
             </div>
             <hr>
         
-            <div class="card rounded-3 border-primary px-3 mt-3" style="height: 450px;">
+            <div class="card rounded-3 border-primary px-3 mt-3" >
                 <div class="card-header border-all bg-white rounded-3" style="margin-top: -10px;">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="text-info">Purchase Report</h4>

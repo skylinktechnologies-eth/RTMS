@@ -72,17 +72,6 @@
                         </div>
                         <div class=" col-md-4 ">
                             <div class="form-group">
-                                <label for="exampleInputEmail3">Reservation Time</label>
-                                <input type="time" class="form-control" id="reservation_time" name="reservation_time"
-                                    placeholder="reservation_time" value="{{ $reservation->reservation_time }}">
-                                @error('reservation_time')
-                                    <div class="alert alert-danger">
-                                        {{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class=" col-md-4 ">
-                            <div class="form-group">
                                 <label for="party_size">Party Size</label>
                                 <input type="number" class="form-control" id="party_size" placeholder="party_size"
                                     value="{{ $reservation->party_size }}" name="party_size">
@@ -126,9 +115,9 @@
                                     <thead class="">
                                         <tr>
                                             <th style="width: 25%">Tables</th>
-                                            <th style="width: 25%"> start date</th>
-                                            <th style="width: 25%"> end date</th>
-
+                                            <th style="width: 22%"> Start Date</th>
+                                            <th style="width: 22%"> End Date</th>
+                                            <th style="width: 25%">Reservation Time</th>
                                             <th></th>
 
                                         </tr>
@@ -145,7 +134,7 @@
                             @foreach ($details as $detail)
                                 @if ($reservation->id == $detail->reservation_id)
                                     <div class="row mt-2">
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <select class="form-control selectpicker" id="table_id"
                                                 name="List[{{ $no }}][table_id]" data-live-search="true">
                                                 <option value="">select Table</option>
@@ -183,6 +172,20 @@
                                                     name="List[{{ $no }}][occupancy_end_date]"
                                                     value="{{ $detail->occupancy_end_date }}" class="form-control"
                                                     placeholder="End Date">
+                                                @error('List')
+                                                    <div class="alert alert-danger">
+                                                        {{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="time" onchange="getTotal()" id="reservation_time"
+                                                    step="any" min="0"
+                                                    name="List[{{ $no }}][reservation_time]"
+                                                    value="{{ $detail->reservation_time }}" class="form-control"
+                                                    placeholder="Time">
                                                 @error('List')
                                                     <div class="alert alert-danger">
                                                         {{ $message }}</div>
