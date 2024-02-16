@@ -66,18 +66,22 @@
 
                     </div>
                 </div>
+                @php
+                    $total = 0;
+                @endphp
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="copy-print-csv" class="table custom-table">
+                        <table id="copy-print-sales" class="table custom-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Date</th>
                                     <th>Item</th>
                                     <th>Quantity</th>
-                                    <th>Total Amount</th>
+                                    <th>Total </th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($orderItems as $index => $orderItem)
                                     <tr>
@@ -87,53 +91,37 @@
                                         <td>{{ $orderItem->total_quantity }}</td>
                                         <td>{{ $orderItem->sub_total }}</td>
                                     </tr>
+                                    @php
+                                        $total += $orderItem->sub_total;
+                                    @endphp
                                 @endforeach
 
                             </tbody>
-
+                            <tr>
+                                <td colspan="4" style="text-align: right;"><strong>Total Amount:</strong></td>
+                                <td> <strong>{{ $total }}</strong></td>
+                            </tr>
                         </table>
                     </div>
+
                 </div>
+
             </div>
         </div>
     </div>
-    <script>
-        var monthText = 'Employees information report';
-        $(document).ready(function() {
-            var table = $('#copy-print-csv').DataTable({
+    {{-- <script>
+        $(function() {
+            $('#copy-print').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    {
-                        extend: 'print',
-                        title: function () {
-                            return monthText;
-                        },
-                        customize: function(win) {
-                            $(win.document.body).find('h1').text(monthText);
-                        }
-                    },
-                    {
-                        extend: 'copyHtml5',
-                        title: function () {
-                            return monthText;
-                        }
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        title: function () {
-                            return monthText;
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        title: function () {
-                            return monthText;
-                        },
-                        orientation: 'landscape'
-                    }
-                ]
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5',
+                    'print'
+                ],
+                'iDisplayLength': 10,
             });
         });
-    </script>
-    
+    </script> --}}
 @endsection

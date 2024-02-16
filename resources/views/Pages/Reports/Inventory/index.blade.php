@@ -68,7 +68,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="copy-print-csv" class="table custom-table">
+                        <table id="copy-print-inventory" class="table custom-table">
                             <thead>
                                 <tr>
                                     <th>Supply Item</th>

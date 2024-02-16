@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../../../img/favicon.svg" />
 
     <!-- Title -->
-    <title>Bootstrap Admin Dashboard - Dashboard</title>
+    <title>Restaurant management system</title>
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="../../../css/bootstrap.min.css">

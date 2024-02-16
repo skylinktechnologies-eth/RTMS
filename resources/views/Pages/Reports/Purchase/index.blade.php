@@ -62,9 +62,12 @@
                         </form>
                     </div>
                 </div>
+                @php
+                $total = 0;
+            @endphp
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="copy-print-csv" class="table custom-table">
+                        <table id="copy-print-purchase" class="table custom-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -85,8 +88,16 @@
                                         <td>{{ number_format($supplyOrderItem->average_price, 2) }}</td>
                                         <td>{{ number_format($supplyOrderItem->total, 2) }}</td>
                                     </tr>
+                                    @php
+                                    $total += $supplyOrderItem->total;
+                                @endphp
                                 @endforeach
+                               
                             </tbody>
+                             <tr>
+                                    <td colspan="5" style="text-align: right;"><strong>Total Amount:</strong></td>
+                                    <td> <strong>{{ $total }}</strong></td>
+                                </tr>
                         </table>
                     </div>
                 </div>

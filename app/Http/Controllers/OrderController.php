@@ -64,7 +64,7 @@ class OrderController extends Controller
         }
         $interaction = new OrderInteraction();
         $interaction->order_id = $order->id;
-        $interaction->waitstaff_id = 1;
+        $interaction->waitstaff_id = Auth::id();
         $interaction->interaction_date = $order->order_date;
         $interaction->interaction_type = 'Order Placed';
         $interaction->save();

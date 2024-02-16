@@ -26,6 +26,146 @@ $(function(){
 	});
 });
 
+$(function(){
+    $('#copy-print-sales').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                title: 'Sales Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Sales Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Sales Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Sales Report',
+                customize: function(doc) {
+                    // Find the table element in the PDFMake definition
+                    var table = doc.content[1].table;
+
+                    // Center align content
+                    table.widths = Array(table.body[0].length + 1).join('*').split('');
+                    table.body.forEach(row => {
+                        row.forEach(cell => {
+                            cell.alignment = 'center';
+                        });
+                    });
+
+                    // Increase font size
+                    table.body[0].forEach(cell => {
+                        cell.fontSize = 14;
+                    });
+                }
+            },
+            {
+                extend: 'print',
+                title: 'Sales Report'
+            }
+        ],
+        iDisplayLength: 10,
+        title: 'Sales Report', // Set the default DataTables title
+    });
+});
+
+$(function(){
+    $('#copy-print-purchase').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                title: 'Purchase Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Purchase Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Purchase Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Purchase Report',
+                customize: function(doc) {
+                    // Find the table element in the PDFMake definition
+                    var table = doc.content[1].table;
+
+                    // Center align content
+                    table.widths = Array(table.body[0].length + 1).join('*').split('');
+                    table.body.forEach(row => {
+                        row.forEach(cell => {
+                            cell.alignment = 'center';
+                        });
+                    });
+
+                    // Increase font size
+                    table.body[0].forEach(cell => {
+                        cell.fontSize = 14;
+                    });
+                }
+            },
+            {
+                extend: 'print',
+                title: 'Purchase Report'
+            }
+        ],
+        iDisplayLength: 10,
+        title: 'Purchase Report', // Set the default DataTables title
+    });
+});
+$(function(){
+    $('#copy-print-inventory').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                title: 'Inventory Report'
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'Inventory Report'
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'Inventory Report'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Inventory Report',
+                customize: function(doc) {
+                    // Find the table element in the PDFMake definition
+                    var table = doc.content[1].table;
+
+                    // Center align content
+                    table.widths = Array(table.body[0].length + 1).join('*').split('');
+                    table.body.forEach(row => {
+                        row.forEach(cell => {
+                            cell.alignment = 'center';
+                        });
+                    });
+
+                    // Increase font size
+                    table.body[0].forEach(cell => {
+                        cell.fontSize = 14;
+                    });
+                }
+            },
+            {
+                extend: 'print',
+                title: 'Inventory Report'
+            }
+        ],
+        iDisplayLength: 10,
+        title: 'Inventory Report', // Set the default DataTables title
+    });
+});
+
 
 // Fixed Header
 $(document).ready(function(){

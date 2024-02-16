@@ -118,21 +118,26 @@
                                                                 @csrf
 
                                                                 <div class="row">
-                                                                    <div class="col-sm-4 col-4">
+                                                                    <div class="col-sm-3 col-2">
                                                                         <div class="form-group">
                                                                             <label for="exampleInputCity1">Table</label>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-sm-4 col-4">
+                                                                    <div class="col-sm-3 col-3">
                                                                         <div class="form-group">
                                                                             <label for="exampleInputCity1">Occupacy Start
                                                                                 date</label>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-sm-4 col-4">
+                                                                    <div class="col-sm-3 col-3">
                                                                         <div class="form-group">
                                                                             <label for="exampleInputCity1">Occupacy End
                                                                                 date</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-2 col-2">
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputCity1">Reservation Time</label>
                                                                         </div>
                                                                     </div>
 
@@ -143,37 +148,19 @@
                                                                 @foreach ($details as $detail)
                                                                     @if ($detail->reservation_id == $detailId)
                                                                         <div class="row">
-                                                                            <div class="col-sm-4 col-4">
-                                                                                <div class="form-group">
-
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="category_name" name="item_id"
-                                                                                        value=" {{ $detail->table->table_name }}"
-                                                                                        placeholder="Category Name"style="border-block-color: white;border-color:white">
-                                                                                </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <p> {{ $detail->table->table_name }}</p>
+                                                                   
                                                                             </div>
-                                                                            <div class="col-sm-4 col-4">
-                                                                                <div class="form-group">
-
-                                                                                    <input type="text"
-                                                                                        class="form-control" id="quantity"
-                                                                                        name="quantity[]"
-                                                                                        value="  {{ $detail->occupancy_start_date }}"
-                                                                                        placeholder="Category Name"
-                                                                                        style="border-block-color: white;border-color:white">
-                                                                                </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                      <p>{{ $detail->occupancy_start_date }}</p>
                                                                             </div>
-                                                                            <div class="col-sm-4 col-4">
-                                                                                <div class="form-group">
-
-                                                                                    <input type="text"
-                                                                                        class="form-control" id="price"
-                                                                                        name="price[]"
-                                                                                        value="   {{ $detail->occupancy_end_date }}"
-                                                                                        placeholder="Category Name"
-                                                                                        style="border-block-color: white;border-color:white">
-                                                                                </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <p> {{ $detail->occupancy_end_date }}</p>
+                                                                             
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-3">
+                                                                        <p> {{ $detail->reservation_time }}</p>
                                                                             </div>
 
                                                                         </div>

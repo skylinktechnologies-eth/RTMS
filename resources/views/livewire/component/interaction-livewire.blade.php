@@ -146,6 +146,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 @php
                                                     $total = 0;
                                                 @endphp
