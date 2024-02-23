@@ -26,6 +26,10 @@ class Item extends Model
     {
         return $this->hasMany(IssuingItem::class, 'item_id');
     }
+    public function disposingItem()
+    {
+        return $this->hasMany(DisposingItem::class, 'item_id');
+    }
     public function inventory()
     {
         return $this->hasMany(Inventory::class, 'item_id');

@@ -78,6 +78,9 @@
                     $uniqueOrderItem->status == 'Preparing' ||
                     ($uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close'))
               
+             
+
+
                 <div class="col-lg-2 col-sm-4">
                     <div class="card" >
                         <div class="card-header bg-primary" style="color:white">

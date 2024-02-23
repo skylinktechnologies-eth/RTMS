@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DisposeController;
 use App\Http\Controllers\IssuingController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\KitchenController;
@@ -193,6 +194,15 @@ Route::controller(IssuingController::class)->group(function () {
     Route::post('issuing-store', 'store')->name('issuing.store');
     Route::put('issuing-update/{id}', 'update')->name('issuing.update');
     Route::delete('issuing-delete/{id}', 'destroy')->name('issuing.destroy');
+});
+//Issuing
+Route::controller(DisposeController::class)->group(function () {
+    Route::get('disposing', 'index')->name('disposing.index');
+    Route::get('disposing-create', 'create')->name('disposing.create');
+    Route::get('disposing-edit/{id}', 'edit')->name('disposing.edit');
+    Route::post('disposing-store', 'store')->name('disposing.store');
+    Route::put('disposing-update/{id}', 'update')->name('disposing.update');
+    Route::delete('disposing-delete/{id}', 'destroy')->name('disposing.destroy');
 });
 //kitchen
 Route::controller(KitchenController::class)->group(function () {

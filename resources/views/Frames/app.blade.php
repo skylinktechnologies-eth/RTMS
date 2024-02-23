@@ -273,6 +273,14 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('issuing-list')
+                            <li>
+                                <a href="/disposing">
+                                    <i class="icon-documents"></i>
+                                    <span class="menu-text">Disposing</span>
+                                </a>
+                            </li>
+                        @endcan
 
                         @if ($reportList)
                             <li class="header-menu">Reports</li>
