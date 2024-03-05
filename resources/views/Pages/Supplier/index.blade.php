@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Purchase</li>
+            <li class="breadcrumb-item">Maintain</li>
             <li class="breadcrumb-item active">Supplier</li>
         </ol>
 
@@ -13,17 +13,7 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
+           
         </ul>
     </div>
 
@@ -73,18 +63,18 @@
                                                 <label for="exampleInputCity1"> Name</label>
                                                 <input type="text" class="form-control" id="supplier_name"
                                                     name="supplier_name" placeholder="supplier Name"
-                                                    value="{{ old('supplier_name') }}">
+                                                    value="{{ old('supplier_name') }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputCity1"> Contact number</label>
                                                 <input type="number" class="form-control" id="contact_number"
                                                     name="contact_number" placeholder="Contact Number"
-                                                    value="{{ old('contact_number') }}">
+                                                    value="{{ old('contact_number') }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputCity1"> Address</label>
                                                 <input type="text" class="form-control" id="address" name="address"
-                                                    placeholder="address" value="{{ old('address') }}">
+                                                    placeholder="address" value="{{ old('address') }}" required>
                                             </div>
 
 
@@ -189,20 +179,20 @@
                                                                 <input type="text" class="form-control"
                                                                     id="supplier_name" name="supplier_name"
                                                                     placeholder="supplier Name"
-                                                                    value="{{ $supplier->supplier_name }}">
+                                                                    value="{{ $supplier->supplier_name }}" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputCity1"> Contact number</label>
                                                                 <input type="number" class="form-control"
                                                                     id="contact_number" name="contact_number"
                                                                     placeholder="Contact Number"
-                                                                    value="{{ $supplier->contact_number }}">
+                                                                    value="{{ $supplier->contact_number }}" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exampleInputCity1"> Address</label>
                                                                 <input type="text" class="form-control" id="address"
                                                                     name="address" placeholder="address"
-                                                                    value="{{ $supplier->address }}">
+                                                                    value="{{ $supplier->address }}" required>
                                                             </div>
                                                         </div>
 

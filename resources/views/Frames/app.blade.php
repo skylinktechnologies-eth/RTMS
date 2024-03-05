@@ -43,7 +43,6 @@
     <link rel="stylesheet" href="../../../vendor/jqcloud/jqcloud.css" />
 
     <style>
-       
         .sidebar-content {
             overflow-y: auto;
             height: 100%;
@@ -137,7 +136,7 @@
                         @if ($userList || $roleList || Auth::user()->hasRole('Admin'))
                             <li class="sidebar-dropdown">
                                 <a href="#">
-                                    <i class="icon-rate_review"></i>
+                                    <i class="icon-layers"></i>
                                     <span class="menu-text">User Managment</span>
                                 </a>
                                 <div class="sidebar-submenu">
@@ -216,7 +215,7 @@
                         @can('kitchen-list')
                             <li>
                                 <a href="/kitchen  ">
-                                    <i class="icon-add-user"></i>
+                                    <i class="icon-cake"></i>
                                     <span class="menu-text"> kitchen </span>
                                 </a>
                             </li>
@@ -276,7 +275,7 @@
                         @can('issuing-list')
                             <li>
                                 <a href="/disposing">
-                                    <i class="icon-documents"></i>
+                                    <i class="icon-round-brush"></i>
                                     <span class="menu-text">Disposing</span>
                                 </a>
                             </li>
@@ -287,7 +286,7 @@
                             @can('report-manage')
                                 <li>
                                     <a href="/report  ">
-                                        <i class="icon-add-user"></i>
+                                        <i class="icon-report"></i>
                                         <span class="menu-text"> Report </span>
                                     </a>
                                 </li>
@@ -326,48 +325,21 @@
                         <li class="dropdown">
                             <a href="#" id="notifications" data-toggle="dropdown" aria-haspopup="true">
                                 <i class="icon-bell"></i>
-                                <span class="count-label">8</span>
+                                <span class="count-label">0</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right lrg" aria-labelledby="notifications">
                                 <div class="dropdown-menu-header">
-                                    Notifications (40)
+                                    Notifications
                                 </div>
                                 <ul class="header-notifications">
                                     <li>
-                                        <a href="#">
-                                            <div class="user-img away">
-                                                <img src="img/user10.png" alt="Bootstrap Admin Panel">
-                                            </div>
-                                            <div class="details">
-                                                <div class="user-title">Abbott</div>
-                                                <div class="noti-details">Membership has been ended.</div>
-                                                <div class="noti-date">Today, 07:30 pm</div>
-                                            </div>
-                                        </a>
+
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <div class="user-img busy">
-                                                <img src="img/user10.png" alt="Admin Panel">
-                                            </div>
-                                            <div class="details">
-                                                <div class="user-title">Braxten</div>
-                                                <div class="noti-details">Approved new design.</div>
-                                                <div class="noti-date">Today, 12:00 am</div>
-                                            </div>
-                                        </a>
+
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <div class="user-img online">
-                                                <img src="img/user6.png" alt="Admin Template">
-                                            </div>
-                                            <div class="details">
-                                                <div class="user-title">Larkyn</div>
-                                                <div class="noti-details">Check out every table in detail.</div>
-                                                <div class="noti-date">Today, 04:00 pm</div>
-                                            </div>
-                                        </a>
+
                                     </li>
                                 </ul>
                             </div>
@@ -529,6 +501,11 @@
     <script>
         setTimeout(function() {
             document.getElementById('warning-alert').style.display = 'none';
+        }, 5000);
+    </script>
+      <script>
+        setTimeout(function() {
+            document.getElementById('error-alert').style.display = 'none';
         }, 5000);
     </script>
 

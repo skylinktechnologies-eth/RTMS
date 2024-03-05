@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-
+            <li class="breadcrumb-item">Register</li>
             <li class="breadcrumb-item active">Menu Item/Edit</li>
         </ol>
 
@@ -11,17 +11,6 @@
                 <a href="#" id="reportrange">
                     <span class="range-text"></span>
                     <i class="icon-chevron-down"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
                 </a>
             </li>
         </ul>
@@ -48,7 +37,7 @@
         <div class="card rounded-3 px-3  " style="height: 450px;">
             <div class="card-header bg-primary rounded-3" style="margin-top: -10px;color:#fff">
                 <div style="display: flex; justify-content: space-between;">
-                    <strong> Create Product Menu  </strong>
+                    <strong> Create Product Menu </strong>
                     <a href="{{ route('menuItem.index') }}" class="text-white"><i class="fas fa-arrow-left"></i>
                         Back</a>
                 </div>
@@ -60,7 +49,7 @@
                     <div class="form-group">
                         <label for="exampleInputName1"> Category Name</label>
                         <select class="form-control selectpicker" id="category_id" name="category_id"
-                        data-live-search="true">
+                            data-live-search="true">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"
                                     {{ old('category_id', $item->category_id) == $category->id ? 'selected' : '' }}>
@@ -76,7 +65,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Item Name</label>
                         <input type="text" class="form-control" id="item_name" name="item_name"
-                            value="{{ $item->item_name }}" placeholder="">
+                            value="{{ $item->item_name }}" placeholder="" required>
                         @error('item_name')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>
@@ -90,8 +79,8 @@
                     </div>
                     <div class="form-group">
                         <label for="contact_name">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" value="{{ $item->price }}"
-                            placeholder="">
+                        <input type="text" class="form-control" id="price" name="price"
+                            value="{{ $item->price }}" placeholder="" required>
                         @error('price')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>
@@ -99,19 +88,13 @@
                     </div>
 
                     <div class="col-xl-12 pt-3 text-center ">
-                        <button type="submit" id="submit" name="submit"
-                            class="btn btn-primary ">Submit
+                        <button type="submit" id="submit" name="submit" class="btn btn-primary ">Submit
                             Form</button>
                     </div>
                 </form>
             </div>
-        </div> 
+        </div>
 
-        
+
     </div>
 @endsection
-
-
-
-
-

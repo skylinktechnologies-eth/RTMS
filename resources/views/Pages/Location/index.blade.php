@@ -13,17 +13,6 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -47,7 +36,23 @@
             </div>
         @endif
 
+        @if (session('danger'))
+        <div class="row">
 
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+                <div class="alert alert-danger px-3" id="danger-alert">
+
+                    {{ session('danger') }}
+                </div>
+            </div>
+        </div>
+    @endif
         <div class="row gutters">
             <div class="col-sm-12">
                 <div class="text-right mb-3">
@@ -75,7 +80,7 @@
                                                 <label for="exampleInputCity1">Location Name</label>
                                                 <input type="text" class="form-control" id="location_name"
                                                     name="location_name" placeholder="Location Name"
-                                                    value="{{ old('location_name') }}">
+                                                    value="{{ old('location_name') }}" required>
                                             </div>
 
 
@@ -173,7 +178,7 @@
                                                                 <input type="text" class="form-control"
                                                                     id="location_name" name="location_name"
                                                                     value="{{ $location->location_name }}"
-                                                                    placeholder="Table Name">
+                                                                    placeholder="Table Name" required>
                                                             </div>
                                                         </div>
 

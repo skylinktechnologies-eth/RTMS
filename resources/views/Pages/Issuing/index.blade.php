@@ -5,7 +5,6 @@
             <li class="breadcrumb-item">Issuing</li>
             <li class="breadcrumb-item active">Issuing </li>
         </ol>
-
         <ul class="app-actions">
             <li>
                 <a href="#" id="reportrange">
@@ -13,37 +12,17 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
-
     <div class="main-container">
-
-
-
-
         @if (session('success'))
             <div class="row">
-
                 <div class="col-md-4">
-
                 </div>
                 <div class="col-md-4">
-
                 </div>
                 <div class="col-md-4">
                     <div class="alert alert-success px-3" id="success-alert">
-
                         {{ session('success') }}
                     </div>
                 </div>
@@ -57,7 +36,6 @@
                         <a href="{{ route('issuing.create') }}" type="button" class="btn btn-primary">Add New
                             Issuing </a>
                     @endcan
-
                 </div>
             </div>
         </div>
@@ -75,7 +53,6 @@
                                     <th>Item</th>
                                     <th> Total Quantity</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +61,6 @@
                                 @endphp
                                 @php
                                     $groupedIssuedItems = [];
-
                                     foreach ($issuingItems as $issuingItem) {
                                         $issuingId = $issuingItem->issuing->id;
 
@@ -192,9 +168,6 @@
                                             </div>
                                         </div>
                                         <td>{{ $total }}</td>
-
-
-
                                         <!-- Display action buttons -->
                                         <td>
                                             <div class="d-flex">
@@ -216,15 +189,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-
-
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

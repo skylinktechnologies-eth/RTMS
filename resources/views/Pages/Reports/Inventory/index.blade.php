@@ -32,20 +32,20 @@
                        
                         <li class="nav-item">
                             <a href="{{ route('report.index') }}" aria-expanded="true" class="nav-link ">
-                                <span class="d-inline-block d-sm-none"><i class="mdi mdi-account"></i></span>
+                                <span class="d-inline-block d-sm-none"><i class="icon-show_chart "></i></span>
                                 <span class="d-none d-sm-inline-block">Sales</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('report.purchase') }}" aria-expanded="false" class="nav-link ">
-                                <span class="d-inline-block d-sm-none"><i class="mdi mdi-home-variant"></i></span>
+                                <span class="d-inline-block d-sm-none"><i class="icon-activity"></i></span>
                                 <span class="d-none d-sm-inline-block">Purchase</span>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('report.inventory') }}" aria-expanded="true" class="nav-link active">
-                                <span class="d-inline-block d-sm-none"><i class="mdi mdi-email-variant"></i></span>
+                                <span class="d-inline-block d-sm-none"><i class="icon-check2"></i></span>
                                 <span class="d-none d-sm-inline-block">Inventory</span>
                             </a>
                         </li>

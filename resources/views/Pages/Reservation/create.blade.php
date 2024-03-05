@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item">Reservation</li>
             <li class="breadcrumb-item active">Reservation/Create</li>
         </ol>
 
@@ -11,17 +11,6 @@
                 <a href="#" id="reportrange">
                     <span class="range-text"></span>
                     <i class="icon-chevron-down"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
                 </a>
             </li>
         </ul>
@@ -62,7 +51,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Reservation Date</label>
                                 <input type="date" class="form-control" id="reservation_date"
-                                    name="reservation_date" placeholder="reservation date" value="{{ old('reservation_date') }}">
+                                    name="reservation_date" placeholder="reservation date" value="{{ old('reservation_date') }}" required>
                                 @error('reservation_date')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -74,7 +63,7 @@
                             <div class="form-group">
                                 <label for="party_size">Number of Customer</label>
                                 <input type="number" class="form-control" id="party_size"
-                                    placeholder="no of customer" name="party_size" value="{{ old('party_size') }}">
+                                    placeholder="no of customer" name="party_size" value="{{ old('party_size') }}" required>
                                 @error('party_size')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -87,7 +76,7 @@
                             <div class="form-group">
                                 <label for="contact_name">Contact Name</label>
                                 <input type="text" class="form-control" id="contact_name"
-                                    name="contact_name" placeholder="contact name" value="{{ old('contact_name') }}">
+                                    name="contact_name" placeholder="contact name" value="{{ old('contact_name') }}" required>
                                 @error('contact_name')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -98,7 +87,7 @@
                             <div class="form-group">
                                 <label for="contact_number">Contact Number</label>
                                 <input type="text" class="form-control" id="contact_number"
-                                    name="contact_number" placeholder="contact number" value="{{ old('contact_number') }}">
+                                    name="contact_number" placeholder="contact number" value="{{ old('contact_number') }}" required>
 
                                 @error('contact_number')
                                     <div class="alert alert-danger">
@@ -132,7 +121,7 @@
 
                                 <div class="col-md-2">
                                     <select class="form-control selectpicker" id="table_id"
-                                        name="table_id[]" data-live-search="true">
+                                        name="table_id[]" data-live-search="true" required>
                                         <option value="">select Table</option>
                                         @foreach ($tables as $table)
                                             <option value="{{ $table->id }}" >
@@ -146,7 +135,7 @@
                                         <input type="date" onchange="getTotal()"
                                             id="occupancy_start_date" step="any" min="0"
                                             name="occupancy_start_date[]" class="form-control"
-                                            placeholder="Start Date" >
+                                            placeholder="Start Date" required >
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -154,7 +143,7 @@
                                         <input type="date" onchange="getTotal()"
                                             id="occupancy_end_date" step="any" min="0"
                                             name="occupancy_end_date[]" class="form-control"
-                                            placeholder="End Date">
+                                            placeholder="End Date" required>
                                     </div>
 
                                 </div>
@@ -163,7 +152,7 @@
                                         <input type="time" onchange="getTotal()"
                                             id="reservation_time" step="any" min="0"
                                             name="reservation_time[]" class="form-control"
-                                            placeholder="Time">
+                                            placeholder="Time" required>
                                     </div>
 
                                 </div>

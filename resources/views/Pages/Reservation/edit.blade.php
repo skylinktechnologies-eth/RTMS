@@ -2,8 +2,8 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Tables</li>
-            <li class="breadcrumb-item active">Reservation/Create</li>
+            <li class="breadcrumb-item">Reservation</li>
+            <li class="breadcrumb-item active">Reservation/Edit</li>
         </ol>
 
         <ul class="app-actions">
@@ -11,17 +11,6 @@
                 <a href="#" id="reportrange">
                     <span class="range-text"></span>
                     <i class="icon-chevron-down"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
                 </a>
             </li>
         </ul>
@@ -63,7 +52,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Reservation Date</label>
                                 <input type="date" class="form-control" id="reservation_date" name="reservation_date"
-                                    value="{{ $reservation->reservation_date }}" placeholder="reservation_date">
+                                    value="{{ $reservation->reservation_date }}" placeholder="reservation_date" required>
                                 @error('reservation_date')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -74,7 +63,7 @@
                             <div class="form-group">
                                 <label for="party_size">Party Size</label>
                                 <input type="number" class="form-control" id="party_size" placeholder="party_size"
-                                    value="{{ $reservation->party_size }}" name="party_size">
+                                    value="{{ $reservation->party_size }}" name="party_size" required>
                                 @error('party_size')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -87,7 +76,7 @@
                             <div class="form-group">
                                 <label for="contact_name">Contact Name</label>
                                 <input type="text" class="form-control" id="contact_name" name="contact_name"
-                                    placeholder="contact_name" value="{{ $reservation->contact_name }}">
+                                    placeholder="contact_name" value="{{ $reservation->contact_name }}" required>
                                 @error('contact_name')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -98,7 +87,7 @@
                             <div class="form-group">
                                 <label for="contact_number">Contact Number</label>
                                 <input type="text" class="form-control" id="contact_number" name="contact_number"
-                                    placeholder="contact_number" value="{{ $reservation->contact_number }}">
+                                    placeholder="contact_number" value="{{ $reservation->contact_number }}" required>
 
                                 @error('contact_number')
                                     <div class="alert alert-danger">
@@ -136,7 +125,7 @@
                                     <div class="row mt-2">
                                         <div class="col-md-2">
                                             <select class="form-control selectpicker" id="table_id"
-                                                name="List[{{ $no }}][table_id]" data-live-search="true">
+                                                name="List[{{ $no }}][table_id]" data-live-search="true" required>
                                                 <option value="">select Table</option>
                                                 @foreach ($tables as $table)
                                                     <option value="{{ $table->id }}"
@@ -157,7 +146,7 @@
                                                     step="any" min="0"
                                                     name="List[{{ $no }}][occupancy_start_date]"
                                                     value="{{ $detail->occupancy_start_date }}" class="form-control"
-                                                    placeholder="Start Date">
+                                                    placeholder="Start Date" required>
 
                                                 @error('List')
                                                     <div class="alert alert-danger">
@@ -171,7 +160,7 @@
                                                     step="any" min="0"
                                                     name="List[{{ $no }}][occupancy_end_date]"
                                                     value="{{ $detail->occupancy_end_date }}" class="form-control"
-                                                    placeholder="End Date">
+                                                    placeholder="End Date" required>
                                                 @error('List')
                                                     <div class="alert alert-danger">
                                                         {{ $message }}</div>
@@ -185,7 +174,7 @@
                                                     step="any" min="0"
                                                     name="List[{{ $no }}][reservation_time]"
                                                     value="{{ $detail->reservation_time }}" class="form-control"
-                                                    placeholder="Time">
+                                                    placeholder="Time" required>
                                                 @error('List')
                                                     <div class="alert alert-danger">
                                                         {{ $message }}</div>

@@ -90,6 +90,11 @@ class WaitstaffController extends Controller
     }
     public function destroy(String $id)
     {
+        $details = WaitstaffAssignment::where('waitstaff_id', $id)->get();
+
+        foreach ($details as $detail) {
+            $detail->delete();
+        }
         $waitstaff = Waitstaff::find($id);
         $waitstaff->delete();
         return back()->with('success', 'Waitstaff delete successfully!');

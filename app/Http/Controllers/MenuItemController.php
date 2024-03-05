@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\MenuItem;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuItemController extends Controller
 {
@@ -67,7 +69,6 @@ class MenuItemController extends Controller
         $request->validate([
             'category_id' => 'required',
             'item_name' => 'required',
-
             'price' => 'required'
         ]);
 
@@ -86,8 +87,23 @@ class MenuItemController extends Controller
     }
     public function destroy(String $id)
     {
-        $menItem = MenuItem::find($id);
-        $menItem->delete();
-        return back()->with('success', 'Menu Item delete successfully!');
+        try {
+           
+            $relatedCount = DB::table('order_items')->where('menu_item_id', $id)->count();
+           
+            if ($relatedCount === 0) {
+             
+                $menItem = MenuItem::find($id);
+                $menItem->delete();
+                 return redirect()->back();
+            } else {
+              
+                return back()->with('danger', 'Cannot delete  Menu Item  with related data');
+            }
+        } catch (QueryException $e) {
+        
+        }
+       
+     
     }
 }

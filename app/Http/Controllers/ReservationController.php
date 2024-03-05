@@ -111,15 +111,11 @@ class ReservationController extends Controller
     {
 
         $request->validate([
-
-
             'reservation_date' => 'required',
             'party_size' => 'required',
             'contact_name' => 'required',
             'contact_number' => 'required',
             'List' => 'required'
-
-
         ]);
 
         $reservations =  Reservation::find($id);

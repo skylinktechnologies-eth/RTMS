@@ -14,17 +14,7 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
+           
         </ul>
     </div>
     <div class="main-container">
@@ -61,7 +51,7 @@
                     <div class="form-group">
                         <label for="exampleInputName1"> Table Name</label>
                         <select class="form-control selectpicker" id="item_category_id" name="item_category_id"
-                        data-live-search="true">
+                        data-live-search="true" required>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"  {{ old('table_id', $items->item_category_id) == $category->id ? 'selected' : '' }}>
                                     {{ $category->item_category_name }}</option>
@@ -76,7 +66,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Item Name</label>
                         <input type="text" class="form-control" id="item_name" name="item_name" value="{{ $items->item_name }}"
-                            placeholder="item_name">
+                            placeholder="item_name" required>
                         @error('item_name')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>
@@ -85,7 +75,7 @@
                     <div class="form-group">
                         <label for="unit_of_measure">Unit Of Measure</label>
                         <input type="text" class="form-control" id="unit_of_measure" placeholder="unit_of_measure" value="{{ $items->unit_of_measure }}"
-                            name="unit_of_measure">
+                            name="unit_of_measure" required>
                         @error('unit_of_measure')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>
@@ -94,7 +84,7 @@
                     <div class="form-group">
                         <label for="contact_name">Price</label>
                         <input type="number" class="form-control" id="price" name="price"  value="{{ $items->price }}"
-                            placeholder="contact_name">
+                            placeholder="contact_name" required>
                         @error('price')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>

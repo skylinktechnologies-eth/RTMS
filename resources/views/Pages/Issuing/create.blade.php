@@ -13,31 +13,15 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="main-container">
-
-
         <div class="container-fluid">
             @if (session('success'))
                 <div class="row">
-
                     <div class="col-md-4">
-
                     </div>
                     <div class="col-md-4">
-
                     </div>
                     <div class="col-md-4">
                         <div class="alert alert-success px-3" id="success-alert">
@@ -48,13 +32,10 @@
                 </div>
             @endif
             <!-- start page title -->
-
             <div class="col-12">
-
             </div>
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="table-container">
                             <div class="t-header">purchase Product</div>
@@ -65,14 +46,12 @@
                                             <th>No</th>
                                             <th>Item </th>
                                             <th> Total Quantity</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php
                                         $no = 0;
                                     @endphp
-
                                         @foreach ($inventories as $inventory)
                                             @php
                                                 $no = $no + 1;
@@ -87,19 +66,13 @@
                                                         {{ $inventory->purchased_quantity - $inventory->issued_quantity }}
                                                     </td>
                                                 </tr>
-                                           
                                         @endforeach
-
-
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                     <div class="card">
-
                         <div class="card-header border-bottom bg-transparent">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -110,10 +83,7 @@
                                 </div>
 
                             </div>
-
-
                         </div>
-
                         <div class="card-body">
                             <form method="POST" action="{{ route('issuing.store') }}">
                                 @csrf
@@ -259,14 +229,8 @@
                     </div>
                 </div>
                 <!-- end card -->
-
             </div>
-
         </div>
-
-
-
-
     </div>
     <!-- Include this script in your HTML file -->
     <script>
@@ -287,62 +251,50 @@
             }
         }
 
-        // Replace this function with your logic to get the inventory quantity based on the selected item
         function getInventoryQuantity(itemId) {
-            // Your logic to fetch the inventory quantity based on the selected item
-            // Replace this with your actual logic
-            // Example: return inventoryQuantity[selectedItemId];
+           
             return 100; // Replace with the actual inventory quantity for the selected item
         }
     </script>
-
-
-    <!-- Add the following script to your HTML file -->
+  
     <script>
-        var i = 0; // Initialize i
+        var i = 0; 
         function addList() {
-            // Get the selected item and its details
+           
             var itemId = document.getElementById('item_id').value;
             var itemName = document.getElementById('item_id').options[document.getElementById('item_id').selectedIndex]
                 .text;
             var quantity = parseFloat(document.getElementById('quantity').value);
 
-            // Get the table body
             var tableBody = document.getElementById('itemList').getElementsByTagName('tbody')[0];
 
-            // Create a new row for the item
             var newRow = tableBody.insertRow();
 
-            // Insert cells into the new row
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
             var cell3 = newRow.insertCell(2);
 
-            // Set the content of each cell
             cell1.innerHTML = itemName;
             cell2.innerHTML = quantity;
             cell3.innerHTML = '<a class="btn btn-danger" onclick="removeRow(this)"><i class="icon-minus"></i></a>' +
                 '<input type="hidden" name="item_list[' + i + '][item_id]" value="' + itemId + '">' +
                 '<input type="hidden" name="item_list[' + i + '][quantity]" value="' + quantity + '">';
 
-            // Increment i for the next iteration
             i++;
 
-            // Update the summary
             updateSummary();
         }
 
         function removeRow(btn) {
-            // Remove the row when clicking the minus sign
+            
             var row = btn.parentNode.parentNode;
             row.parentNode.removeChild(row);
 
-            // Update the summary
             updateSummary();
         }
 
         function updateSummary() {
-            // Calculate and update the subtotal and total values
+           
             var subTotal = 0;
             var rows = document.getElementById('itemList').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -352,7 +304,6 @@
                 subTotal += total;
             }
 
-            // document.getElementById('all_sub').innerText = subTotal;
             document.getElementById('all_total').innerText = subTotal;
             document.getElementById('all_total').value = subTotal;
         }

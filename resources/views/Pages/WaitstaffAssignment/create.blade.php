@@ -13,17 +13,7 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
+           
         </ul>
     </div>
 
@@ -84,7 +74,7 @@
                         <div class="row gutters bg-light mr-2 pb-3 ">
                             <div class="col-6  mt-3">
                                 <select id="table_id" name="table_id" class="form-control selectpicker"
-                                    data-live-search="true">
+                                    data-live-search="true" required>
                                     <option value="">Select Tables</option>
                                     @foreach ($tables as $table)
                                         <option value="{{ $table->id }}">{{ $table->table_name }}</option>

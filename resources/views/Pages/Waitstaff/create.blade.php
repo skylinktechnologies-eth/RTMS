@@ -13,17 +13,6 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="main-container">
@@ -61,7 +50,7 @@
                             <div class="form-group">
                                 <label for="exampleInputName1"> First Name</label>
                                 <input type="text" class="form-control" id="first_name" name="first_name"
-                                    placeholder="first_name ">
+                                    placeholder="first_name " required>
                                 @error('first_name')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -74,7 +63,7 @@
                             <div class="form-group">
                                 <label for="exampleInputName1"> Last Name</label>
                                 <input type="text" class="form-control" id="last_name" name="last_name"
-                                    placeholder="last_name ">
+                                    placeholder="last_name " required>
                                 @error('last_name')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -85,7 +74,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail3"> Contact Number</label>
                                 <input type="text" class="form-control" id="contact_number" name="contact_number"
-                                    placeholder="contact_number ">
+                                    placeholder="contact_number " required>
                                 @error('contact_number')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>
@@ -99,7 +88,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail3"> Hire Date</label>
                                 <input type="date" class="form-control" id="hire_date" name="hire_date"
-                                    placeholder="hire_date ">
+                                    placeholder="hire_date " required>
                                 @error('hire_date')
                                     <div class="alert alert-danger">
                                         {{ $message }}</div>

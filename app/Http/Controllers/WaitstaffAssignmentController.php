@@ -38,7 +38,7 @@ class WaitstaffAssignmentController extends Controller
 
         $assignTable=WaitstaffAssignment::where('table_id',$request->table_id)->get();
       
-        if($assignTable->isNotEmpty()){
+        if($assignTable->isNotEmpty() ){
             return back()->with('danger','Table is already assign!');
         }else{
             $waitstaff= new WaitstaffAssignment();

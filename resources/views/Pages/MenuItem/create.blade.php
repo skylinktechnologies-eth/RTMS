@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-
+            <li class="breadcrumb-item">Register</li>
             <li class="breadcrumb-item active">Menu Item/Create</li>
         </ol>
 
@@ -13,17 +13,7 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
+           
         </ul>
     </div>
     <div class="main-container">
@@ -59,7 +49,7 @@
                     <div class="form-group">
                         <label for="exampleInputName1"> Category Name</label>
                         <select class="form-control selectpicker" id="category_id" name="category_id"
-                            data-live-search="true">
+                            data-live-search="true" required>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
@@ -75,7 +65,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3"> Item Name</label>
                         <input type="text" class="form-control" id="item_name" name="item_name"
-                            placeholder="Item name">
+                            placeholder="Item name" required>
                         @error('item_name')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>
@@ -90,7 +80,7 @@
                     <div class="form-group">
                         <label for="contact_name">Price</label>
                         <input type="number" class="form-control" id="price" name="price"
-                            placeholder="Price">
+                            placeholder="Price" required>
                         @error('price')
                             <div class="alert alert-danger">
                                 {{ $message }}</div>

@@ -13,17 +13,6 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="main-container">
@@ -60,7 +49,7 @@
                         <div class="form-group pt-2">
                             <label for="exampleInputName1"> Category</label>
                             <select class="form-control selectpicker" id="item_category_id" name="item_category_id"
-                                data-live-search="true" >
+                                data-live-search="true" required>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->item_category_name }}</option>
                                 @endforeach
@@ -74,7 +63,7 @@
                         <div class="form-group pt-2">
                             <label for="exampleInputEmail3">Item Name</label>
                             <input type="text" class="form-control" id="item_name"
-                                name="item_name" placeholder="item_name" value="{{ old('item_name') }}">
+                                name="item_name" placeholder="item_name" value="{{ old('item_name') }}" required>
                             @error('item_name')
                                 <div class="alert alert-danger">
                                     {{ $message }}</div>
@@ -83,7 +72,7 @@
                         <div class="form-group pt-2">
                             <label for="party_size">Unit of Measure</label>
                             <input type="text" class="form-control" id="unit_of_measure"
-                                placeholder="unit_of_measure" name="unit_of_measure" value="{{ old('unit_of_measure') }}">
+                                placeholder="unit_of_measure" name="unit_of_measure" value="{{ old('unit_of_measure') }}" required>
                             @error('unit_of_measure')
                                 <div class="alert alert-danger">
                                     {{ $message }}</div>
@@ -94,7 +83,7 @@
                         <div class="form-group pt-2"  >
                             <label for="contact_name">Price</label>
                             <input type="number" class="form-control" id="price" name="price"
-                                placeholder="price" value="{{ old('price') }}">
+                                placeholder="price" value="{{ old('price') }}" required>
                             @error('price')
                                 <div class="alert alert-danger">
                                     {{ $message }}</div>

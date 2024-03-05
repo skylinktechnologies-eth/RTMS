@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Perchase</li>
+            <li class="breadcrumb-item">Purchase</li>
             <li class="breadcrumb-item active">Supplyorders/Create</li>
         </ol>
 
@@ -13,22 +13,9 @@
                     <i class="icon-chevron-down"></i>
                 </a>
             </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="main-container">
-
-
         <div class="container-fluid">
             @if (session('success'))
                 <div class="row">
@@ -50,7 +37,6 @@
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
-
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -60,13 +46,9 @@
                                     <div class="col-lg-6">
                                         <h5 class="header-title mb-0">Create New Orders Form</h5>
                                     </div>
-
                                     <div class="col-lg-4">
                                     </div>
-
                                 </div>
-
-
                             </div>
                             <form method="POST" action="{{ route('purchase.store') }}">
                                 @csrf
@@ -82,7 +64,8 @@
                                                             class="col-sm-1 col-form-label col-form-label-sm">Date</label>
                                                         <div class="col-sm-2">
                                                             <input type="date" name="order_date" class="form-control"
-                                                                value="{{ now()->toDateString() }}" id="order_date">
+                                                                value="{{ now()->toDateString() }}" id="order_date"
+                                                                required>
                                                             @error('order_date')
                                                                 <div class="alert alert-danger">
                                                                     {{ $message }}</div>
@@ -95,7 +78,7 @@
                                                             class="col-sm-1 col-form-label col-form-label-sm">Supplier</label>
                                                         <div class="col-sm-4">
                                                             <select class="form-control selectpicker" id="supplier_id"
-                                                                name="supplier_id" data-live-search="true">
+                                                                name="supplier_id" data-live-search="true" required>
                                                                 <option value="">select </option>
                                                                 @foreach ($suppliers as $supplier)
                                                                     <option value="{{ $supplier->id }}">
@@ -112,11 +95,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                     <div class="mt-2">
                                         <div class="row">
                                             <div class="col-lg-8 mb-2">
@@ -124,8 +104,9 @@
                                                 <div class="card  mt-2">
                                                     <div class="card-body bg-light " style="border-color:white">
                                                         <div class="row ">
-                                                            <div class="col "> <select class="form-control selectpicker"
-                                                                    id="item_id" name="item_id[]" data-live-search="true">
+                                                            <div class="col ">
+                                                                <select class="form-control selectpicker" id="item_id"
+                                                                    name="item_id[]" data-live-search="true" required>
                                                                     <option value="">select Item</option>
                                                                     @foreach ($items as $item)
                                                                         <option value="{{ $item->id }}">
@@ -139,15 +120,21 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="col ">
-                                                                <input type="number"  id="quantity"
-                                                                    step="any" min="0" name="quantity[]" oninput="calculateTotal()"
-                                                                    class="form-control" placeholder="Quantity">
+                                                                <input type="number" id="quantity" step="any"
+                                                                    min="0" name="quantity[]"
+                                                                    oninput="calculateTotal()" class="form-control"
+                                                                    placeholder="Quantity" required>
                                                             </div>
-                                                            <div class="col"> <input type="number" 
-                                                                    id="price" step="any" min="0" oninput="calculateTotal()"
-                                                                    name="price[]" class="form-control"
-                                                                    placeholder="U-Price"></div>
-                                                            <div class="col"> <input type="number" id="total"  class="form-control"  name="total[]" min="0" readonly   placeholder="subTotal"></div>
+                                                            <div class="col">
+                                                                <input type="number" id="price" step="any"
+                                                                    min="0" oninput="calculateTotal()" name="price[]"
+                                                                    class="form-control" placeholder="U-Price" required>
+                                                            </div>
+                                                            <div class="col">
+                                                                <input type="number" id="total" class="form-control"
+                                                                    name="total[]" min="0" readonly
+                                                                    placeholder="subTotal" required>
+                                                            </div>
                                                             <div class="col"> <a class="btn btn-primary"
                                                                     onclick="addList()"><i class="icon-plus"
                                                                         style="color: white"></i></a>
@@ -233,7 +220,7 @@
     </div>
 
     <!-- Add the following script to your HTML file -->
-
+    
     <script>
         function calculateTotal() {
             // Get quantity and price values

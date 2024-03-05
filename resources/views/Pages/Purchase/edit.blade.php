@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">Perchase</li>
+            <li class="breadcrumb-item">Purchase</li>
             <li class="breadcrumb-item active">Supplyorders/edit</li>
         </ol>
 
@@ -11,17 +11,6 @@
                 <a href="#" id="reportrange">
                     <span class="range-text"></span>
                     <i class="icon-chevron-down"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print">
-                    <i class="icon-print"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="Download CSV">
-                    <i class="icon-cloud_download"></i>
                 </a>
             </li>
         </ul>
@@ -48,7 +37,6 @@
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
-
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -64,13 +52,9 @@
 
                                         <div class="col-lg-4">
                                         </div>
-
                                     </div>
-
-
                                 </div>
                                 <div class="card-body">
-
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="row">
@@ -147,26 +131,28 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="col ">
-                                                                        <input type="number" id="quantity{{ $orderItem->id }}" step="any"
-                                                                            min="0"
+                                                                        <input type="number"
+                                                                            id="quantity{{ $orderItem->id }}"
+                                                                            step="any" min="0"
                                                                             name="List[{{ $no }}][quantity]"
                                                                             value="{{ $orderItem->quantity }}"
-                                                                            oninput="calculateTotal('{{ $orderItem->id }}')" class="form-control"
-                                                                            placeholder="Quantity">
+                                                                            oninput="calculateTotal('{{ $orderItem->id }}')"
+                                                                            class="form-control" placeholder="Quantity">
                                                                     </div>
                                                                     <div class="col"> <input type="number"
-                                                                            id="price{{ $orderItem->id }}" step="any" min="0"
+                                                                            id="price{{ $orderItem->id }}" step="any"
+                                                                            min="0"
                                                                             oninput="calculateTotal('{{ $orderItem->id }}')"
                                                                             value="{{ $orderItem->price }}"
                                                                             name="List[{{ $no }}][price]"
                                                                             class="form-control" placeholder="U-Price">
                                                                     </div>
                                                                     <div class="col"> <input type="number"
-                                                                            id="total{{ $orderItem->id  }}" class="form-control"
+                                                                            id="total{{ $orderItem->id }}"
+                                                                            class="form-control"
                                                                             name="List[{{ $no }}][total]"
-                                                                            min="0"
-                                                                            value="{{ $orderItem->total }}" readonly
-                                                                            placeholder="subTotal"></div>
+                                                                            min="0" value="{{ $orderItem->total }}"
+                                                                            readonly placeholder="subTotal"></div>
                                                                     <div class="col">
                                                                     </div>
                                                                 </div>
@@ -186,11 +172,6 @@
                                             <div class="col-lg-8">
 
                                             </div>
-
-
-
-
-
                                             <div class="col-lg-4">
 
                                                 <div>
@@ -226,10 +207,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     </div>
 
     <!-- Add the following script to your HTML file -->
@@ -238,10 +215,10 @@
             // Get quantity and price values
             var quantity = parseFloat(document.getElementById('quantity' + Id).value) || 0;
             var price = parseFloat(document.getElementById('price' + Id).value) || 0;
-    
+
             // Calculate total
             var total = quantity * price;
-    
+
             // Display the total
             document.getElementById('total' + Id).value = total;
         }

@@ -47,7 +47,11 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([]);
+        $request->validate([
+            'supplier_id'=>'required',
+            'order_date'=>'required',
+            'item_list'=>'required'
+        ]);
 
         $supplyOrder = new SupplyOrder();
         $supplyOrder->supplier_id = $request->supplier_id;
@@ -55,11 +59,7 @@ class PurchaseController extends Controller
         $supplyOrder->status = "Placed";
         $supplyOrder->save();
 
-        // $table->foreignId('item_id')->constrained();
-        // $table->integer('quantity');
-        // $table->date('last_update');
-        // Iterate through each item in the request and create a new SupplyOrderItem
-        foreach ($request->item_list as $item) {
+         foreach ($request->item_list as $item) {
             $orderItem = new SupplyOrderItem();
             $orderItem->supply_order_id = $supplyOrder->id;
             $orderItem->item_id = $item['item_id'];
@@ -97,6 +97,8 @@ class PurchaseController extends Controller
     {
 
         $request->validate([
+            'supplier_id'=>'required',
+            'order_date'=>'required',
             'List' => 'required'
             // Add your validation rules here
         ]);

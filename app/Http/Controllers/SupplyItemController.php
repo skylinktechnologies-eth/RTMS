@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\ItemCategory;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SupplyItemController extends Controller
 {
     //
     function __construct()
     {
-         $this->middleware('permission:supplyItem-list|supplyItem-create|supplyItem-edit|supplyItem-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:supplyItem-create', ['only' => ['create','store']]);
-         $this->middleware('permission:supplyItem-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:supplyItem-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:supplyItem-list|supplyItem-create|supplyItem-edit|supplyItem-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:supplyItem-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:supplyItem-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:supplyItem-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -31,7 +33,7 @@ class SupplyItemController extends Controller
     }
     public function store(Request $request)
     {
-       
+
         $request->validate([
             'item_name' => 'required',
             'item_category_id' => 'required',
@@ -50,7 +52,7 @@ class SupplyItemController extends Controller
     {
         $categories = ItemCategory::all();
         $items = Item::find($id);
-        return view('Pages.SupplyItem.edit', compact('categories','items'));
+        return view('Pages.SupplyItem.edit', compact('categories', 'items'));
     }
     public function update(Request $request, $id)
     {
@@ -72,8 +74,22 @@ class SupplyItemController extends Controller
     }
     public function destroy($id)
     {
-        $location = Item::find($id);
-        $location->delete();
-        return back()->with('success', 'Supply Item deleted successfully');
+        try {
+
+            $relatedCount = DB::table('supply_order_items')->where('item_id', $id)->count();
+            $relatedIssuingCount = DB::table('issuing_items')->where('item_id', $id)->count();
+            $relatedDisposingCount = DB::table('disposing_items')->where('item_id', $id)->count();
+
+            if ($relatedCount === 0 && $relatedIssuingCount === 0 && $relatedDisposingCount === 0) {
+
+                $location = Item::find($id);
+                $location->delete();
+                return redirect()->back();
+            } else {
+
+                return back()->with('danger', 'Cannot delete  Supply Item  with related data');
+            }
+        } catch (QueryException $e) {
+        }
     }
 }

@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="exampleInputCity1">Category Name</label>
                                 <input type="text" class="form-control" id="category_name" name="category_name" value="{{ $category->category_name }}"
-                                    placeholder="">
+                                    placeholder="" required>
                             </div>
                         </div>
                        
