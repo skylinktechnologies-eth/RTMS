@@ -44,7 +44,7 @@
             @if ($user->getRoleNames()->contains('Waiter'))
                 <div class="col-md-2">
                     <div class="card text-center " style="padding: 5%;border-radius:5%;  ">
-                        <a href="/login" style="color:black">
+                        <a href="/login" style="color:black; text-decoration:none;">
                             <i class="icon-user " style="font-size: 50px"></i>
                             <h3 class="text-center">{{ $user->name }}</h3>
                         </a>
