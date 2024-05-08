@@ -2,22 +2,22 @@
 @section('content')
     <div class="main-container">
         @if (session('success'))
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-4">
+                <div class="col-md-4">
 
-            </div>
-            <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
 
-            </div>
-            <div class="col-md-4">
-                <div class="alert alert-success px-3" id="success-alert">
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success px-3" id="success-alert">
 
-                    {{ session('success') }}
+                        {{ session('success') }}
+                    </div>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
         <div class="card pt-1" style="">
             <div class="row d-flex align-items-end">
 
@@ -29,7 +29,7 @@
                         <h3 class="text-white"></h3>
                     </div>
                     <ul class="nav nav-tabs  nav-bordered">
-                       
+
                         <li class="nav-item">
                             <a href="{{ route('report.index') }}" aria-expanded="true" class="nav-link ">
                                 <span class="d-inline-block d-sm-none"><i class="icon-show_chart "></i></span>
@@ -82,9 +82,9 @@
                                     <tr>
                                         <td>{{ $inventory->item->item_name }}</td>
                                         <td>{{ $inventory->purchased_quantity }}</td>
-                                        <td>{{ $inventory->issued_quantity  }}</td>
+                                        <td>{{ $inventory->issued_quantity }}</td>
                                         <td>
-                                           {{ $inventory->purchased_quantity -  $inventory->issued_quantity }} 
+                                            {{ $inventory->purchased_quantity - $inventory->issued_quantity }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -96,6 +96,4 @@
             </div>
         </div>
     </div>
-
-    
 @endsection

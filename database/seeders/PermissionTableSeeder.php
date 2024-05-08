@@ -53,10 +53,9 @@ class PermissionTableSeeder extends Seeder
             'menuItem-edit',
             'menuItem-delete',
 
-            'order-list',
-            'order-create',
-            'order-edit',
-            'order-delete',
+            'order',
+
+
 
             'purchase-list',
             'purchase-create',
@@ -90,6 +89,11 @@ class PermissionTableSeeder extends Seeder
             'waitstaff-create',
             'waitstaff-edit',
             'waitstaff-delete',
+
+            'otherstaff-list',
+            'otherstaff-create',
+            'otherstaff-edit',
+            'otherstaff-delete',
 
             'user-list',
             'user-create',

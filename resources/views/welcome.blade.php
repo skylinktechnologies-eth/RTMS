@@ -1,185 +1,77 @@
-@extends('Frames.app')
-@section('content')
-    <div class="page-header">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Dashboard</li>
-            <li class="breadcrumb-item active">Main</li>
-        </ol>
+<!doctype html>
+<html lang="en">
 
-        <ul class="app-actions">
-            <li>
-                <a href="#" id="reportrange">
-                    <span class="range-text"></span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-            </li>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        </ul>
+    <!-- Meta -->
+    <meta name="description" content="Admin Templates & Dashboard UI Kits">
+    <meta name="author" content="Bootstrap Gallery" />
+
+
+    <!-- Title -->
+    <title>Restaurant management system</title>
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <!-- Icomoon Font Icons css -->
+    <link rel="stylesheet" href="../../../fonts/style.css">
+<style>
+     .footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 10px;
+            background-color: rgb(59, 86, 68); /* Adjust opacity as needed */
+            color: white;
+            border-top-left-radius: 10px;
+        }
+</style>
+</head>
+
+<body style="background-color: rgb(59, 86, 68)">
+
+    <div class="text-center" style="margin-top: 90px">
+        <img src="th1.jpg" alt="" style="height: 120px; width:200px; border-radius:5%">
+    </div>
+    <div class="text-center" style="margin-top: 40px">
+        <h4 style="color: white">Restaurant Table Management System</h4>
+    </div>
+    <div class="row" style="margin-left: 20px;margin-right:10px;margin-top: 70px">
+        @foreach ($users as $user)
+            @if ($user->getRoleNames()->contains('Waiter'))
+                <div class="col-md-2">
+                    <div class="card text-center " style="padding: 5%;border-radius:5%;  ">
+                        <a href="/login" style="color:black">
+                            <i class="icon-user " style="font-size: 50px"></i>
+                            <h3 class="text-center">{{ $user->name }}</h3>
+                        </a>
+
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+    <div class="footer">
+        Powered By <img src="SkyLinkLogo.png" alt="" style="height: 60px; width: 160px;">
+    </div>
+    <div>
+
     </div>
 
-    <!-- Main container start -->
-    <div class="main-container">
 
-        <!-- Row start -->
-
-        <div class="row gutters">
-            <div class="col-xl-3 col-lg-6 col-sm-12 col-12">
-                <div class="card" style="background-color: #ffffff;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <div class="card-body"
-                        style="background: linear-gradient(to right, #3498db, #ffffff); border-radius: 10px;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <i class="icon-shopping-cart1"
-                                    style="font-size: 50px; width: 50px; height: 50px; color: #74047a; margin-right: 10px;"></i>
-
-                                <!-- You can add more decorative elements here, such as additional icons, text, or images -->
-                            </div>
-                            <div class="text-end">
-
-                                <h4 class="mb-0" style="color: #34495e; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
-                                    Total Product</h4>
-                                <h3 class="text-center" style="color: #34495e;">
-                                    <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
-                                </h3>
-
-                            </div>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/moment.js"></script>
 
 
 
-                        </div>
-                    </div>
-                </div>
+    <script src="../../vendor/slimscroll/slimscroll.min.js"></script>
+    <script src="../../vendor/slimscroll/custom-scrollbar.js"></script>
 
 
+</body>
 
-            </div>
-            <div class="col-xl-3 col-lg-6 col-sm-12 col-12">
-                <div class="card" style="background-color: #ffffff;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <div class="card-body"
-                        style="background: linear-gradient(to right, #8d34db, #ffffff); border-radius: 10px;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <i class="icon-rate_review"
-                                    style="font-size: 50px; width: 50px; height: 50px; color: #017bd2; margin-right: 10px;"></i>
-
-                                <!-- You can add more decorative elements here, such as additional icons, text, or images -->
-                            </div>
-                            <div class="text-end">
-
-                                <h4 class="mb-0" style="color: #34495e; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
-                                    Total Orders</h4>
-                                <h3 class="text-center" style="color: #34495e;">
-                                    <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
-                                </h3>
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-sm-12 col-12">
-                <div class="card" style="background-color: #ffffff;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <div class="card-body"
-                        style="background: linear-gradient(to right, #db345b, #ffffff); border-radius: 10px;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <i class="icon-local_atm"
-                                    style="font-size: 50px; width: 50px; height: 50px; color: #04882b; margin-right: 10px;"></i>
-
-                                <!-- You can add more decorative elements here, such as additional icons, text, or images -->
-                            </div>
-                            <div class="text-end">
-
-                                <h4 class="mb-0" style="color: #34495e; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
-                                    Total Sales</h4>
-                                <h3 class="text-center" style="color: #34495e;">
-                                    <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
-                                </h3>
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-6 col-sm-12 col-12">
-                <div class="card" style="background-color: #ffffff;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <div class="card-body"
-                        style="background: linear-gradient(to right, #34dbd0, #ffffff); border-radius: 10px;">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <i class="icon-dollar-sign"
-                                    style="font-size: 50px; width: 50px; height: 50px; color: #e4620b; margin-right: 10px;"></i>
-
-                                <!-- You can add more decorative elements here, such as additional icons, text, or images -->
-                            </div>
-                            <div class="text-end">
-
-                                <h5 class="mb-0" style="color: #34495e; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);">
-                                    Collected Amount</h5>
-                                
-                                <h3 class="text-center" style="color: #34495e;">
-                                    <span data-plugin="counterup"
-                                        style="color: #2ecc71; font-size: 24px;"></span>
-                                </h3>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row end -->
-
-        <!-- Row start -->
-        <div class="row gutters">
-            <div class="col-sm-12">
-                <div class="card h-360">
-                    <div class="card-header">
-                        <div class="card-title">Sales Comparison</div>
-                    </div>
-                    <div class="card-body">
-                        <!-- Row start -->
-                        <div class="row gutters">
-                            <div class="col-lg-5 col-sm-12 col-12">
-                                <div id="compare-sales"></div>
-                                <div class="info-stats3 shade-one-a">
-                                    <i class="icon-turned_in"></i>
-                                    <h6>Q3 - Overall Sales</h6>
-                                    <h3></h3>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-12 col-12">
-                                <div class="vs"></div>
-                            </div>
-                            <div class="col-lg-5 col-sm-12 col-12">
-                                <div id="compare-expenses"></div>
-                                <div class="info-stats3 shade-one-a">
-                                    <i class="icon-turned_in"></i>
-                                    <h6>Q4 - Overall Sales</h6>
-                                    <h3>37,000</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Row end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Row end -->
-
-
-
-    </div>
-    <!-- Main container end -->
-@endsection
+</html>

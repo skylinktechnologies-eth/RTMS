@@ -13,11 +13,8 @@ class OrderItemController extends Controller
     //
     function __construct()
     {
-         $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','store','changeStatusToServe']]);
-         $this->middleware('permission:order-create', ['only' => ['create','store']]);
-         $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:order-delete', ['only' => ['destroy']]);
-    }
+         $this->middleware('permission:order', ['only' => ['index','store','create','edit','update','destroy','changeStatusToServe']]);
+        }
 
     public function index()
     {
@@ -85,7 +82,7 @@ class OrderItemController extends Controller
         $orderItem->delete();
         return back()->with('success', 'Menu Item delete successfully!');
     }
-  
+
     public function changeStatusToServe($id)
     {
 
@@ -97,6 +94,6 @@ class OrderItemController extends Controller
        }else{
         return back()->with('warning', 'Please stay until the status is ready');
        }
-       
+
     }
 }

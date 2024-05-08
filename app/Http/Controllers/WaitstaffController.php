@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Table;
+use App\Models\User;
 use App\Models\Waitstaff;
 use App\Models\WaitstaffAssignment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+use Spatie\Permission\Models\Role;
 
 class WaitstaffController extends Controller
 {
@@ -63,6 +67,16 @@ class WaitstaffController extends Controller
         $waitstaff->hire_date = $request->hire_date;
         $waitstaff->status = $statuses;
         $waitstaff->save();
+
+        $user= new User();
+        $user->name=  $request->first_name. ' ' . $request->last_name;
+        $emailPrefix = $request->first_name . '.' . $request->last_name;
+        $email = $emailPrefix . '@RTMS.com';
+        $user->email = $email;
+        $user->password =Hash::make($request->contact_number);
+        $user->save();
+        $waiterRole = Role::where('name', 'Waiter')->first();
+        $user->assignRole($waiterRole);
 
         return redirect()->route('waitstaff.index');
     }

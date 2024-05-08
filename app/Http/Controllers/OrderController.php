@@ -7,12 +7,13 @@ use App\Models\Order;
 use App\Models\OrderInteraction;
 use App\Models\OrderItem;
 use App\Models\Table;
+use App\Models\WaitstaffAssignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    
+
     public function index()
     {
         $orderItems = OrderItem::all();
@@ -23,8 +24,9 @@ class OrderController extends Controller
     {
         $order = Order::all();
         $tables = Table::all();
+        $waitstaffs=WaitstaffAssignment::all();
         $menuItems = MenuItem::all();;
-        return view('Pages.Order.create', compact('order', 'tables', 'menuItems'));
+        return view('Pages.Order.create', compact('order', 'tables', 'menuItems','waitstaffs'));
     }
     public function edit($id)
     {
@@ -38,7 +40,7 @@ class OrderController extends Controller
         $request->validate([
             'order_date' => 'required',
             'table_id' => 'required',
-            
+
         ]);
 
         $order = new Order();

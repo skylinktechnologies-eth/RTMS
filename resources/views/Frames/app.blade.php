@@ -90,7 +90,7 @@
             $supplyItemList = auth()->user()->can('supplyItem-list');
             $reportList = auth()->user()->can('report-manage');
             $purchaseList = auth()->user()->can('purchase-list');
-            $orderList = auth()->user()->can('order-list');
+            $orderList = auth()->user()->can('order');
             $menuItemList = auth()->user()->can('menuItem-list');
             $locationList = auth()->user()->can('location-list');
             $supplyItemCategoryList = auth()->user()->can('supplyItemCategory-list');
@@ -104,14 +104,14 @@
             <!-- Sidebar brand start  -->
             <div class="sidebar-brand">
 
-                <a href="/" class="logo" style="padding:5px">
+                <a href="/dashboard" class="logo" style="padding:5px">
                     <span class="logo-lg">
                         <img src="rectangle_logo.png" style="border-radius: 50%" height="45px" alt="">
                         <span class="logo-lg-" style="color: white">Restaurant</span>
                     </span>
                 </a>
 
-                <a href="/" class="logo-sm">
+                <a href="/dashboard" class="logo-sm">
                     <img src="rectangle_logo.png" alt="Bootstrap Admin Dashboard" style="border-radius: 50%"
                         height="45px" />
                 </a>
@@ -127,7 +127,7 @@
                     <ul>
 
                         <li class=" ">
-                            <a href="/">
+                            <a href="/dashboard">
                                 <i class="icon-devices_other"></i>
                                 <span class="menu-text">Dashboards</span>
                             </a>
@@ -184,15 +184,28 @@
                                 </div>
                             </li>
                         @endif
-                        @can('waitstaff-list')
-                            <li>
-                                <a href="/waitstaff">
-                                    <i class="icon-add-user"></i>
-                                    <span class="menu-text"> Waitstaff</span>
-                                </a>
-                            </li>
-                        @endcan
 
+                        @if ($waitstaffList)
+                            <li class="sidebar-dropdown">
+                                <a href="#">
+                                    <i class="icon-add-user"></i>
+                                    <span class="menu-text">Staff</span>
+                                </a>
+                                <div class="sidebar-submenu">
+                                    <ul>
+                                        @can('waitstaff-list')
+                                            <li>
+                                                <a href="/waitstaff"> Waitstaff</a>
+                                            </li>
+                                        @endcan
+
+                                        <li>
+                                            <a href="/otherstaff">Other Staff</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
 
                         @can('reservation-list')
                             <li>
@@ -203,7 +216,7 @@
                             </li>
                         @endcan
 
-                        @can('order-list')
+                        @can('order')
                             <li>
                                 <a href="/orderItem  ">
                                     <i class="icon-layout"></i>
@@ -221,9 +234,8 @@
                             </li>
                         @endcan
 
-
-                        <li class="header-menu">Inventory</li>
                         @if ($locationList || $supplyItemCategoryList || $supplyItemList || $supplierList)
+                            <li class="header-menu">Inventory</li>
                             <li class="sidebar-dropdown">
                                 <a href="#">
                                     <i class="icon-edit1"></i>
@@ -503,7 +515,7 @@
             document.getElementById('warning-alert').style.display = 'none';
         }, 5000);
     </script>
-      <script>
+    <script>
         setTimeout(function() {
             document.getElementById('error-alert').style.display = 'none';
         }, 5000);

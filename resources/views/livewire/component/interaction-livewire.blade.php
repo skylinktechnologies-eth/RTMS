@@ -77,30 +77,26 @@
                 $uniqueOrderItem->status == 'Pending' ||
                     $uniqueOrderItem->status == 'Preparing' ||
                     ($uniqueOrderItem->status == 'Ready' && $uniqueOrderItem->order->status != 'Close'))
-              
-             
-
-
                 <div class="col-lg-2 col-sm-4">
-                    <div class="card" >
+                    <div class="card">
                         <div class="card-header bg-primary" style="color:white">
                             <strong> {{ $uniqueOrderItem->order->table->table_name }} </strong>
                         </div>
                         <div class="card-body text-center">
                             <div>
                                 @if ($uniqueOrderItem->status == 'Pending')
-                                <p class="bg-warning text-white rounded" style="font-size:16px;padding:3px">
-                                    <strong>{{ $uniqueOrderItem->status }}</strong>
-                                </p>
-                            @elseif ($uniqueOrderItem->status == 'Preparing')
-                                <p class="bg-danger text-white rounded" style="font-size:16px;padding:3px">
-                                    <strong>{{ $uniqueOrderItem->status }}</strong>
-                                </p>
-                            @elseif ($uniqueOrderItem->status == 'Ready')
-                                <p class="bg-success text-white rounded" style="font-size:16px;padding:3px">
-                                    <strong>{{ $uniqueOrderItem->status }}</strong>
-                                </p>
-                            @endif
+                                    <p class="bg-warning text-white rounded" style="font-size:16px;padding:3px">
+                                        <strong>{{ $uniqueOrderItem->status }}</strong>
+                                    </p>
+                                @elseif ($uniqueOrderItem->status == 'Preparing')
+                                    <p class="bg-danger text-white rounded" style="font-size:16px;padding:3px">
+                                        <strong>{{ $uniqueOrderItem->status }}</strong>
+                                    </p>
+                                @elseif ($uniqueOrderItem->status == 'Ready')
+                                    <p class="bg-success text-white rounded" style="font-size:16px;padding:3px">
+                                        <strong>{{ $uniqueOrderItem->status }}</strong>
+                                    </p>
+                                @endif
                             </div>
                             <div class=" ">
 
@@ -108,14 +104,14 @@
                                     style="background-color: white;color:rgb(3, 89, 180)"
                                     data-target="#viewItem{{ $uniqueOrderItem->id }}">view
                                 </button>
-                                 <!-- Modal -->
-                                 <div class="modal fade" id="viewItem{{ $uniqueOrderItem->id }}"
-                                    tabindex="-1" role="dialog" aria-labelledby="viewItemLabel"
-                                    aria-hidden="true">
+                                <!-- Modal -->
+                                <div class="modal fade" id="viewItem{{ $uniqueOrderItem->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="viewItemLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="viewItemLabel">{{ $uniqueOrderItem->order->table->table_name }}
+                                                <h5 class="modal-title" id="viewItemLabel">
+                                                    {{ $uniqueOrderItem->order->table->table_name }}
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -130,7 +126,7 @@
                                                                 Item</label>
                                                         </div>
                                                     </div>
-                    
+
                                                     <div class="col-sm-3 col-3">
                                                         <div class="form-group">
                                                             <label for="exampleInputCity1">remark</label>
@@ -149,7 +145,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 @php
                                                     $total = 0;
                                                 @endphp
@@ -157,37 +153,44 @@
                                                     @foreach ($orderItems as $orderItem)
                                                         @if ($orderItem->order_id == $uniqueOrderItem->order_id)
                                                             <div class="col-sm-3 col-3 ">
-                                                                <h6>{{ $orderItem->quantity }}-{{ $orderItem->menuItem->item_name }}</h6>
+                                                                <h6>{{ $orderItem->quantity }}-{{ $orderItem->menuItem->item_name }}
+                                                                </h6>
                                                             </div>
-                    
+
                                                             <div class="col-sm-3 col-3 ">
                                                                 <h6> {{ $orderItem->remark }}</h6>
                                                             </div>
                                                             <div class="col-sm-3 col-3 text-center pt-2">
                                                                 @if ($orderItem->status == 'Pending')
-                                                                    <p class="bg-warning text-white rounded" style="font-size:16px;padding:3px">
+                                                                    <p class="bg-warning text-white rounded"
+                                                                        style="font-size:16px;padding:3px">
                                                                         <strong>{{ $orderItem->status }}</strong>
                                                                     </p>
                                                                 @elseif ($orderItem->status == 'Preparing')
-                                                                    <p class="bg-info text-white rounded" style="font-size:16px;padding:3px">
+                                                                    <p class="bg-info text-white rounded"
+                                                                        style="font-size:16px;padding:3px">
                                                                         <strong>{{ $orderItem->status }}</strong>
                                                                     </p>
                                                                 @elseif ($orderItem->status == 'Ready')
-                                                                    <p class="bg-success text-white rounded" style="font-size:16px;padding:3px">
+                                                                    <p class="bg-success text-white rounded"
+                                                                        style="font-size:16px;padding:3px">
                                                                         <strong>{{ $orderItem->status }}</strong>
                                                                     </p>
                                                                 @endif
                                                             </div>
                                                             <div class="col-sm-3 col-3 pt-2">
                                                                 @php
-                                                                    $interaction = \App\Models\KitchenInteraction::where('order_item_id', $orderItem->id)
+                                                                    $interaction = \App\Models\KitchenInteraction::where(
+                                                                        'order_item_id',
+                                                                        $orderItem->id,
+                                                                    )
                                                                         ->where('interaction_type', 'Serve')
                                                                         ->get();
                                                                 @endphp
-                    
+
                                                                 @if ($interaction->isEmpty())
-                                                                    <a href=" changeStatusToServe-{{ $orderItem->id }}" type="button"
-                                                                        class="btn btn-info">
+                                                                    <a href=" changeStatusToServe-{{ $orderItem->id }}"
+                                                                        type="button" class="btn btn-info">
                                                                         Deliver
                                                                     </a>
                                                                 @else
@@ -196,7 +199,7 @@
                                                                     </p>
                                                                 @endif
                                                             </div>
-                    
+
                                                             @php
                                                                 $total += $orderItem->sub_total;
                                                             @endphp
@@ -207,8 +210,8 @@
                                                     <p>Total:{{ $total }}</p>
                                                 </div>
                                                 <div class="text-center">
-                                                    <a href=" changeStatusClose-{{ $uniqueOrderItem->order->id }}" type="button"
-                                                        class="btn btn-primary" >
+                                                    <a href=" changeStatusClose-{{ $uniqueOrderItem->order->id }}"
+                                                        type="button" class="btn btn-primary">
                                                         Paid
                                                     </a>
                                                 </div>
@@ -225,8 +228,8 @@
 
                     </div>
                 </div>
-                   
-             
+
+
                 {{-- @if ($uniqueOrderItem->status == 'Preparing')
                     <div class=" text-center"
                         style="height: 120px; width:185px;background-color:rgb(6, 62, 185); color:white; margin-right: 10px; margin-bottom: 20px;">

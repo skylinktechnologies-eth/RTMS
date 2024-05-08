@@ -1,21 +1,21 @@
 @extends('Frames.app')
 @section('content')
-<div class="page-header">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Order</li>
-        <li class="breadcrumb-item active">order/create</li>
-    </ol>
+    <div class="page-header">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Order</li>
+            <li class="breadcrumb-item active">order/create</li>
+        </ol>
 
-    <ul class="app-actions">
-        <li>
-            <a href="#" id="reportrange">
-                <span class="range-text"></span>
-                <i class="icon-chevron-down"></i>
-            </a>
-        </li>
-       
-    </ul>
-</div>
+        <ul class="app-actions">
+            <li>
+                <a href="#" id="reportrange">
+                    <span class="range-text"></span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+            </li>
+
+        </ul>
+    </div>
     <div class="main-container">
 
 
@@ -39,16 +39,12 @@
             @endif
             <div>
                 <form action="{{ route('order.store') }}" method="POST">
-
                     @csrf
                     <div class="row gutters ">
-
-
                         <div class="col-md-7 col-sm-12 ">
                             <div class="card ">
                                 <div class="card-header">
                                     <div class="row">
-
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <input type="date" name="order_date" class="form-control"
@@ -63,15 +59,21 @@
                                             <select class="form-control selectpicker" id="table_id" name="table_id"
                                                 data-live-search="true" required>
                                                 <option value="">select Table</option>
-                                                @foreach ($tables as $table)
-                                                    <option value="{{ $table->id }}">
-                                                        {{ $table->table_name }}</option>
-                                                @endforeach
-
+                                                @if (Auth::user()->name == 'Admin')
+                                                    @foreach ($tables as $table)
+                                                        <option value="{{ $table->id }}">
+                                                            {{ $table->table_name }}</option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($waitstaffs as $waitstaff)
+                                                        @if ($waitstaff->waitstaff->first_name . ' ' . $waitstaff->waitstaff->last_name == Auth::user()->name)
+                                                            <option value="{{ $waitstaff->table->id }}">
+                                                                {{ $waitstaff->table->table_name }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </select>
-                                           
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -109,7 +111,8 @@
                                                                     <div class="form-group">
                                                                         <input type="text" class="form-control"
                                                                             id="quantity{{ $menuItem->id }}"
-                                                                            name="quantity[]" placeholder="Quantity" value="{{ old('quantity[]') }}"
+                                                                            name="quantity[]" placeholder="Quantity"
+                                                                            value="{{ old('quantity[]') }}"
                                                                             aria-label="filter">
                                                                     </div>
                                                                     <div class="form-group">
@@ -245,7 +248,7 @@
 
             // Update the total cell in your table (replace 'totalAmount' with the actual ID of your total cell)
             document.getElementById('totalAmount').innerHTML = '<p>Total: ' + total.toFixed(2) +
-            '</p>'; // Display total with two decimal places
+                '</p>'; // Display total with two decimal places
         }
 
         // Function to remove a row
