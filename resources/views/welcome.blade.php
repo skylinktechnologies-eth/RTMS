@@ -24,14 +24,14 @@
             bottom: 0;
             right: 0;
             padding: 10px;
-            background-color: rgb(59, 86, 68); /* Adjust opacity as needed */
+            background-color: #6cac91; /* Adjust opacity as needed */
             color: white;
             border-top-left-radius: 10px;
         }
 </style>
 </head>
 
-<body style="background-color: rgb(59, 86, 68)">
+<body style="background-color: #6cac91">
 
     <div class="text-center" style="margin-top: 90px">
         <img src="th1.jpg" alt="" style="height: 120px; width:200px; border-radius:5%">
@@ -55,7 +55,7 @@
         @endforeach
     </div>
     <div class="footer">
-        Powered By <img src="SkyLinkLogo.png" alt="" style="height: 60px; width: 160px;">
+        Powered By <img src="SkyLinkLogo.png" alt="" style="height: 60px; width: 240px;">
     </div>
     <div>
 
