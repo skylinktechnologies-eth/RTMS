@@ -24,9 +24,9 @@ class OrderController extends Controller
     {
         $order = Order::all();
         $tables = Table::all();
-        $waitstaffs=WaitstaffAssignment::all();
+        $waitstaffs = WaitstaffAssignment::all();
         $menuItems = MenuItem::all();;
-        return view('Pages.Order.create', compact('order', 'tables', 'menuItems','waitstaffs'));
+        return view('Pages.Order.create', compact('order', 'tables', 'menuItems', 'waitstaffs'));
     }
     public function edit($id)
     {
