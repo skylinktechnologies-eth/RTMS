@@ -2,7 +2,7 @@
 @section('content')
     <div class="page-header">
         <ol class="breadcrumb">
-           
+
             <li class="breadcrumb-item active">Reservation</li>
         </ol>
 
@@ -139,14 +139,14 @@
                                                                         <div class="row">
                                                                             <div class="col-sm-3 col-3">
                                                                                 <p> {{ $detail->table->table_name }}</p>
-                                                                   
+
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
                                                                       <p>{{ $detail->occupancy_start_date }}</p>
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
                                                                                 <p> {{ $detail->occupancy_end_date }}</p>
-                                                                             
+
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
                                                                         <p> {{ $detail->reservation_time }}</p>
@@ -167,8 +167,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
-
 
                                         <td class="text-center">
                                             <div class="dropdown">
@@ -244,5 +242,5 @@
         </div>
     </div>
     <!-- Row end -->
-    
+
 @endsection

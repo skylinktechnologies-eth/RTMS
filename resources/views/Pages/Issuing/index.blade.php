@@ -156,10 +156,6 @@
 
                                                             <div class="modal-footer custom">
 
-                                                                <div class="right-side">
-                                                                    <button type="submit"
-                                                                        class="btn btn-link success btn-block">Save</button>
-                                                                </div>
                                                             </div>
                                                         </form>
                                                     </div>
